@@ -1,0 +1,6 @@
+tables in EddoSQL are automatically sortable and that can not change.
+tables are built from many objects that stored inside view.tables, the "Custom" class allows us to interact with the others and it is the only one that can be manipulated by the user from the graphical interface.
+the Custom's contructor has ... parameters.
+1) boolean array that indicates either tables horizontal and vertical lines are visible or not, the space between lines and their color.
+2) a two dimentional array with a Color array that contains both header and body background and foreground colors respectively.
+

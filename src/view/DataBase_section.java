@@ -1,0 +1,475 @@
+package view;
+
+import java.awt.BorderLayout;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
+
+import controller.library.EddoLibrary;
+import dao.mysql.MySQLConnection;
+import dao.mysql.MySQLDaoOperation;
+import eddql.launch.LoadData;
+import export.view.DatabaseExporterUI;
+import model.DataBaseModel;
+import view.iconmaker._Icon;
+import view.pupupsmessage.PupupMessages;
+import view.tables.Custom;
+import view.tables.JTableUtilities;
+import view.tables.Sort;
+
+//color static from the class background an stuff...
+
+public class DataBase_section {
+	// theme for panels
+
+	ArrayList<String> names = new ArrayList<>();
+	JTextField dbNameField;
+	JPanel mainPanel;
+	JLabel indexLabel;
+	String message = "List of databases";
+
+	String opt = "";
+
+	/*
+	 * 
+	 * ========================================================
+	 * 
+	 */
+
+	public DataBase_section() {
+
+		msgLabel.setFocusable(false);
+		timer();
+
+	}
+
+	/*
+	 * 
+	 * ========================================================
+	 * 
+	 */
+
+	private JTable table;
+
+	public void dataBases() throws SQLException {
+		names = new ArrayList<>();
+		ArrayList<String> dataBases = new MySQLDaoOperation().showDataBases();
+
+		table = new JTable();
+		// table.setEnabled(false);
+
+		// table.addMouseListener(this);
+		JPanel intern = new JPanel();
+		intern.setLayout(new BorderLayout());
+		final Object header[] = { "Names", "oldest tab created", "at", "latest tab created", "at", "tables count" };
+		Home.frame.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+		int i = 0, j = dataBases.size();
+		final Object[][] obj = new Object[j][6];
+		try {
+			for (DataBaseModel data : LoadData.database) {
+				obj[i][0] = data.getName();
+				obj[i][1] = data.getLatestTab();
+				obj[i][2] = data.getLatestTabTime();
+				obj[i][3] = data.getOldestTab();
+				obj[i][4] = data.getOldestTabTime();
+				obj[i][5] = data.getTablesCount();
+				names.add(data.getName());
+				i++;
+			}
+		} catch (Exception e) {
+			new LoadData().databaseSectionLoader();
+			dataBases();
+		}
+
+//		JTableHeader hea = table.getTableHeader();
+//		hea.setUI(new javax.swing.plaf.basic.BasicTableHeaderUI());
+		JTableUtilities.setCellsAlignment(table, SwingConstants.CENTER, 0);
+
+		@SuppressWarnings("rawtypes")
+		Class[] columnClass = new Class[] { String.class, String.class, String.class, String.class, String.class,
+				Integer.class };
+
+		DefaultTableModel defaultTableModel = new DefaultTableModel(obj, header) {
+
+			/*
+			 * 
+			 */
+
+			private static final long serialVersionUID = 1L;
+
+			public Class<?> getColumnClass(int columnIndex) {
+				return columnClass[columnIndex];
+			}
+		};
+		table.setModel(defaultTableModel);
+		table.setDefaultEditor(Object.class, null);
+		JTableUtilities.setCellsAlignment(table, SwingConstants.CENTER, 1);
+		// horizontal lines show,vertical...lines gap, currentbg, ...
+		Custom tabCustom = new Custom(table, false, false, 30, null, null);
+		intern.add(tabCustom.getScrollPane());
+
+		if (Home.content != null) {
+			Home.content.removeAll();
+		}
+
+		mainPanel = new JPanel();
+		mainPanel.setLayout(new BorderLayout());
+		mainPanel.add(intern, BorderLayout.CENTER);
+		header();
+		// dashBoard();
+		Home.content.add(mainPanel, BorderLayout.CENTER);
+		revalidate(Home.content);
+		Home.frame.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		new Sort().tableSortFilter(table);
+
+		// new action implementation
+
+		action(table);
+
+	}
+
+	JButton connect, create, delete;
+
+	/*
+	 * 
+	 * ================================================================
+	 * 
+	 */
+
+	void action(JTable table) {
+		table.addMouseListener(new MouseAdapter() {
+
+			public void mousePressed(MouseEvent e) {
+
+				if (SwingUtilities.isRightMouseButton(e)) {
+					try {
+
+						int row = table.rowAtPoint(e.getPoint());
+						if (row >= 0 && row < table.getRowCount()) {
+							table.setRowSelectionInterval(row, row);
+							String selectedValue = table.getValueAt(row, 0).toString();
+							JPopupMenu popup = new JPopupMenu();
+							JMenuItem deleteItem = new JMenuItem("Delete");
+							deleteItem.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent e) {
+									// Delete action
+									action("Delete", selectedValue);
+								}
+							});
+							JMenuItem connectItem = new JMenuItem("Connect");
+							connectItem.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent e) {
+									action("Connect", selectedValue);
+								}
+							});
+
+							JMenuItem createItem = new JMenuItem("↳ New");
+							createItem.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent e) {
+									// action("Create", selectedValue);
+									createDatabase();
+								}
+							});
+							String dbConnected = new MySQLConnection().getDbName();
+							JMenuItem exportItem = new JMenuItem("Export");
+							exportItem.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent e) {
+									try {
+										new DatabaseExporterUI(dbConnected, new MySQLDaoOperation().showTables());
+
+									} catch (SQLException e1) {
+										e1.printStackTrace();
+									}
+								}
+							});
+
+							popup.add(connectItem);
+							popup.add(deleteItem);
+							popup.add(createItem);
+							if (dbConnected.equals(selectedValue)) {
+								popup.add(exportItem);
+							}
+							if (selectedValue != null) {
+								popup.show(e.getComponent(), e.getX(), e.getY());
+							}
+						}
+					} catch (Exception e2) {
+					}
+				}
+			}
+		});
+
+	}
+
+	void createDatabase() {
+		JDialog dialog = new JDialog();
+		dialog.setIconImage(Home.frame.getIconImage());
+		dialog.setModal(true);
+		dialog.setLayout(new BorderLayout());
+		dialog.setSize(new Dimension(400, 120));
+		dialog.setResizable(false);
+		JPanel panel = new JPanel(new GridBagLayout());
+		dialog.setTitle("Create database");
+		dbNameField = new JTextField(15);
+		GridBagConstraints constraints = new GridBagConstraints();
+		constraints.insets = new Insets(5, 5, 5, 5);
+		constraints.gridx = 0;
+		constraints.gridy = 0;
+		panel.add(new JLabel("Name :"), constraints);
+		constraints.gridx = 1;
+		constraints.gridy = 0;
+		panel.add(dbNameField, constraints);
+		constraints.gridx = 2;
+		constraints.gridy = 0;
+		JButton createButton = new JButton("Create");
+		panel.add(createButton, constraints);
+
+		JLabel label = new JLabel(" ");
+		constraints.gridx = 0;
+		constraints.gridy = 1;
+		constraints.gridwidth = 2;
+		constraints.fill = GridBagConstraints.BOTH;
+		panel.add(label, constraints);
+
+		createButton.setPreferredSize(new Dimension(80, 25));
+
+		createButton.addActionListener((e) -> {
+			try {
+				if (new MySQLDaoOperation().create(dbNameField.getText()) > 0) {
+
+					label.setText(dbNameField.getText() + " created succesfully");
+				} else {
+					label.setText("Process failed");
+
+				}
+				DataBaseModel x = new DataBaseModel(dbNameField.getText(), "...", "...", "...", "...", 0);
+				LoadData.database.add(x);
+				dataBases();
+			} catch (SQLException e1) {
+				new PupupMessages().message(e1.getMessage(), new _Icon().exceptionIcon());
+			}
+		});
+
+		dbNameField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.getSource() == dbNameField) {
+					String txt = dbNameField.getText().trim();
+					if (!txt.isEmpty()) {
+						txt = txt.toLowerCase();
+						if (names.contains(txt)) {
+							createButton.setEnabled(false);
+							label.setText("Database already existed");
+						} else if (EddoLibrary.prohibitedName().contains(txt) || txt.contains(" ")
+								|| EddoLibrary.numbers().contains(txt.substring(0, 1))) {
+							createButton.setEnabled(false);
+							label.setText("Incorrect name");
+						} else {
+							createButton.setEnabled(true);
+							label.setText(" ");
+						}
+					} else {
+						createButton.setEnabled(false);
+						label.setText("Name can not be empty");
+					}
+				}
+			}
+		});
+
+		dialog.add(panel);
+		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		dialog.setLocationRelativeTo(null);
+		dialog.setVisible(true);
+
+	}
+
+	public void header() {
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		JPanel searchPanel = new JPanel();
+		searchPanel.setBounds(5, 10, 300, 20);
+		searchPanel.setLayout(new FlowLayout());
+		msgLabel.setFont(new Font("", Font.PLAIN, 11));
+		searchPanel.add(msgLabel);
+		panel.add(searchPanel);
+		JLabel lineLabel = new JLabel(
+				"_____________________________________________________________________________________________________________________________");
+		lineLabel.setBounds(300, 0, 20000, 25);
+		lineLabel.setForeground(new JLabel().getForeground());
+		panel.add(lineLabel);
+		panel.setPreferredSize(new Dimension(100, 40));
+
+		mainPanel.add(panel, BorderLayout.NORTH);
+		revalidate(panel);
+
+	}
+
+	void revalidate(JPanel panel) {
+		panel.revalidate();
+		panel.repaint();
+	}
+	/*
+	 * 
+	 * ========================================================
+	 * 
+	 */
+
+	String dbName = "";
+
+	/*
+	 * 
+	 * ========================================================
+	 * 
+	 */
+
+	/*
+	 * 
+	 * ========================================================
+	 * 
+	 */
+
+	String con = "";
+
+	@SuppressWarnings("static-access")
+	public void action(String act, String dataBase) {
+		try {
+			switch (act) {
+			case "Connect" -> {
+				new MySQLDaoOperation().use(dataBase);
+
+				new MySQLConnection().setDbName(dataBase);
+				Home.frame.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+				new LoadData().tablesSectionLoader();
+				Home.frame.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+				message = "Currently using " + dataBase;
+				msgLabel.setText("connected to " + dataBase);
+				// msgLabel.setForeground(Color.white);
+				Home.dbn = dataBase;
+			}
+			case "Delete" -> {
+				new PupupMessages().confirm("Do you really want to delete " + dataBase);
+				if (PupupMessages.getAction == 1) {
+					new MySQLDaoOperation().deleteDb(dataBase);
+					for (DataBaseModel d : LoadData.database) {
+						if (d.getName().equals(dataBase)) {
+							LoadData.database.remove(d);
+							break;
+						}
+					}
+					new PupupMessages().message("Process completed", new _Icon().succesIcon());
+				} else {
+					new PupupMessages().message("Process canceled", new _Icon().messageIcon());
+				}
+			}
+
+			}
+		} catch (SQLException e) {
+			new PupupMessages().message(e.getMessage(), new _Icon().exceptionIcon());
+		}
+		try {
+			dataBases();
+		} catch (SQLException e) {
+			Home.dbn = "";
+			new MySQLConnection().setDbName("");
+			msgLabel.setText("No more database selected!");
+			try {
+				Home.dbn = new MySQLConnection().getDbName();
+				dataBases();
+			} catch (SQLException e1) {
+				new PupupMessages().message("A terrible error occured", new _Icon().exceptionIcon());
+				Home.frame.dispose();
+				Home.frame.removeAll();
+				new PupupMessages().message(
+						"if that didn't fix it, please restart the program manually or contact assistance",
+						new _Icon().exceptionIcon());
+				new MainEddQL().main(null);
+			}
+		}
+		Home.frame.revalidate();
+		Home.frame.repaint();
+	}
+
+	/*
+	 * 
+	 * ========================================================
+	 * 
+	 */
+
+	public boolean isNumber(String txt) {
+		try {
+			Integer.parseInt(txt);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	/*
+	 * 
+	 * ========================================================
+	 * 
+	 */
+
+	// make a package for chrono and create multiple classes
+
+	JLabel msgLabel = new JLabel();
+
+	/*
+	 * 
+	 * ========================================================
+	 * 
+	 */
+
+	Timer chrono = new Timer();
+
+	public void timer() {
+		chrono = new Timer();
+		chrono.schedule(new TimerTask() {
+
+			int i = 0;
+
+			public void run() {
+				if (i == 10) {
+					msgLabel.setText("");
+					// msgLabel.setForeground(Color.blue);
+					i = -1;
+				}
+				i++;
+
+			}
+		}, 450, 450);
+	}
+
+	/*
+	 * 
+	 * ========================================================
+	 * 
+	 */
+
+}
