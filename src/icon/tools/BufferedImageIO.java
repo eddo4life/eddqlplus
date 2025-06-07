@@ -18,11 +18,9 @@ public class BufferedImageIO {
 		BufferedImage bufferedImage = null;
 		try {
 			bufferedImage = ImageIO.read(BufferedImageIO.class.getResource(name));
-			/*votre programme presente des defaillances technique cela aura des repercutions sur sa presentation,
-			veuillez contacter l'assistance technique a fin de pouvoir resoudre ce probleme*/
 		} catch (IOException e) {
 			new PupupMessages().message(
-					"Error system, some ressources couldn't be loaded, resart the app or contact assistance.",
+					"Error system, some resources couldn't be loaded, restart the app or contact assistance.",
 					new _Icon().exceptionIcon());
 			return null;
 		}
