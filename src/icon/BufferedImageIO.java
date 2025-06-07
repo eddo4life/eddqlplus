@@ -21,7 +21,7 @@ public class BufferedImageIO {
 			bufferedImage = ImageIO.read(BufferedImageIO.class.getResource(name));
 		} catch (IOException e) {
 			new PupupMessages().message(
-					"Error system, some ressources couldn't be loaded, resart the app or contact assistance.",
+					"Error system, some resources couldn't be loaded, restart the app or contact assistance.",
 					new _Icon().exceptionIcon());
 			return null;
 		}
