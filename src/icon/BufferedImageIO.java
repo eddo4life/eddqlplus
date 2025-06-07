@@ -3,13 +3,12 @@ package icon;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-import view.iconmaker._Icon;
 import view.pupupsmessage.PupupMessages;
+import view.iconmaker._Icon;
 
 public class BufferedImageIO {
 

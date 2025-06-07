@@ -107,7 +107,7 @@ public class LoadData {
 			loadingLabel.setText("Completed!");
 			//loadingLabel.setForeground(Color.cyan);
 		} else {
-			loadingLabel.setText("Failed, connection requierd!");
+			loadingLabel.setText("Failed, connection required!");
 			loadingLabel.setForeground(Color.red);
 		}
 		try {
@@ -122,8 +122,6 @@ public class LoadData {
 
 	JProgressBar bar = new JProgressBar();
 
-	int process = 0;
-
 	/*
 	 * =============================================================
 	 */
@@ -134,14 +132,14 @@ public class LoadData {
 		if (wait)
 			Home.frame.setCursor(new Cursor(Cursor.WAIT_CURSOR));
 		try {
-			ArrayList<String> showtables ;
+			ArrayList<String> showTables ;
 			if(DBMS.dbms==1) {
-				 showtables = new MySQLDaoOperation().showTables();
+				 showTables = new MySQLDaoOperation().showTables();
 			}else {
-				showtables=new OracleDaoOperation().showTables();
+				showTables=new OracleDaoOperation().showTables();
 			}
 			int tourTotal = lineCount;
-			lineCount += showtables.size();
+			lineCount += showTables.size();
 			ArrayList<String> dteTime;
 			if(DBMS.dbms == 1) {
 			dteTime = new MySQLDaoOperation().getDate();
@@ -149,7 +147,7 @@ public class LoadData {
 				dteTime=new OracleDaoOperation().getDate();
 			}
 			int i = 0;
-			for (String data : showtables) {
+			for (String data : showTables) {
 				tbm = new ShowTablesModel();
 				tbm.setNames(data);
 				if(DBMS.dbms==1) {
@@ -192,7 +190,7 @@ public class LoadData {
 
 	public void mathCalcul(int tourTotal, int tourEffectue, int max, boolean add) {
 		float y = (tourEffectue * max) / tourTotal;
-		int percent = (int) Math.round(y);
+		int percent = Math.round(y);
 		if (add)
 			bar.setValue(percent + 51);
 		else
@@ -219,7 +217,6 @@ public class LoadData {
 			lineCount += names.size();
 			for (String s : names) {
 				dbm = new DataBaseModel();
-				s.toString();
 				dbm.setName(s);
 				String[] old = new MySQLDaoOperation().getDbOldestDate(String.valueOf(s)).split(" ");
 				dbm.setOldestTab(old[0]);// date
@@ -245,7 +242,6 @@ public class LoadData {
 
 	int exit = 1;
 	static JFrame frame = new JFrame();
-	static JPanel southPanel;
 	static JLabel loadingLabel;
 
 	/*
