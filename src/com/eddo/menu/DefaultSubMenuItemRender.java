@@ -1,6 +1,6 @@
 package com.eddo.menu;
 
-import java.awt.Component;
+import java.awt.*;
 
 public class DefaultSubMenuItemRender implements SubMenuItemRender {
 
