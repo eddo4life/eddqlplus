@@ -1,20 +1,6 @@
 package eddql.launch;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.util.ArrayList;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.UIManager;
-
 import com.formdev.flatlaf.FlatDarkLaf;
-
 import dao.DBMS;
 import dao.mysql.MySQLDaoOperation;
 import dao.oracle.OracleDaoOperation;
@@ -22,6 +8,10 @@ import icon.BufferedImageIO;
 import model.DataBaseModel;
 import model.ShowTablesModel;
 import view.Home;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
 
 public class LoadData {
 
@@ -36,6 +26,7 @@ public class LoadData {
 	public LoadData() {
 	}
 
+	// Likely a overload
 	public LoadData(String x) {
 		wait = false;
 		try {
@@ -125,7 +116,6 @@ public class LoadData {
 	/*
 	 * =============================================================
 	 */
-	 String bug="";
 	public void tablesSectionLoader() {
 		
 		tables = new ArrayList<>();
