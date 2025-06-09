@@ -1,10 +1,10 @@
 package view;
 
-import javax.swing.text.Segment;
-
 import org.fife.ui.rsyntaxtextarea.Token;
 import org.fife.ui.rsyntaxtextarea.TokenMakerBase;
 import org.fife.ui.rsyntaxtextarea.TokenTypes;
+
+import javax.swing.text.Segment;
 
 public class CustomSqlSyntaxHighlighting extends TokenMakerBase {
 

@@ -1,13 +1,9 @@
 package test.drag;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Arrays;
-
 import dao.mysql.MySQLConnection;
+
+import java.sql.*;
+import java.util.Arrays;
 
 public class ConsoleTable{
   public void displayTable(ResultSet resultSet, boolean adjustColumnWidth) throws SQLException {

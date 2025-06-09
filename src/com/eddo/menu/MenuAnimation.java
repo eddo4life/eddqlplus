@@ -1,9 +1,10 @@
 package com.eddo.menu;
-import java.awt.Color;
 
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
+
+import java.awt.*;
 
 public class MenuAnimation {
 

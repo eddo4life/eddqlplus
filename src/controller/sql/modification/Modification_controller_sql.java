@@ -1,12 +1,12 @@
 package controller.sql.modification;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-
 import dao.DBMS;
 import dao.mysql.MySQLDaoOperation;
 import dao.oracle.OracleDaoOperation;
 import view.CreateTable;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Modification_controller_sql {
 

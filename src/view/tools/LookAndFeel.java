@@ -1,11 +1,10 @@
 package view.tools;
 
-import java.awt.Font;
-
-import javax.swing.UIManager;
-import javax.swing.plaf.nimbus.NimbusLookAndFeel;
-
 import dao.sqlite.SystemDatabaseTreatment;
+
+import javax.swing.*;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
+import java.awt.*;
 
 public class LookAndFeel {
 

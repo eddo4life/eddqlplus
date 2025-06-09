@@ -1,18 +1,6 @@
 package dao.mysql;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mysql.cj.jdbc.result.ResultSetMetaData;
-
 import dao.sqlite.SystemDatabaseTreatment;
 import eddql.launch.LoadData;
 import export.ExcelExporter;
@@ -20,6 +8,13 @@ import model.ConnectingToolsModel;
 import view.DisplayConsole;
 import view.Insertion;
 import view.tools.Tools;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MySQLDaoOperation {
 	MySQLConnection connection = new MySQLConnection();

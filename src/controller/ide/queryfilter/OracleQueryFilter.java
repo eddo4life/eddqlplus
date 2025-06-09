@@ -1,12 +1,12 @@
 package controller.ide.queryfilter;
 
-import java.sql.SQLException;
-
 import controller.ide.command.system.CommandSystem;
 import dao.mysql.MySQLConnection;
 import dao.mysql.MySQLDaoOperation;
 import view.Home;
 import view.terminal.Terminal;
+
+import java.sql.SQLException;
 
 public class OracleQueryFilter {
 

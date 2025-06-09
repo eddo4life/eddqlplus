@@ -1,8 +1,8 @@
 package model;
 
-import java.util.ArrayList;
-
 import view.Insertion;
+
+import java.util.ArrayList;
 
 public class InsertList {
 

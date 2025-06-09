@@ -1,5 +1,6 @@
 package com.eddo.menu;
-import javax.swing.Icon;
+
+import javax.swing.*;
 
 public class ModelSubMenu {
 

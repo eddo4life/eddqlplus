@@ -1,11 +1,10 @@
 package view.iconmaker;
 
-import java.awt.Color;
-
-import javax.swing.Icon;
-
 import jiconfont.icons.font_awesome.FontAwesome;
 import jiconfont.swing.IconFontSwing;
+
+import javax.swing.*;
+import java.awt.*;
 
 public class IconFontGenerator {
 	private Icon icon;

@@ -1,19 +1,5 @@
 package view.terminal;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JSeparator;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-
 import dao.DBMS;
 import dao.mysql.MySQLDaoOperation;
 import dao.oracle.OracleDaoOperation;
@@ -21,6 +7,13 @@ import view.Editor_section;
 import view.Home;
 import view.tables.Custom;
 import view.tables.JTableUtilities;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import java.awt.*;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Terminal {
 
@@ -54,7 +47,7 @@ public class Terminal {
 
 		// Editor.components.add(messagePanel);
 
-		JLabel titleLabel = new JLabel("Output•");
+		JLabel titleLabel = new JLabel("Outputï¿½");
 		titleLabel.setFont(new Font("", Font.ITALIC, 13));
 		exceptionLabel.setFont(new Font("", Font.PLAIN, 14));
 		//titleLabel.setForeground(Color.darkGray);

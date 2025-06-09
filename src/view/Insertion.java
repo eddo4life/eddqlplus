@@ -1,20 +1,5 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridBagLayout;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableModel;
-
 import dao.DBMS;
 import dao.InsertData;
 import dao.mysql.MySQLConnection;
@@ -25,6 +10,13 @@ import view.iconmaker._Icon;
 import view.pupupsmessage.PupupMessages;
 import view.tables.Custom;
 import view.tables.JTableUtilities;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Insertion {
 

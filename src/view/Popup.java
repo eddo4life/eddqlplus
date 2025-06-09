@@ -1,22 +1,17 @@
 package view;
 
 //and menu items to it
-import java.awt.Color;
-import java.awt.Insets;
+
+import controller.ide.filemanager.FileManager;
+import icon.BufferedImageIO;
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.print.PrinterException;
-
-import javax.swing.JFrame;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-import javax.swing.KeyStroke;
-
-import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
-
-import controller.ide.filemanager.FileManager;
-import icon.BufferedImageIO;
 
 
 class Popup extends JFrame implements ActionListener {

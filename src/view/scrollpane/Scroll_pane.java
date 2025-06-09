@@ -1,8 +1,7 @@
 package view.scrollpane;
 
-import java.awt.Component;
-
-import javax.swing.JScrollPane;
+import javax.swing.*;
+import java.awt.*;
 
 
 public class Scroll_pane {

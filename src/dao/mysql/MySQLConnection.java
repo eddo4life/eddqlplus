@@ -1,17 +1,13 @@
 package dao.mysql;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import dao.sqlite.SQLiteINFO;
 import dao.sqlite.SystemDatabaseTreatment;
 import model.ConnectingToolsModel;
 import view.iconmaker._Icon;
 import view.pupupsmessage.PupupMessages;
 import view.tools.Tools;
+
+import java.sql.*;
 
 public class MySQLConnection {
 

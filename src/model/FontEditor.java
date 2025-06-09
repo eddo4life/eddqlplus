@@ -1,6 +1,6 @@
 package model;
 
-import java.awt.Font;
+import java.awt.*;
 
 public class FontEditor {
 	

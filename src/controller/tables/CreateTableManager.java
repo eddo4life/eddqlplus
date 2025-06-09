@@ -1,11 +1,10 @@
 package controller.tables;
 
-import java.util.List;
-
-import javax.swing.table.AbstractTableModel;
-
 import model.CreateTableModel;
 import view.CreateTable;
+
+import javax.swing.table.AbstractTableModel;
+import java.util.List;
 
 public class CreateTableManager extends AbstractTableModel {
 

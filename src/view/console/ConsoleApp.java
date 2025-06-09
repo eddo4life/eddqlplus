@@ -1,23 +1,13 @@
 package view.console;
 
-import java.awt.BorderLayout;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.Stack;
+import view.MySQLTextAreaExample;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-
-import view.MySQLTextAreaExample;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.Stack;
 
 /*
  * 

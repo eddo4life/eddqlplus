@@ -1,22 +1,12 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Insets;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
-import javax.swing.border.LineBorder;
-
 import dao.oracle.OracleDaoOperation;
 import model.oracle.OracleUsers;
 import view.scrollpane.Scroll_pane;
+
+import javax.swing.*;
+import javax.swing.border.LineBorder;
+import java.awt.*;
 
 public class OracleUsersSection {
 

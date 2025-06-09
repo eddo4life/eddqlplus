@@ -1,8 +1,7 @@
 package com.eddo.menu;
-import java.awt.BorderLayout;
-import java.awt.Component;
 
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 
 public class MainForm extends JPanel {
 

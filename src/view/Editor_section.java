@@ -1,56 +1,22 @@
 package view;
 
-import java.awt.AWTKeyStroke;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GraphicsEnvironment;
-import java.awt.GridBagConstraints;
-import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-
-import javax.swing.ButtonGroup;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JColorChooser;
-import javax.swing.JDesktopPane;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
-import javax.swing.KeyStroke;
-import javax.swing.border.TitledBorder;
-import javax.swing.plaf.DimensionUIResource;
-import javax.swing.text.DefaultCaret;
-
-import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
-import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
-import org.fife.ui.rtextarea.RTextScrollPane;
-
 import controller.ide.queryfilter.QueryFilter;
 import icon.BufferedImageIO;
 import model.FontEditor;
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
+import org.fife.ui.rtextarea.RTextScrollPane;
 import view.console.ConsoleApp;
 import view.ide.event.FileEvent;
 import view.scrollpane.Scroll_pane;
+
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
+import javax.swing.plaf.DimensionUIResource;
+import javax.swing.text.DefaultCaret;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.ArrayList;
 
 public class Editor_section implements KeyListener {
 	// JDesktopPane desktop;

@@ -1,23 +1,12 @@
 package view.pupupsmessage;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
+import icon.BufferedImageIO;
 
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
-
-import icon.BufferedImageIO;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 
 
 public class PupupMessages extends JDialog {

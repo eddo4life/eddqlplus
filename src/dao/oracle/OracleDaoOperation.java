@@ -1,16 +1,10 @@
 package dao.oracle;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-
-//import com.mysql.cj.jdbc.result.ResultSetMetaData;
-
 import model.oracle.OracleUsers;
 import view.Insertion;
+
+import java.sql.*;
+import java.util.ArrayList;
 
 public class OracleDaoOperation {
 

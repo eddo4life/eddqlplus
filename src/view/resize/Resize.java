@@ -1,11 +1,10 @@
 package view.resize;
 
-import java.awt.Component;
-import java.awt.Dimension;
+import view.Home;
+
+import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-
-import view.Home;
 
 public class Resize {
 

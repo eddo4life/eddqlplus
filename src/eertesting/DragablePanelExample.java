@@ -1,11 +1,9 @@
 package eertesting;
-import java.awt.Color;
-import java.awt.Point;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class DragablePanelExample {
  public DragablePanelExample() {

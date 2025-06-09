@@ -1,16 +1,9 @@
 package test.drag;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-
 import dao.mysql.MySQLConnection;
+
+import javax.swing.*;
+import java.sql.*;
 
 public class SQLTableDisplay {
     public static void displayTable(ResultSet rs) throws SQLException {

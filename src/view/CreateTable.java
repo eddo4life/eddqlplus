@@ -1,35 +1,5 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-
 import controller.library.EddoLibrary;
 import controller.tables.CreateTableManager;
 import dao.DBMS;
@@ -45,6 +15,14 @@ import view.resize.Resize;
 import view.tables.Custom;
 import view.tables.JTableUtilities;
 import view.tables.Sort;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class CreateTable implements MouseListener, KeyListener {
 	public String database;

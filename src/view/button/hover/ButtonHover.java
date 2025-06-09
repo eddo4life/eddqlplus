@@ -1,11 +1,9 @@
 package view.button.hover;
 
-import java.awt.Color;
-import java.awt.Cursor;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import javax.swing.JButton;
 
 
 public class ButtonHover {

@@ -1,15 +1,10 @@
 package com.eddo.menu;
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.geom.RoundRectangle2D;
-
-import javax.swing.JComponent;
-import javax.swing.UIManager;
 
 import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.geom.RoundRectangle2D;
 
 public class SubMenuPanel extends JComponent {
 

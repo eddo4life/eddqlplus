@@ -1,20 +1,16 @@
 package test.drag;
 
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 public class Console extends JFrame {
   private JTextField commandField;
   private JTextArea consoleArea;
 
   public Console() {
-    // Initialisation de la fenêtre
+    // Initialisation de la fenï¿½tre
     setSize(800, 600);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setTitle("Console");
@@ -26,21 +22,21 @@ public class Console extends JFrame {
     consoleArea.setEditable(false);
     consoleArea.setFocusable(false);
 
-    // Ajout des composants à la fenêtre
+    // Ajout des composants ï¿½ la fenï¿½tre
     JPanel mainPanel = new JPanel();
     mainPanel.setLayout(new BorderLayout());
     mainPanel.add(commandField, BorderLayout.SOUTH);
     mainPanel.add(consoleArea, BorderLayout.CENTER);
     add(mainPanel);
 
-    // Écouter les événements d'action sur le champ de commande
+    // ï¿½couter les ï¿½vï¿½nements d'action sur le champ de commande
     commandField.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         String command = commandField.getText();
         consoleArea.append("> " + command + "\n");
         commandField.setText("");
-        // Insérez ici le code pour exécuter la commande et afficher les résultats
+        // Insï¿½rez ici le code pour exï¿½cuter la commande et afficher les rï¿½sultats
       }
     });
   }

@@ -1,23 +1,5 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.sql.SQLException;
-
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-
 import controller.sql.modification.Modification_controller_sql;
 import dao.DBMS;
 import dao.mysql.MySQLDaoOperation;
@@ -25,6 +7,11 @@ import dao.oracle.OracleDaoOperation;
 import eddql.launch.LoadData;
 import view.iconmaker._Icon;
 import view.pupupsmessage.PupupMessages;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 
 public class Modification {
 	String tableName;

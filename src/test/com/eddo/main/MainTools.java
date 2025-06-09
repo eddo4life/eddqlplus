@@ -1,12 +1,5 @@
 package test.com.eddo.main;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.EventQueue;
-
-import javax.swing.Icon;
-import javax.swing.border.TitledBorder;
-
 import com.eddo.menu.EventMenu;
 import com.eddo.menu.MainForm;
 import com.eddo.menu.MenuItem;
@@ -14,12 +7,15 @@ import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.extras.FlatAnimatedLafChange;
-
 import icon.tools.BufferedImageIO;
 import jiconfont.icons.font_awesome.FontAwesome;
 import test.com.eddo.form.Form1;
 import view.iconmaker.IconFontGenerator;
 import view.tools.Tools;
+
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
 
 /**
  *

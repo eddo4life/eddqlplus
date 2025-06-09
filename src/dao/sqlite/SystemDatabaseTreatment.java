@@ -1,12 +1,12 @@
 package dao.sqlite;
 
+import model.ConnectingToolsModel;
+import model.Sys;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import model.ConnectingToolsModel;
-import model.Sys;
 
 public class SystemDatabaseTreatment {
 

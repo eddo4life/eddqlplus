@@ -1,15 +1,13 @@
 package view.tables;
 
 
+import view.Home;
 
-import javax.swing.JTable;
-import javax.swing.RowFilter;
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-
-import view.Home;
 
 public class Sort {
 

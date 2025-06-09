@@ -1,46 +1,6 @@
 
 package view;
 
-import java.awt.AWTKeyStroke;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.sql.SQLException;
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.JToolBar;
-import javax.swing.border.BevelBorder;
-
 import dao.DBMS;
 import dao.mysql.MySQLConnection;
 import eddql.launch.LoadData;
@@ -53,6 +13,17 @@ import view.iconmaker._Icon;
 import view.pupupsmessage.PupupMessages;
 import view.resize.Resize;
 import view.tools.Tools;
+
+import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Home implements MouseListener, KeyListener, FocusListener {
 	public static JPanel content = new JPanel();

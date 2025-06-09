@@ -1,9 +1,7 @@
 package view.tables;
 
-import java.awt.Color;
-
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
+import java.awt.*;
 
 public class Custom {
 	JScrollPane scrollPane;

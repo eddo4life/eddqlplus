@@ -1,16 +1,11 @@
 package view;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-import javax.swing.JTextArea;
-
 import dao.mysql.MySQLConnection;
 import dao.sqlite.SystemDatabaseTreatment;
 import model.ConnectingToolsModel;
+
+import javax.swing.*;
+import java.sql.*;
 
 public class MySQLTextAreaExample extends JTextArea {
 

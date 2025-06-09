@@ -1,11 +1,8 @@
 package com.eddo.menu;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.geom.Rectangle2D;
 
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
-import javax.swing.UIManager;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
 
 public class SubMenuItem extends JButton {
 
