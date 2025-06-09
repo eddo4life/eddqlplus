@@ -1,13 +1,11 @@
 package controller.ide.command.system;
 
-import java.awt.Color;
-
-import javax.swing.JColorChooser;
-
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
-
 import view.Editor_section;
 import view.Home;
+
+import javax.swing.*;
+import java.awt.*;
 
 public class CommandSystem {
 
@@ -23,19 +21,10 @@ public class CommandSystem {
                 case "cls;" -> Editor_section.reset();
                 case "clear;" -> {
                     t.setText("");
-                    //Editor.lineEditorPane.setText("");
                 }
                 case "exit;", "quit;", "close;" -> t.setEditable(false);//welcome page...
                 case "hbar;", "hide bar" -> Home.toolBar.setVisible(false);
                 case "sbar;", "show bar" -> Home.toolBar.setVisible(true);
-                case "light;" -> {
-
-                    //Editor_section.resetColor();
-                }
-                case "dark;" -> {
-
-                    //Editor_section.resetColor();
-                }
                 case "open font;", "choose font;", "pick font;" -> Editor_section.westPanel_fontChooser_parent.setVisible(true);
                 case "font color;" -> {
                     Color color = JColorChooser.showDialog(Home.frame, "Choose a color", null);
@@ -45,10 +34,7 @@ public class CommandSystem {
                 case "w -resize;" -> {
                     Home.frame.setResizable(!Home.frame.isResizable());
                 }
-                //case "create new table"->;
-                //cretate new strategies fro insert....
-                //case "insert into ...(to autmatically select the table..
-                //case "new insertion"...
+                // TODO: Add commands that can interact with the SQL's GUI
             }
         }
 
@@ -68,10 +54,4 @@ public class CommandSystem {
             }
         return cls;
     }
-
 }
-
-/*
-
-
- */
