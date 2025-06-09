@@ -54,19 +54,19 @@ public class FileManager {
 
 			try {
 
-				String text = "", endText = "";
+				String currentLine = "";
 
 				FileReader fr = new FileReader(fi);
 
 				BufferedReader br = new BufferedReader(fr);
 
-				endText = br.readLine();
+				StringBuilder text = new StringBuilder(br.readLine());
 
-				while ((text = br.readLine()) != null) {
-					endText = endText + "\n" + text;
+				while ((currentLine = br.readLine()) != null) {
+					text.append("\n").append(currentLine);
 				}
 
-				editor_pane.setText(endText);
+				editor_pane.setText(text.toString());
 				br.close();
 			} catch (Exception evt) {
 				JOptionPane.showMessageDialog(null, evt.getMessage());
