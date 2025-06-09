@@ -1,78 +1,71 @@
 package controller.ide.filemanager;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
-
 import view.Editor_section;
 import view.Home;
 
+import javax.swing.*;
+import java.io.*;
+
 public class FileManager {
-	
-	RSyntaxTextArea editor_pane=Editor_section.textArea;
-	
-	public FileManager() {
-		
-	}
-	
-	public void saveFile() {
-		JFileChooser saveFile = new JFileChooser("f:");
 
-		int r = saveFile.showOpenDialog(Home.frame);
+    RSyntaxTextArea editor_pane = Editor_section.textArea;
 
-		if (r == JFileChooser.APPROVE_OPTION) {
-			File fi = new File(saveFile.getSelectedFile().getAbsolutePath());
+    public FileManager() {
 
-			try {
-				FileWriter wr = new FileWriter(fi, false);
-				BufferedWriter w = new BufferedWriter(wr);
-				w.write(editor_pane.getText());
-				w.flush();
-				w.close();
-			} catch (Exception evt) {
-				JOptionPane.showMessageDialog(null, evt.getMessage());
-			}
-		}
+    }
 
-	}
+    public void saveFile() {
+        JFileChooser saveFile = new JFileChooser("f:");
+
+        int r = saveFile.showOpenDialog(Home.frame);
+
+        if (r == JFileChooser.APPROVE_OPTION) {
+            File fi = new File(saveFile.getSelectedFile().getAbsolutePath());
+
+            try {
+                FileWriter wr = new FileWriter(fi, false);
+                BufferedWriter w = new BufferedWriter(wr);
+                w.write(editor_pane.getText());
+                w.flush();
+                w.close();
+            } catch (Exception evt) {
+                JOptionPane.showMessageDialog(null, evt.getMessage());
+            }
+        }
+
+    }
 
 
-	public void openFile() {
+    public void openFile() {
 
-		JFileChooser openFile = new JFileChooser("f:");
-		int r = openFile.showOpenDialog(Home.frame);
+        JFileChooser openFile = new JFileChooser("f:");
+        int r = openFile.showOpenDialog(Home.frame);
 
-		if (r == JFileChooser.APPROVE_OPTION) {
-			File fi = new File(openFile.getSelectedFile().getAbsolutePath());
+        if (r == JFileChooser.APPROVE_OPTION) {
+            File fi = new File(openFile.getSelectedFile().getAbsolutePath());
 
-			try {
+            try {
 
-				String currentLine = "";
+                String currentLine = "";
 
-				FileReader fr = new FileReader(fi);
+                FileReader fr = new FileReader(fi);
 
-				BufferedReader br = new BufferedReader(fr);
+                BufferedReader br = new BufferedReader(fr);
 
-				StringBuilder text = new StringBuilder(br.readLine());
+                StringBuilder text = new StringBuilder(br.readLine());
 
-				while ((currentLine = br.readLine()) != null) {
-					text.append("\n").append(currentLine);
-				}
+                while ((currentLine = br.readLine()) != null) {
+                    text.append("\n").append(currentLine);
+                }
 
-				editor_pane.setText(text.toString());
-				br.close();
-			} catch (Exception evt) {
-				JOptionPane.showMessageDialog(null, evt.getMessage());
-			}
-		}
+                editor_pane.setText(text.toString());
+                br.close();
+            } catch (Exception evt) {
+                JOptionPane.showMessageDialog(null, evt.getMessage());
+            }
+        }
 
-	}
+    }
 
 }
