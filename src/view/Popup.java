@@ -144,13 +144,13 @@ class Popup extends JFrame implements ActionListener {
 			new FileManager().saveFile();
 		} else if (e.getSource() == print) {
 			try {
-				if (Editor_section.editorpane_current_fgColor == Color.white)
+				if (Editor_section.editorPaneCurrentFgColor == Color.white)
 					t.setForeground(Color.black);
 				t.print();
 			} catch (PrinterException e1) {
 				e1.printStackTrace();
 			}
-			t.setForeground(Editor_section.editorpane_current_fgColor);
+			t.setForeground(Editor_section.editorPaneCurrentFgColor);
 		} else if (e.getSource() == delete) {
 			// put it delete row and select the row current row to make the action
 		} else if (e.getSource() == selectAll) {

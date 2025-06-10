@@ -29,7 +29,7 @@ public class CommandSystem {
                 case "font color;" -> {
                     Color color = JColorChooser.showDialog(Home.frame, "Choose a color", null);
                     t.setForeground(color);
-                    Editor_section.editorpane_current_fgColor = color;
+                    Editor_section.editorPaneCurrentFgColor = color;
                 }
                 case "w -resize;" -> {
                     Home.frame.setResizable(!Home.frame.isResizable());
