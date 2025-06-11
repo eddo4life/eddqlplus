@@ -19,10 +19,10 @@ textArea.setFont(font);
 public class ConsoleApp extends JPanel implements ActionListener, DocumentListener, KeyListener {
 	private static final long serialVersionUID = 1L;
 
-	private JTextField inputField;
-	private JTextArea outputArea;
-	private Stack<String> undoStack;
-	private Stack<String> redoStack;
+	private final JTextField inputField;
+	private final JTextArea outputArea;
+	private final Stack<String> undoStack;
+	private final Stack<String> redoStack;
 	private String currentCommand;
 
 	public ConsoleApp() {
@@ -59,8 +59,8 @@ public class ConsoleApp extends JPanel implements ActionListener, DocumentListen
 
 		inputField.requestFocus();
 
-		undoStack = new Stack<String>();
-		redoStack = new Stack<String>();
+		undoStack = new Stack<>();
+		redoStack = new Stack<>();
 	}
 
 	@Override

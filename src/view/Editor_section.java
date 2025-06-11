@@ -313,7 +313,6 @@ public class Editor_section implements KeyListener {
         fonts_list.setPreferredSize(null);
         JLabel label1 = new JLabel();
 
-        // fonts_list.setPreferredSize(null);
         fonts_list.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -513,7 +512,6 @@ public class Editor_section implements KeyListener {
             terminPanel.setVisible(true);
             execute();
         }
-
     }
 
     void execute() {

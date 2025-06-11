@@ -41,17 +41,22 @@ public class CommandSystem {
     }
 
     boolean cls(String str) {
-        boolean cls = false;
-        if (str.length() > 4)
-            if (String.valueOf(str.charAt(str.length() - 5)).isBlank()) {
-                if (str.toLowerCase().substring(str.length() - 4, str.length()).equals("cls;")) {
-                    Editor_section.reset();
-                    cls = true;
-                }
-            } else if (str.length() == 4) {
-                Editor_section.reset();
-                cls = true;
-            }
-        return cls;
+        if (isClsCommand(str)) {
+            Editor_section.reset();
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isClsCommand(String str) {
+        if (str.length() == 4) {
+            return str.equalsIgnoreCase("cls;");
+        }
+        if (str.length() > 4) {
+            boolean hasLeadingSpace = Character.isWhitespace(str.charAt(str.length() - 5));
+            String lastFourChars = str.substring(str.length() - 4).toLowerCase();
+            return hasLeadingSpace && lastFourChars.equals("cls;");
+        }
+        return false;
     }
 }
