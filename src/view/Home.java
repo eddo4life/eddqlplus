@@ -7,6 +7,7 @@ import eddql.launch.LoadData;
 import icon.BufferedImageIO;
 import jiconfont.icons.font_awesome.FontAwesome;
 import model.ConnectingToolsModel;
+import test.com.eddo.main.MainTools;
 import view.iconmaker.IconFontGenerator;
 import view.iconmaker._Icon;
 import view.pupupsmessage.PupupMessages;
@@ -17,6 +18,7 @@ import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -32,6 +34,7 @@ public class Home implements MouseListener, KeyListener, FocusListener {
     public static JLabel db;
 
     public static JLabel tools;
+    private final JLabel home = new JLabel("");
 
     public Home() {
         launch();
@@ -94,7 +97,6 @@ public class Home implements MouseListener, KeyListener, FocusListener {
     }
 
     private JLabel terminal() {
-        JLabel home = new JLabel("");
         home.setIcon(new BufferedImageIO().getIcon(20, 20, "console.png"));
         setComponent(home);
         home.setBounds(150, 0, 70, 30);
@@ -278,7 +280,28 @@ public class Home implements MouseListener, KeyListener, FocusListener {
 
         if (Tools.ct != null) {
             if (unlock) {
-                if (e.getSource() == logout) {
+                if (e.getSource() == tablesSections) {
+                    try {
+                        new TablesSections().saisie();
+                    } catch (NullPointerException ignored) {
+                    }
+                } else if (e.getSource() == db) {
+                    try {
+                        new DataBase_section().dataBases();
+                    } catch (SQLException e1) {
+                        new MySQLConnection().setDbName("");
+                    }
+                } else if (e.getSource() == oracleUsers) {
+                    new OracleUsersSection();
+                } else if (e.getSource() == home) {
+                    editor();
+                } else if (e.getSource() == tools) {
+                    content.removeAll();
+                    content.add(new MainTools());
+                    content.revalidate();
+                    content.repaint();
+
+                } else if (e.getSource() == logout) {
                     act(0);
                 } else if (e.getSource() == refresh) {
                     act(1);
@@ -537,13 +560,11 @@ public class Home implements MouseListener, KeyListener, FocusListener {
     @Override
     public void focusGained(FocusEvent e) {
         // TODO Auto-generated method stub
-
     }
 
     @Override
     public void focusLost(FocusEvent e) {
         // TODO Auto-generated method stub
-
     }
 
 }
