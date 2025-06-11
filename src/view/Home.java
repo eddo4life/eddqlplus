@@ -25,7 +25,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-
 public class Home implements MouseListener, KeyListener, FocusListener {
     public static JPanel content = new JPanel();
     public static JToolBar toolBar;
@@ -158,6 +157,12 @@ public class Home implements MouseListener, KeyListener, FocusListener {
         sysOpt.add(restart);
         sysOpt.add(_lock);
         toolBar.add(sysOpt);
+
+        logout.setToolTipText("Log out");
+        restart.setToolTipText("Restart");
+        refresh.setToolTipText("Refresh");
+        _lock.setToolTipText("Lock");
+        
         db = new JLabel("Databases");
         db.setIcon(new IconFontGenerator(FontAwesome.DATABASE, 15, null).getIcon());
         if (DBMS.dbms != 1) {
