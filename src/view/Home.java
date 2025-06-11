@@ -27,10 +27,8 @@ public class Home implements MouseListener, KeyListener, FocusListener {
     public static JPanel content = new JPanel();
     public static JToolBar toolBar;
     public static JFrame frame;
-    JPanel smenuPanel;
-    GridBagConstraints smenuconstraint;
-    Cursor defaultCursor;
-    JLabel home;
+
+    private Cursor defaultCursor;
     public static JLabel db;
 
     public static JLabel tools;
@@ -55,14 +53,11 @@ public class Home implements MouseListener, KeyListener, FocusListener {
         GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
         int width = gd.getDisplayMode().getWidth();
         int height = gd.getDisplayMode().getHeight();
-        // frame.setSize(new Dimension(width/2, height/2));
+
         frame.setMinimumSize(new Dimension(width / 2, height / 2));
-        //frame.setUndecorated(true);
+
         frame.setLayout(new BorderLayout());
         frame.setLocationRelativeTo(null);
-        // frame.setLocation(117, 100);;
-
-        // we'll get the location from the database
 
         frame.setIconImage(new BufferedImageIO().getIcon(500, 500, "logo.jpg").getImage());
         passwordField = new JPasswordField(15);
@@ -80,9 +75,7 @@ public class Home implements MouseListener, KeyListener, FocusListener {
         JPanel p = new JPanel();
         p.setLayout(new FlowLayout(2));
         p.setPreferredSize(new Dimension(10, 35));
-        // GridBagConstraints c = new GridBagConstraints();
-//		c.gridx = 0;
-//		c.gridy = 0;
+
         p.add(copyright);
         frame.add(p, BorderLayout.SOUTH);
         frame.add(content, BorderLayout.CENTER);
@@ -100,14 +93,13 @@ public class Home implements MouseListener, KeyListener, FocusListener {
 
     }
 
-    JLabel terminal() {
-        home = new JLabel("");
+    private JLabel terminal() {
+        JLabel home = new JLabel("");
         home.setIcon(new BufferedImageIO().getIcon(20, 20, "console.png"));
         setComponent(home);
         home.setBounds(150, 0, 70, 30);
-        getToolLabel(home);
-        // home.setIcon(new IconFontGenerator(FontAwesome.DESKTOP, 15,
-        // color).getIcon());
+        addMouseListenerOn(home);
+
         home.addMouseListener(this);
         return home;
     }
@@ -118,7 +110,6 @@ public class Home implements MouseListener, KeyListener, FocusListener {
      *
      */
 
-    int heightbar = 30;
     JButton logout, refresh, restart, _lock;
     JLabel tablesSections = new JLabel("Tables");
 
@@ -136,17 +127,17 @@ public class Home implements MouseListener, KeyListener, FocusListener {
             oracleUsers.setVisible(false);
         }
 
-        getToolLabel(oracleUsers);
+        addMouseListenerOn(oracleUsers);
         oracleUsers.setIcon(new IconFontGenerator(FontAwesome.USER, 17, null).getIcon());
 
         toolBar = new JToolBar();
         new Resize(toolBar, "toolbar");
-        toolBar.setLayout(new FlowLayout(0, 20, 5));
+        toolBar.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 5));
         toolBar.setRollover(false);
         toolBar.setFloatable(false);
         toolBar.setOpaque(true);
         JPanel sysOpt = new JPanel();
-        sysOpt.setLayout(new FlowLayout(0, 0, -1));
+        sysOpt.setLayout(new FlowLayout(FlowLayout.LEFT, 0, -1));
         logout = new JButton(new IconFontGenerator(FontAwesome.POWER_OFF, 17, null).getIcon());
         logout.addMouseListener(this);
         refresh = new JButton(new IconFontGenerator(FontAwesome.REPEAT, 17, null).getIcon());
@@ -169,12 +160,12 @@ public class Home implements MouseListener, KeyListener, FocusListener {
         if (DBMS.dbms != 1) {
             db.setVisible(false);
         }
-        getToolLabel(db);
+        addMouseListenerOn(db);
         tablesSections.setIcon(new IconFontGenerator(FontAwesome.TABLE, 15, null).getIcon());
-        getToolLabel(tablesSections);
+        addMouseListenerOn(tablesSections);
         tools = new JLabel("Tools");
         tools.setIcon(new IconFontGenerator(FontAwesome.WRENCH, 15, null).getIcon());
-        getToolLabel(tools);
+        addMouseListenerOn(tools);
 
         toolBar.add(terminal());
         toolBar.add(oracleUsers);
@@ -182,20 +173,19 @@ public class Home implements MouseListener, KeyListener, FocusListener {
         toolBar.add(tablesSections);
         toolBar.add(tools);
 
-        // searchField.setBorder(new BevelBorder(1, Color.black, Color.black));
-        // searchField.setForeground(Color.black);
         searchField.setMargin(new Insets(0, 10, 0, 0));
         searchField.setFocusable(false);
         searchField.setBorder(null);
-        // searchField.setBackground(Color.lightGray);
+
         searchLabel = new JLabel("Search");
 
         searchLabel.setIcon(new IconFontGenerator(FontAwesome.SEARCH, 15, null).getIcon());
 
-        getToolLabel(searchLabel);
+        addMouseListenerOn(searchLabel);
+
         JPanel searchPanel = new JPanel();
         searchPanel.setBackground(null);
-        searchPanel.setLayout(new FlowLayout(0, 10, 0));
+        searchPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 0));
         searchPanel.add(searchLabel);
         searchLabel.addMouseListener(new MouseAdapter() {
             @Override
@@ -221,63 +211,39 @@ public class Home implements MouseListener, KeyListener, FocusListener {
         toolBar.add(searchPanel);
         JPanel bckNextPanel = new JPanel();
         bckNextPanel.setBackground(null);
-        bckNextPanel.setLayout(new FlowLayout(0, 12, 0));
+        bckNextPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 12, 0));
         toolBar.add(bckNextPanel);
         frame.add(toolBar, BorderLayout.NORTH);
     }
 
-    public JLabel getToolLabel(JLabel label) {
+    private void addMouseListenerOn(JLabel label) {
         if (label != searchLabel)
             label.addMouseListener(this);
         label.setFont(new Font("sanserif", Font.PLAIN, 10));
-        return label;
     }
 
-    JLabel searchLabel;
+
+    /*
+     *
+     * ========================================================
+     *
+     */
+
+    private JLabel searchLabel;
     public static JTextField searchField = new JTextField(15);
-
-    /*
-     *
-     * ========================================================
-     *
-     */
-
-//	public void menu() {
-//
-//		smenuPanel = new JPanel();
-//		smenuPanel.setLayout(new GridBagLayout());
-//		smenuconstraint = new GridBagConstraints();
-//		smenuconstraint.gridx = 0;
-//		smenuconstraint.gridy = 0;
-//
-//		smenuconstraint.gridx = 0;
-//		smenuconstraint.gridy = 8;
-//	}
-
-    /*
-     *
-     * ========================================================
-     *
-     */
 
     public static void editor() {
         new Editor_section(null);
     }
 
-    static JPasswordField passwordField;
+    private static JPasswordField passwordField;
 
-    /*
-     *
-     * ========================================================
-     *
-     */
+    private final ConnectingToolsModel toolsModel = new ConnectingToolsModel();
+    private final String password = toolsModel.getPassword();
+    private String online = "eddo";
+    private int lock = 0;
 
-    ConnectingToolsModel toolsModel = new ConnectingToolsModel();
-    String password = toolsModel.getPassword();
-    String online = "eddo";
-    static int lock = 0;
-
-    JDialog log = new JDialog();
+    private JDialog log = new JDialog();
 
     private void lock() {
         log = new JDialog();
@@ -296,7 +262,7 @@ public class Home implements MouseListener, KeyListener, FocusListener {
     }
 
     @SuppressWarnings("deprecation")
-    boolean acces() {
+    private boolean access() {
         if (passwordField.getText().equals(password) || passwordField.getText().equals(online)) {
             online = password;
             lock = 1;
@@ -311,7 +277,6 @@ public class Home implements MouseListener, KeyListener, FocusListener {
         setComponent(e.getComponent());
 
         if (Tools.ct != null) {
-            // unlock
             if (unlock) {
                 if (e.getSource() == logout) {
                     act(0);
@@ -343,8 +308,6 @@ public class Home implements MouseListener, KeyListener, FocusListener {
         this.components = component;
     }
 
-    JLabel anonymousLabel = new JLabel("");
-
     @Override
     public void mousePressed(MouseEvent e) {
     }
@@ -366,8 +329,6 @@ public class Home implements MouseListener, KeyListener, FocusListener {
     public void mouseExited(MouseEvent e) {
         selection(e, false);
         frame.setCursor(defaultCursor);
-        if (e.getComponent() != getComponent()) {
-        }
     }
 
     /*
@@ -389,8 +350,8 @@ public class Home implements MouseListener, KeyListener, FocusListener {
      */
 
     public void timer() {
-        Timer chrono = new Timer();
-        chrono.schedule(new TimerTask() {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
             public void run() {
 
                 String alt = "", dbms = "";
@@ -429,12 +390,10 @@ public class Home implements MouseListener, KeyListener, FocusListener {
                 Home.frame.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
                 frame.revalidate();
                 frame.repaint();
-
             }
             case 2 -> {
                 restart();
             }
-
             case 3 -> {
                 new PupupMessages().message("The default password is \"eddo\", until this functionality is completed!",
                         new _Icon().messageIcon());
@@ -538,7 +497,7 @@ public class Home implements MouseListener, KeyListener, FocusListener {
      * bellow
      */
 
-    public JButton designButton(String name) {
+    private JButton designButton(String name) {
         JButton button = new JButton(name);
         button.setPreferredSize(new Dimension(90, 26));
         button.setFocusable(false);
@@ -554,7 +513,6 @@ public class Home implements MouseListener, KeyListener, FocusListener {
     }
 
     public static String dbn = new MySQLConnection().getDbName();
-    int inc = 1;
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -569,7 +527,7 @@ public class Home implements MouseListener, KeyListener, FocusListener {
     @Override
     public void keyReleased(KeyEvent e) {
         if (e.getKeyCode() == 10) {
-            if (acces()) {
+            if (access()) {
                 unlock = true;
                 log.dispose();
             }
