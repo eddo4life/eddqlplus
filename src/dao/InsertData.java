@@ -12,10 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class InsertData extends AbstractTableModel {
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
+
     String[] columnNames;
     ArrayList<InsertList> list;
     InsertList insertList = new InsertList();
