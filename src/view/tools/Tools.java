@@ -117,7 +117,7 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
 
 	public JPanel home() {
 		JPanel panel = new JPanel(new GridBagLayout());
-		panel.add(new JLabel("Tools"));
+		panel.add(menuPanel);
 		return panel;
 	}
 
@@ -399,7 +399,10 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
 		} else if (e.getSource() == displayLabel) {
 
 		} else if (e.getSource() == connectionLabel) {
-			sqlConnector();
+//			sqlConnector();
+			Home.content.add(sqlConnector(),BorderLayout.CENTER);
+			Home.content.revalidate();
+			Home.content.repaint();
 		}
 
 	}

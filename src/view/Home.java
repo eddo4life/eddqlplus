@@ -7,7 +7,6 @@ import eddql.launch.LoadData;
 import icon.BufferedImageIO;
 import jiconfont.icons.font_awesome.FontAwesome;
 import model.ConnectingToolsModel;
-import test.com.eddo.main.MainTools;
 import view.iconmaker.IconFontGenerator;
 import view.iconmaker._Icon;
 import view.pupupsmessage.PupupMessages;
@@ -24,6 +23,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
+
+
 
 public class Home implements MouseListener, KeyListener, FocusListener {
     public static JPanel content = new JPanel();
@@ -275,11 +276,9 @@ public class Home implements MouseListener, KeyListener, FocusListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
         setComponent(e.getComponent());
-
         if (Tools.ct != null) {
-            if (unlock) {
+            if (true) {
                 if (e.getSource() == tablesSections) {
                     try {
                         new TablesSections().saisie();
@@ -296,11 +295,7 @@ public class Home implements MouseListener, KeyListener, FocusListener {
                 } else if (e.getSource() == home) {
                     editor();
                 } else if (e.getSource() == tools) {
-                    content.removeAll();
-                    content.add(new MainTools());
-                    content.revalidate();
-                    content.repaint();
-
+                    new Tools().menu();
                 } else if (e.getSource() == logout) {
                     act(0);
                 } else if (e.getSource() == refresh) {
@@ -353,6 +348,7 @@ public class Home implements MouseListener, KeyListener, FocusListener {
         selection(e, false);
         frame.setCursor(defaultCursor);
     }
+
 
     /*
      *

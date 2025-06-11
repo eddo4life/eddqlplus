@@ -380,7 +380,7 @@ public class DataBase_section {
 				Home.dbn = new MySQLConnection().getDbName();
 				dataBases();
 			} catch (SQLException e1) {
-				new PupupMessages().message("A terrible error occured", new _Icon().exceptionIcon());
+				new PupupMessages().message("A terrible error occurred", new _Icon().exceptionIcon());
 				Home.frame.dispose();
 				Home.frame.removeAll();
 				new PupupMessages().message(
