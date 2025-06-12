@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class Modification {
 	String tableName;
@@ -143,17 +144,13 @@ public class Modification {
 		JPanel panel = new JPanel(new GridBagLayout());
 		JLabel nameLabel = getLabel("Name");
 		JTextField nameField = getTextField(15);
-		String datatype[] = { "int(2)", "varchar(15)", "real", "blob", "decimal(2,2)", "date" };
+		String[] datatype = { "int(2)", "varchar(15)", "real", "blob", "decimal(2,2)", "date" };
 		JComboBox<String> comboBox = new JComboBox<String>(datatype);
 		comboBox.setSelectedIndex(1);
-		// tooptimizelater
+		// TODO: Optimizing later...(maybe)
 		comboBox.addActionListener((e) -> {
 			int index = comboBox.getSelectedIndex();
-			if (index != 0 && index != 1 && index != 4) {
-				comboBox.setEditable(false);
-			} else {
-				comboBox.setEditable(true);
-			}
+			comboBox.setEditable(index == 0 || index == 1 || index == 4);
 		});
 		JButton addButton = getButton("Add");
 
@@ -185,7 +182,7 @@ public class Modification {
 	}
 
 	JPanel renameColumn() {
-		JPanel panel = new JPanel(new FlowLayout(1));
+		JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JLabel renameLabel = getLabel("Rename");
 		JComboBox<String> comboBox = new JComboBox<String>(TableToBeSelected.head);
 		JLabel label = getLabel("to");
@@ -198,7 +195,7 @@ public class Modification {
 				new PupupMessages().message("Please write a new name", new _Icon().messageIcon());
 			} else {
 				String res = new Modification_controller_sql().renameColumn(tableName,
-						comboBox.getSelectedItem().toString(), newName);
+						Objects.requireNonNull(comboBox.getSelectedItem()).toString(), newName);
 				if (res.isEmpty()) {
 					new PupupMessages().message("Renamed completed", new _Icon().succesIcon());
 					new LoadData().tablesSectionLoader();
@@ -219,8 +216,8 @@ public class Modification {
 	}
 
 	JPanel deleteColumn() {
-		JPanel panel = new JPanel(new FlowLayout(1));
-		JLabel deleteLabel = getLabel("Delete columnn ");
+		JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		JLabel deleteLabel = getLabel("Delete column ");
 		JComboBox<String> comboBox = new JComboBox<String>(TableToBeSelected.head);
 
 		comboBox.addActionListener((ActionEvent e) -> {
@@ -248,7 +245,7 @@ public class Modification {
 	}
 
 	JPanel deleteRow() {
-		JPanel panel = new JPanel(new FlowLayout(1));
+		JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JLabel deleteLabel = getLabel("Delete from " + tableName + " if only ");
 		JComboBox<String> comboBox = new JComboBox<String>(TableToBeSelected.head);
 		comboBox.setSelectedIndex(0);
@@ -260,7 +257,7 @@ public class Modification {
 
 			if (!field.getText().isBlank()) {
 
-				String string = comboBox.getSelectedItem().toString() + field.getText();
+				String string = Objects.requireNonNull(comboBox.getSelectedItem()) + field.getText();
 				if (!buildQuery.isBlank()) {
 					string = " AND " + string;
 				}
@@ -311,7 +308,7 @@ public class Modification {
 
 
 	JPanel updateRow() {
-		JPanel panel = new JPanel(new FlowLayout(1));
+		JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JLabel updateLabel = getLabel("Update " + tableName + " set the value ");
 		panel.add(updateLabel);
 		JTextField val_field = getTextField(10);
@@ -322,7 +319,7 @@ public class Modification {
 		JComboBox<String> comboBox = new JComboBox<String>(TableToBeSelected.head);
 		comboBox.setSelectedIndex(0);
 		panel.add(comboBox);
-		JCheckBox constBox = new JCheckBox("Contraint");
+		JCheckBox constBox = new JCheckBox("Constraint");
 		panel.add(constBox);
 		JLabel constLabel = getLabel("whenever");
 		panel.add(constLabel);
@@ -345,11 +342,11 @@ public class Modification {
 			if (!val_field.getText().isBlank()) {
 
 				if (constBox.isSelected()) {
-					if (!const_field.getText().isBlank()) { // comboBoxcolumn to b affected
-															// //comboBox2Columncomstraintapliedfrom
+					if (!const_field.getText().isBlank()) { // comboBox column to b affected
+															// //comboBox2 Column constraint applied from
 						String rep = new Modification_controller_sql().updating(val_field.getText(),
-								comboBox.getSelectedItem().toString(), const_field.getText(),
-								comboBox2.getSelectedItem().toString(), constBox.isSelected(), tableName);
+								Objects.requireNonNull(comboBox.getSelectedItem()).toString(), const_field.getText(),
+								Objects.requireNonNull(comboBox2.getSelectedItem()).toString(), constBox.isSelected(), tableName);
 						new PupupMessages().message(rep, new _Icon().messageIcon());
 						new LoadData().tablesSectionLoader();
 						refreshTable();
@@ -358,8 +355,8 @@ public class Modification {
 					}
 				} else {
 					String rep = new Modification_controller_sql().updating(val_field.getText(),
-							comboBox.getSelectedItem().toString(), const_field.getText(),
-							comboBox2.getSelectedItem().toString(), constBox.isSelected(), tableName);
+							Objects.requireNonNull(comboBox.getSelectedItem()).toString(), const_field.getText(),
+							Objects.requireNonNull(comboBox2.getSelectedItem()).toString(), constBox.isSelected(), tableName);
 					new PupupMessages().message(rep, new _Icon().messageIcon());
 					new LoadData().tablesSectionLoader();
 					refreshTable();
@@ -373,20 +370,17 @@ public class Modification {
 	}
 
 	JLabel getLabel(String text) {
-		JLabel label = new JLabel(text);
-		return label;
+		return new JLabel(text);
 	}
 
 	JButton getButton(String text) {
-		JButton button = new JButton(text);
 
-		return button;
+		return new JButton(text);
 	}
 
 	JTextField getTextField(int dim) {
-		JTextField field = new JTextField(dim);
 
-		return field;
+		return new JTextField(dim);
 	}
 
 	JScrollPane menuPanel() {
@@ -437,10 +431,6 @@ public class Modification {
 		scrollPane.setBorder(null);
 		return scrollPane;
 	}
-
-	/*
-	 * =============================================================
-	 */
 
 	/*
 	 * 
@@ -501,5 +491,4 @@ public class Modification {
 	JButton change_datatype_button = getMenuButton("Change datatype");
 	JButton quick_change_button = getMenuButton("Quick change");
 	JButton exit_button = getMenuButton("Exit");
-
 }
