@@ -53,9 +53,7 @@ public class MySQLTextAreaExample extends JTextArea {
 			// Create the border using "+" and "-" characters
 			StringBuilder borderBuilder = new StringBuilder("+");
 			for (int i = 0; i < numColumns; i++) {
-				for (int j = 0; j < maxColumnWidths[i] + 2; j++) {
-					borderBuilder.append("-");
-				}
+				borderBuilder.append("-".repeat(Math.max(0, maxColumnWidths[i] + 2)));
 				borderBuilder.append("+");
 			}
 			borderBuilder.append("\n");

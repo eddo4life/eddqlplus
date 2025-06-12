@@ -73,7 +73,7 @@ public class OracleUsersSection {
 
 	//	usersPanel.setBackground(Color.cyan);
 
-		JPanel gridbagPanel = new JPanel(new GridBagLayout());
+		JPanel gridBagPanel = new JPanel(new GridBagLayout());
 
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.insets = new Insets(10, 10, 10, 10);
@@ -82,13 +82,13 @@ public class OracleUsersSection {
 		
 		gbc.gridx = 0;
 		gbc.gridy = x++;
-		gridbagPanel.add(getPanels("USER_ID", "USERNAME", "CREATED"), gbc);
+		gridBagPanel.add(getPanels("USER_ID", "USERNAME", "CREATED"), gbc);
 		for (OracleUsers user : new OracleDaoOperation().showUsers()) {
 			gbc.gridx = 0;
 			gbc.gridy = x++;
-			gridbagPanel.add(getPanels(user.getId(), user.getName(), user.getDate()), gbc);
+			gridBagPanel.add(getPanels(user.getId(), user.getName(), user.getDate()), gbc);
 		}
-		JScrollPane scrollPane = new Scroll_pane(gridbagPanel).getScrollPane();
+		JScrollPane scrollPane = new Scroll_pane(gridBagPanel).getScrollPane();
 		usersPanel.add(scrollPane);
 		usersPanel.setPreferredSize(new Dimension(800, 300));
 
@@ -128,8 +128,6 @@ public class OracleUsersSection {
 		return gridPanel;
 
 	}
-
-	// operationspart
 
 	JPanel operationHeaderPanel(String title,int push) {
 		JPanel panel = new JPanel(null);
