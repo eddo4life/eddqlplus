@@ -162,7 +162,7 @@ public class Home implements MouseListener, KeyListener, FocusListener {
         restart.setToolTipText("Restart");
         refresh.setToolTipText("Refresh");
         _lock.setToolTipText("Lock");
-        
+
         db = new JLabel("Databases");
         db.setIcon(new IconFontGenerator(FontAwesome.DATABASE, 15, null).getIcon());
         if (DBMS.dbms != 1) {

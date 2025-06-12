@@ -26,7 +26,6 @@ public class DatabaseExporterUI {
 		boxList.clear();
 		logArea.setText("");
 		// list of the tables
-		List<String> list = arrays;
 		JButton button = new JButton("Export");
 		button.setFocusable(false);
 		button.setEnabled(false);
@@ -91,7 +90,7 @@ public class DatabaseExporterUI {
 		constraints2.anchor = GridBagConstraints.WEST;
 		constraints2.insets = new Insets(5, 5, 5, 5);
 		int y = 0;
-		for (String s : list) {
+		for (String s : arrays) {
 			JCheckBox checkBox = new JCheckBox(s);
 			boxList.add(checkBox);
 			constraints2.gridx = 0;
@@ -147,7 +146,7 @@ public class DatabaseExporterUI {
 			showSelectedBox();
 
 		});
-		JPanel southPanel = new JPanel(new FlowLayout(2, 5, 5));
+		JPanel southPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 		JButton pathChooser = new JButton("...");
 		pathChooser.addActionListener(e -> {
 			String res = pathChooser();
@@ -265,8 +264,7 @@ public class DatabaseExporterUI {
 		LocalDateTime myDateObj = LocalDateTime.now();
 		DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
-		String formattedDate = myDateObj.format(myFormatObj);
-		return formattedDate;
+		return myDateObj.format(myFormatObj);
 	}
 
 	String pathChooser() {

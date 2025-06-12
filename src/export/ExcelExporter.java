@@ -42,7 +42,7 @@ public class ExcelExporter {
 					Cell cell = row.createCell(i - 1);
 					cell.setCellValue(value);
 				}
-			}catch (Exception e) {}
+			}catch (Exception ignored) {}
 			
 		}
 
