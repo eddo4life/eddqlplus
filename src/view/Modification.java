@@ -20,14 +20,14 @@ public class Modification {
 	public Modification(String tableName) {
 		this.tableName = tableName;
 		Home.content.removeAll();
-		
+
 //		Home.content.add(panelsBuilder.getScrollPane(), BorderLayout.WEST);
 		// Creating a new panel to set the preferring size will avoid an unnecessarily
 		// scrolling
 		JPanel menuPanel = new JPanel(new BorderLayout());
 		menuPanel.setPreferredSize(new Dimension(195, 0));
 		menuPanel.add(menuPanel());
-		
+
 		Home.content.add(menuPanel, BorderLayout.WEST);
 		tablePanel = new TableToBeSelected().select(tableName);
 		Home.content.add(tablePanel);
@@ -102,7 +102,7 @@ public class Modification {
 				} else if (DBMS.dbms == 2) {
 					new OracleDaoOperation().dropTable(tableName);
 				}
-				
+
 				new PupupMessages().message(tableName + " deleted successfully!", new _Icon().succesIcon());
 				new TablesSections().saisie();
 			} catch (SQLException e1) {
@@ -124,8 +124,8 @@ public class Modification {
 				} else if (DBMS.dbms == 2) {
 				 z = new OracleDaoOperation().clearTable(tableName);
 				}
-				
-				
+
+
 				if (z > 0) {
 					new PupupMessages().message(z + " row(s) of " + tableName + " cleared successfully",
 							new _Icon().succesIcon());
@@ -315,7 +315,7 @@ public class Modification {
 		panel.add(val_field);
 		JLabel label = getLabel("on");
 		panel.add(label);
-		
+
 		JComboBox<String> comboBox = new JComboBox<String>(TableToBeSelected.head);
 		comboBox.setSelectedIndex(0);
 		panel.add(comboBox);
@@ -344,22 +344,12 @@ public class Modification {
 				if (constBox.isSelected()) {
 					if (!const_field.getText().isBlank()) { // comboBox column to b affected
 															// //comboBox2 Column constraint applied from
-						String rep = new Modification_controller_sql().updating(val_field.getText(),
-								Objects.requireNonNull(comboBox.getSelectedItem()).toString(), const_field.getText(),
-								Objects.requireNonNull(comboBox2.getSelectedItem()).toString(), constBox.isSelected(), tableName);
-						new PupupMessages().message(rep, new _Icon().messageIcon());
-						new LoadData().tablesSectionLoader();
-						refreshTable();
+						triggerUpdate(val_field, comboBox, constBox, comboBox2, const_field);
 					} else {
 						new PupupMessages().message("The condition is missing!", new _Icon().messageIcon());
 					}
 				} else {
-					String rep = new Modification_controller_sql().updating(val_field.getText(),
-							Objects.requireNonNull(comboBox.getSelectedItem()).toString(), const_field.getText(),
-							Objects.requireNonNull(comboBox2.getSelectedItem()).toString(), constBox.isSelected(), tableName);
-					new PupupMessages().message(rep, new _Icon().messageIcon());
-					new LoadData().tablesSectionLoader();
-					refreshTable();
+					triggerUpdate(val_field, comboBox, constBox, comboBox2, const_field);
 				}
 			} else {
 				new PupupMessages().message("Please set a value!", new _Icon().messageIcon());
@@ -367,6 +357,15 @@ public class Modification {
 		});
 
 		return panel;
+	}
+
+	private void triggerUpdate(JTextField val_field, JComboBox<String> comboBox, JCheckBox constBox, JComboBox<String> comboBox2, JTextField const_field) {
+		String rep = new Modification_controller_sql().updating(val_field.getText(),
+				Objects.requireNonNull(comboBox.getSelectedItem()).toString(), const_field.getText(),
+				Objects.requireNonNull(comboBox2.getSelectedItem()).toString(), constBox.isSelected(), tableName);
+		new PupupMessages().message(rep, new _Icon().messageIcon());
+		new LoadData().tablesSectionLoader();
+		refreshTable();
 	}
 
 	JLabel getLabel(String text) {
@@ -433,8 +432,8 @@ public class Modification {
 	}
 
 	/*
-	 * 
-	 * 
+	 *
+	 *
 	 */
 
 	JButton getMenuButton(String txt) {
