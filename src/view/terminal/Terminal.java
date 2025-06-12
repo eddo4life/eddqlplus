@@ -93,7 +93,7 @@ public class Terminal {
 			ArrayList<String> data = new ArrayList<>();
 			data = (ArrayList<String>) selectTable.get(1);
 
-			String head[] = new String[header.size()];
+			String[] head = new String[header.size()];
 			int m = 0;
 			for (String hd : header) {
 				head[m] = hd;

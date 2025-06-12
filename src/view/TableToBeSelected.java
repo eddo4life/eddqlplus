@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class TableToBeSelected {
 
@@ -34,9 +35,7 @@ public class TableToBeSelected {
 			} else if (DBMS.dbms == 2){
 				selectTable = new OracleDaoOperation().showDataFrom(name);
 			}
-			
-			
-			
+
 			JTable table = new JTable();
 			table.setEnabled(false);
 			JPanel intern = new JPanel();
@@ -57,11 +56,7 @@ public class TableToBeSelected {
 			for (String d : data) {
 
 				if (i < data.size() / header.size()) {
-					if (d == null) {
-						obj[i][k] = "null";
-					} else {
-						obj[i][k] = d;
-					}
+					obj[i][k] = Objects.requireNonNullElse(d, "null");
 				}
 
 				k++;
@@ -70,8 +65,7 @@ public class TableToBeSelected {
 					k = 0;
 				}
 			}
-			
-			table.getShowHorizontalLines();
+
 			table.setModel(new DefaultTableModel(obj, head));
 			if (header.size() > 15) {
 				table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -106,6 +100,4 @@ public class TableToBeSelected {
 		}
 		return pane;
 	}
-
-
 }

@@ -113,6 +113,7 @@ public class TablesSections {
 			Home.content.removeAll();
 		}
 
+		assert Home.content != null;
 		Home.content.add(panel, BorderLayout.NORTH);
 		Home.content.add(new TableSelector().showTables());
 		Home.content.revalidate();

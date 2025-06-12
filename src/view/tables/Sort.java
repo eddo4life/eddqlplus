@@ -31,7 +31,7 @@ public class Sort {
 					} else {
 						rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
 					}
-				} catch (Exception ex) {
+				} catch (Exception ignored) {
 				}
 			}
 
@@ -46,7 +46,7 @@ public class Sort {
 						rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
 
 					}
-				} catch (Exception ex) {
+				} catch (Exception ignored) {
 				}
 
 			}

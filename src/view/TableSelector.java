@@ -27,7 +27,7 @@ public class TableSelector {
     public static ArrayList<String> tablesListNames = new ArrayList<>();
     public static JTable table;
     public static ArrayList<String> arr = null;
-    String tabs[];
+    String[] tabs;
     JPanel pane;
 
     public JPanel showTables() {
@@ -63,14 +63,14 @@ public class TableSelector {
                             case 2 -> new Modification(tab);
                         }
                         table.setEnabled(false);
-                    } catch (Exception ex) {
+                    } catch (Exception ignored) {
                     }
                 }
             });
 
             JPanel intern = new JPanel();
             intern.setLayout(new BorderLayout());
-            Object header[] = {"#", "Names", "Columns count", "Rows count", "Date", "Time"};
+            Object[] header = {"#", "Names", "Columns count", "Rows count", "Date", "Time"};
             int i = 0, j = showtables.size(), k = 1;
             tabs = new String[j];
             Home.frame.setCursor(new Cursor(Cursor.WAIT_CURSOR));
@@ -130,8 +130,6 @@ public class TableSelector {
             new LoadData().tablesSectionLoader();
             showTables();
         }
-
         return pane;
     }
-
 }

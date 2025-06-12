@@ -167,7 +167,5 @@ class Popup extends JFrame implements ActionListener {
 				//to be continued...
 			}
 	}
-	
-	
 
 }
