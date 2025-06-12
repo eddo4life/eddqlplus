@@ -45,38 +45,32 @@ public class FileEvent implements ActionListener, KeyListener {
 
             String s = e.getActionCommand();
 
-            if (s.equals("cut")) {
-                editor_pane.cut();
-            } else if (s.equals("copy")) {
-                editor_pane.copy();
-            } else if (s.equals("paste")) {
-                editor_pane.paste();
-            } else if (s.equals("select All")) {
-                editor_pane.selectAll();
-            } else if (s.equals("clear")) {
-                editor_pane.setText("");
-            } else if (s.equals("Save")) {
-                new FileManager().saveFile();
-            } else if (s.equals("Print")) {
-                Color color = editor_pane.getForeground();
-                try {
+            switch (s) {
+                case "cut" -> editor_pane.cut();
+                case "copy" -> editor_pane.copy();
+                case "paste" -> editor_pane.paste();
+                case "select All" -> editor_pane.selectAll();
+                case "clear" -> editor_pane.setText("");
+                case "Save" -> new FileManager().saveFile();
+                case "Print" -> {
+                    Color color = editor_pane.getForeground();
+                    try {
 
-                    if (color == Color.white) {
-                        editor_pane.setForeground(Color.black);
+                        if (color == Color.white) {
+                            editor_pane.setForeground(Color.black);
+                        }
+                        editor_pane.print();
+                    } catch (Exception evt) {
+                        JOptionPane.showMessageDialog(null, evt.getMessage());
                     }
-                    editor_pane.print();
-                } catch (Exception evt) {
-                    JOptionPane.showMessageDialog(null, evt.getMessage());
+                    editor_pane.setForeground(color);
                 }
-                editor_pane.setForeground(color);
-            } else if (s.equals("Open")) {
-                new FileManager().openFile();
-            } else if (s.equals("New")) {
-                editor_pane.setEditable(true);
-                editor_pane.setText("");
-            } else if (s.equals("Close")) {
-
-                Editor_section.close_font();
+                case "Open" -> new FileManager().openFile();
+                case "New" -> {
+                    editor_pane.setEditable(true);
+                    editor_pane.setText("");
+                }
+                case "Close" -> Editor_section.close_font();
             }
         }
 
