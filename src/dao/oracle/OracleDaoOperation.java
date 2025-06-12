@@ -29,7 +29,7 @@ public class OracleDaoOperation {
 			}
 			rs.close();
 			st.close();
-		} catch (Exception e) {
+		} catch (Exception ignored) {
 		}
 		return arrayList;
 	}
@@ -56,8 +56,8 @@ public class OracleDaoOperation {
 					header.add(rs.getMetaData().getColumnName(i));
 				}
 				while (rs.next()) {
-					for (int i = 0; i < header.size(); i++) {
-						data.add(rs.getString(header.get(i)));
+					for (String s : header) {
+						data.add(rs.getString(s));
 					}
 				}
 			}
