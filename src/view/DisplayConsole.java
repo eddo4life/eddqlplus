@@ -2,6 +2,7 @@ package view;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class DisplayConsole {
 
@@ -29,41 +30,35 @@ public class DisplayConsole {
     }
 
     String showHeader(ArrayList<String> header, HashMap<String, ArrayList<String>> map) {
-        String line = "";
-        line += getLine(header, map);
+        StringBuilder line = new StringBuilder();
+        line.append(getLine(header, map));
         for (String ss : header) {
-            String s = "|" + ss;
+            StringBuilder s = new StringBuilder("|" + ss);
 
             int l = s.length() - 1;
             int maxL = maxLength(ss, map);
             if (l < maxL) {
-                for (int i = 0; i < maxL - l; i++) {
-                    s += " ";
-                }
+                s.append(" ".repeat(Math.max(0, maxL - l)));
             }
 
-            line += s;
+            line.append(s);
         }
-        line += "|";
+        line.append("|");
 
-        line += getLine(header, map);
-        return line;
+        line.append(getLine(header, map));
+        return line.toString();
 
     }
 
     String showContent(ArrayList<String> header, ArrayList<String> content, HashMap<String, ArrayList<String>> map) {
-        String line = "";
+        StringBuilder line = new StringBuilder();
 
         int i = 0, k = 0, c = 0;
         for (String ss : content) {
-            String s = "|";
+            StringBuilder s = new StringBuilder("|");
 
             if (i < content.size() / header.size()) {
-                if (ss == null) {
-                    s += "null";
-                } else {
-                    s += ss;
-                }
+                s.append(Objects.requireNonNullElse(ss, "null"));
             }
 
             int l = s.length() - 1;
@@ -72,36 +67,32 @@ public class DisplayConsole {
             }
             int maxL = maxLength(header.get(c), map);
             if (l < maxL) {
-                for (int j = 0; j < maxL - l; j++) {
-                    s += " ";
-                }
+                s.append(" ".repeat(Math.max(0, maxL - l)));
             }
             if (k == header.size() - 1) {
-                s += "|";
+                s.append("|");
             }
             if (k % header.size() == 0 && k != 0) {
                 k = 0;
-                line += getLine(header, map);
+                line.append(getLine(header, map));
             }
             k++;
             c++;
-            line += s;
+            line.append(s);
 
         }
-        line += getLine(header, map);
+        line.append(getLine(header, map));
 
-        return line;
+        return line.toString();
     }
 
     String getLine(ArrayList<String> header, HashMap<String, ArrayList<String>> map) {
-        String line = "+";
+        StringBuilder line = new StringBuilder("+");
         for (String data : header) {
 
-            for (int i = 0; i < maxLength(data, map); i++) {
-                line += "-";
-            }
+            line.append("-".repeat(Math.max(0, maxLength(data, map))));
 
-            line += "+";
+            line.append("+");
         }
 
         return "\n" + line + "\n";
@@ -110,9 +101,7 @@ public class DisplayConsole {
 
     void refill(ArrayList<String> tempContent, ArrayList<String> content) {
         tempContent.clear();
-        for (String data : content) {
-            tempContent.add(data);
-        }
+        tempContent.addAll(content);
 
     }
 
