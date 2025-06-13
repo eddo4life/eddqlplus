@@ -25,7 +25,7 @@ public class Sort {
 
 				try {
 					String text = Home.searchField.getText();
-					if (text.trim().length() == 0) {
+					if (text.isBlank()) {
 						rowSorter.setRowFilter(null);
 
 					} else {
@@ -40,7 +40,7 @@ public class Sort {
 
 				String text = Home.searchField.getText();
 				try {
-					if (text.trim().length() == 0) {
+					if (text.isBlank()) {
 						rowSorter.setRowFilter(null);
 					} else {
 						rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
