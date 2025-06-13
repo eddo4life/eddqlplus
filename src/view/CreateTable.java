@@ -960,13 +960,11 @@ public class CreateTable implements MouseListener, KeyListener {
      */
 
     public boolean isColumnExist(String name) {
-        boolean isExist = false;
         for (CreateTableModel s : dataLine) {
-            if (s.getName().equalsIgnoreCase(name)) {
-                if (toModify == null)
-                    isExist = true;
+            if (s.getName().equalsIgnoreCase(name) && toModify == null) {
+                return true;
             }
         }
-        return isExist;
+        return false;
     }
 }
