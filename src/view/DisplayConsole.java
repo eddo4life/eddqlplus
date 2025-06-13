@@ -7,11 +7,8 @@ public class DisplayConsole {
 
 	public DisplayConsole(ArrayList<String> header, ArrayList<String> content) {
 		// System.out.println("called " + header + " \n\n" + content);
-		ArrayList<String> tempContent = new ArrayList<>();
 
-		for (String data : content) {
-			tempContent.add(data);
-		}
+		ArrayList<String> tempContent = new ArrayList<>(content);
 
 		int line = content.size() / header.size();
 

@@ -292,8 +292,8 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
         connectionPanel.add(portField, gb);
         gb.gridx = 2;
         gb.gridy = 2;
-        String arr[] = {"localhost"};
-        host = new JComboBox<String>(arr);
+        String[] arr = {"localhost"};
+        host = new JComboBox<>(arr);
         host.setBackground(null);
         host.setPreferredSize(new Dimension(77, 20));
         host.addActionListener((ActionEvent e) -> {
