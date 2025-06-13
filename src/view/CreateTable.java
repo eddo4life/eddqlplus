@@ -665,38 +665,35 @@ public class CreateTable implements MouseListener, KeyListener {
         eastPanel.add(rcBox);
         addButton = new JButton("Add column");
         addButton.setEnabled(false);
-        addButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        addButton.addActionListener(e -> {
 
-                if (constArrayList.contains("Foreign key") && ctm.getReferences() == null) {
-                    new PupupMessages().message("Please select a reference!", new _Icon().messageIcon());
-                } else {
-                    if (!isColumnExist(columnNameField.getText())) {
-                        if (toModify != null) {
-                            dataLine.remove(toModify);
-                        }
-                        toModify = null;
-                        ctm.setName(columnNameField.getText());
-                        if (hasLimit(ctm.getDatatype()))
-                            ctm.setLimit(limitTextField.getText());
-                        else
-                            ctm.setLimit(null);
-                        ctm.setConstraint(constraintAnalysist());
-                        dataLine.add(ctm);
-                        if (southPanel != null) {
-                            p.remove(southPanel);
-                            Home.content.revalidate();
-                            Home.content.repaint();
-                        }
-                        Home.content.remove(mainPanel);
-                        showTables();
-                        panelBuilder.setVisible(true);
-                        ctm = new CreateTableModel();
-                        constArrayList.clear();
-                    } else {
-                        new PupupMessages().message("two columns can not have same name!", new _Icon().exceptionIcon());
+            if (constArrayList.contains("Foreign key") && ctm.getReferences() == null) {
+                new PupupMessages().message("Please select a reference!", new _Icon().messageIcon());
+            } else {
+                if (!isColumnExist(columnNameField.getText())) {
+                    if (toModify != null) {
+                        dataLine.remove(toModify);
                     }
+                    toModify = null;
+                    ctm.setName(columnNameField.getText());
+                    if (hasLimit(ctm.getDatatype()))
+                        ctm.setLimit(limitTextField.getText());
+                    else
+                        ctm.setLimit(null);
+                    ctm.setConstraint(constraintAnalysis());
+                    dataLine.add(ctm);
+                    if (southPanel != null) {
+                        p.remove(southPanel);
+                        Home.content.revalidate();
+                        Home.content.repaint();
+                    }
+                    Home.content.remove(mainPanel);
+                    showTables();
+                    panelBuilder.setVisible(true);
+                    ctm = new CreateTableModel();
+                    constArrayList.clear();
+                } else {
+                    new PupupMessages().message("two columns can not have same name!", new _Icon().exceptionIcon());
                 }
             }
         });
@@ -789,13 +786,6 @@ public class CreateTable implements MouseListener, KeyListener {
      * ========================================================
      *
      */
-    JPanel eastJPanel = null;
-
-    /*
-     *
-     * ========================================================
-     *
-     */
 
     public String getName() {
         return name;
@@ -869,7 +859,7 @@ public class CreateTable implements MouseListener, KeyListener {
 
     public String[] constraintArray() {
         int j = constArrayList.size();
-        String r[] = new String[j];
+        String[] r = new String[j];
         if (j > 0) {
             for (int i = 0; i < r.length; i++) {
                 r[i] = constArrayList.get(i);
@@ -886,23 +876,23 @@ public class CreateTable implements MouseListener, KeyListener {
      */
 
     public String queryBuilder(ArrayList<CreateTableModel> qb) {
-        String queryBuilder = "CREATE TABLE " + getName() + " (";
+        StringBuilder queryBuilder = new StringBuilder("CREATE TABLE " + getName() + " (");
         for (CreateTableModel data : qb) {
-            queryBuilder += data.getName() + " " + data.getDatatype();
+            queryBuilder.append(data.getName()).append(" ").append(data.getDatatype());
             if (data.getLimit() != null) {
                 if (data.getLimit().length() > 0 && hasLimit(data.getDatatype())) {
-                    queryBuilder += "(" + data.getLimit() + ") ";
+                    queryBuilder.append("(").append(data.getLimit()).append(") ");
                 }
             }
             if (data.getConstraint().length() > 0) {
-                queryBuilder += data.getConstraint();
+                queryBuilder.append(data.getConstraint());
             }
-            queryBuilder += ",";
+            queryBuilder.append(",");
         }
-        queryBuilder = queryBuilder.substring(0, queryBuilder.length() - 1);
-        queryBuilder += ")";//iremoved ; since it raised error in oracle
+        queryBuilder = new StringBuilder(queryBuilder.substring(0, queryBuilder.length() - 1));
+        queryBuilder.append(")");//removed ; since it raised error in oracle
 
-        return queryBuilder;
+        return queryBuilder.toString();
     }
 
     /*
@@ -912,11 +902,7 @@ public class CreateTable implements MouseListener, KeyListener {
      */
 
     public boolean hasLimit(String dataType) {
-        boolean hasLimit = false;
-        if (dataType.equalsIgnoreCase("varchar") || dataType.equalsIgnoreCase("int")) {
-            hasLimit = true;
-        }
-        return hasLimit;
+        return dataType.equalsIgnoreCase("varchar") || dataType.equalsIgnoreCase("int");
     }
 
     /*
@@ -925,15 +911,15 @@ public class CreateTable implements MouseListener, KeyListener {
      *
      */
 
-    public String constraintAnalysist() {
-        String line = "";
+    public String constraintAnalysis() {
+        StringBuilder line = new StringBuilder();
         if (!constArrayList.isEmpty()) {
             for (String c : constArrayList) {
-                line += " " + c;
+                line.append(" ").append(c);
             }
         }
 
-        if (line.contains("Primary key")) {
+        if (line.toString().contains("Primary key")) {
             ctm.setKey("Primary key");
             for (CreateTableModel c : dataLine) {
                 if (c.getKey() != null) {
@@ -946,25 +932,25 @@ public class CreateTable implements MouseListener, KeyListener {
                             break;
                         } else {
                             ctm.setKey(null);
-                            line = line.replace("Primary key", "");
+                            line = new StringBuilder(line.toString().replace("Primary key", ""));
                         }
                     }
                 }
             }
-            ctm.setConstraintAff(line.replace("Primary key", ""));
-        } else if (line.contains("Foreign key")) {
-            ctm.setConstraintAff(line.replace("Foreign key", ""));
+            ctm.setConstraintAff(line.toString().replace("Primary key", ""));
+        } else if (line.toString().contains("Foreign key")) {
+            ctm.setConstraintAff(line.toString().replace("Foreign key", ""));
         } else {
-            ctm.setConstraintAff(line);
+            ctm.setConstraintAff(line.toString());
         }
 
-        if (line.contains("Foreign key")) {
+        if (line.toString().contains("Foreign key")) {
             ctm.setKey("Foreign key");
-            line = line.replace("Foreign key",
-                    "Foreign key (" + columnNameField.getText() + ") " + "REFERENCES (" + ctm.getReferences() + ")");
+            line = new StringBuilder(line.toString().replace("Foreign key",
+                    "Foreign key (" + columnNameField.getText() + ") " + "REFERENCES (" + ctm.getReferences() + ")"));
         }
 
-        return line;
+        return line.toString();
     }
 
     /*
