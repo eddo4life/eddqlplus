@@ -404,7 +404,7 @@ public class CreateTable implements MouseListener, KeyListener {
     public void keyReleased(KeyEvent e) {
 
         if (e.getSource() == columnNameField) {
-            if (columnNameField.getText().length() > 0 && !isColumnExist(columnNameField.getText())
+            if (columnNameField.getText().isBlank() && !isColumnExist(columnNameField.getText())
                     && !EddoLibrary.isNumber(columnNameField.getText())) {
                 if (EddoLibrary.isNumber(limitTextField.getText()) || !hasLimit(ctm.getDatatype())) {
                     columnNameField.setForeground(Color.black);
@@ -424,7 +424,7 @@ public class CreateTable implements MouseListener, KeyListener {
                 disableButton();
             } else {
 
-                if (columnNameField.getText().length() > 0) {
+                if (columnNameField.getText().isBlank()) {
                     enableButton();
                 }
             }
