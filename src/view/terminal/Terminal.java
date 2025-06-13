@@ -90,8 +90,7 @@ public class Terminal {
 
 			header = new ArrayList<>();
 			header = (ArrayList<String>) selectTable.get(0);
-			ArrayList<String> data = new ArrayList<>();
-			data = (ArrayList<String>) selectTable.get(1);
+			ArrayList<String> data = (ArrayList<String>) selectTable.get(1);
 
 			String[] head = new String[header.size()];
 			int m = 0;
@@ -161,7 +160,6 @@ public class Terminal {
 		} catch (SQLException e) {
 			setSize(100, length);
 			exceptionLabel.setText(space + e.getMessage());
-
 		}
 	}
 

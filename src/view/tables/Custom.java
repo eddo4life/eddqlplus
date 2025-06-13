@@ -11,7 +11,7 @@ public class Custom {
 	}
 
 	public Custom(JTable table, boolean showHline, boolean showVline, int rowHeight, Color bgColor,Color fgColor) {
-		// default_requierd
+		// default_required
 		table.setFillsViewportHeight(true);
 		table.setAutoCreateRowSorter(true);
 		new Sort().tableSortFilter(table);
@@ -27,7 +27,5 @@ public class Custom {
 		table.setShowHorizontalLines(showHline);
 		table.setShowVerticalLines(showVline);
 		table.setRowHeight(rowHeight);
-
 	}
-
 }

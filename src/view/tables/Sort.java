@@ -48,7 +48,6 @@ public class Sort {
 					}
 				} catch (Exception ignored) {
 				}
-
 			}
 
 			@Override
@@ -58,5 +57,4 @@ public class Sort {
 
 		});
 	}
-
 }
