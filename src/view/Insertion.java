@@ -47,12 +47,8 @@ public class Insertion {
             ArrayList<String> data;
             data = (ArrayList<String>) selectTable.get(1);
 
-            String[] head = new String[header.size()];
-            int m = 0;
-            for (String hd : header) {
-                head[m] = hd;
-                m++;
-            }
+            String[] head = header.toArray(new String[0]);
+            
             int i = 0, k = 0;
             Object[][] obj = new String[data.size() / header.size()][header.size()];
             for (String d : data) {
