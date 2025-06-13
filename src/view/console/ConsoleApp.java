@@ -7,6 +7,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.Serial;
 import java.util.Stack;
 
 /*
@@ -17,6 +18,7 @@ textArea.setFont(font);
  */
 
 public class ConsoleApp extends JPanel implements ActionListener, DocumentListener, KeyListener {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private final JTextField inputField;
