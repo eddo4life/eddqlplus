@@ -286,7 +286,7 @@ public class Home implements MouseListener, KeyListener, FocusListener {
             if (true) {
                 if (e.getSource() == tablesSections) {
                     try {
-                        new TablesSections().saisie();
+                        new TablesSections().options();
                     } catch (NullPointerException ignored) {
                     }
                 } else if (e.getSource() == db) {

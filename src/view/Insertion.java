@@ -119,7 +119,7 @@ public class Insertion {
             }
         } catch (Exception e) {
             new PupupMessages().message(e.getMessage(), new _Icon().exceptionIcon());
-            new TablesSections().saisie();
+            new TablesSections().options();
         }
 
         LocalDate ld = LocalDate.now();

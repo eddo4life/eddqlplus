@@ -104,11 +104,11 @@ public class Modification {
                 }
 
                 new PupupMessages().message(tableName + " deleted successfully!", new _Icon().succesIcon());
-                new TablesSections().saisie();
+                new TablesSections().options();
             } catch (SQLException e1) {
                 new PupupMessages().message(e1.getMessage(), new _Icon().exceptionIcon());
             }
-            new TablesSections().saisie();
+            new TablesSections().options();
         }
 
     }
@@ -472,7 +472,7 @@ public class Modification {
         });
 
         exit_button.addActionListener((e) -> {
-            new TablesSections().saisie();
+            new TablesSections().options();
         });
 
     }

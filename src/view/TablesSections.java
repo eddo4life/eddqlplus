@@ -21,7 +21,7 @@ public class TablesSections {
     // this variable is responsible for the choice
     public static int optionChoice;
 
-    public void saisie() throws NullPointerException {
+    public void options() throws NullPointerException {
         optionChoice = 0;
         tableName = new JLabel("");
 
