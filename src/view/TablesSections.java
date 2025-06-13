@@ -16,10 +16,8 @@ public class TablesSections {
     public TablesSections() {
     }
 
-    CreateTable ct = new CreateTable();
     public static JLabel tableName = new JLabel();
-    ArrayList<String> listOfNames;
-    JPanel panel, mainPanel;
+    JPanel panel;
     // this variable is responsible for the choice
     public static int optionChoice;
 
@@ -42,20 +40,20 @@ public class TablesSections {
         JLabel tabName = new JLabel("table_name :");
         tabName.setBounds(0, 2, 80, 25);
         createPanel.add(tabName);
-        JButton createbtn = new JButton("Create");
+        JButton createButton = new JButton("Create");
         JTextField createField = new JTextField("");
 
-        createbtn.addActionListener((e) -> {
+        createButton.addActionListener((e) -> {
             CreateTable ct = new CreateTable();
             ct.__init__();
             ct.openCreation(createField.getText());
         });
 
-        createTableAccess(createbtn, createField);
+        createTableAccess(createButton, createField);
         createField.setBounds(80, 2, 120, 25);
-        createbtn.setBounds(200, 2, 80, 25);
+        createButton.setBounds(200, 2, 80, 25);
         createPanel.add(createField);
-        createPanel.add(createbtn);
+        createPanel.add(createButton);
         createPanel.setBounds(100, 0, 300, 30);
         operationsPanel.add(createPanel);
 
