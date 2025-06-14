@@ -362,49 +362,26 @@ public class DataBase_section {
         Home.frame.repaint();
     }
 
-    /*
-     *
-     * ========================================================
-     *
-     */
-
-    public boolean isNumber(String txt) {
-        try {
-            Integer.parseInt(txt);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
 
     /*
      *
      * ========================================================
      *
      */
-
-    // make a package for chrono and create multiple classes
 
     JLabel msgLabel = new JLabel();
 
-    /*
-     *
-     * ========================================================
-     *
-     */
-
-    Timer chrono = new Timer();
+    Timer timer = new Timer();
 
     public void timer() {
-        chrono = new Timer();
-        chrono.schedule(new TimerTask() {
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
 
             int i = 0;
 
             public void run() {
                 if (i == 10) {
                     msgLabel.setText("");
-                    // msgLabel.setForeground(Color.blue);
                     i = -1;
                 }
                 i++;
@@ -412,11 +389,5 @@ public class DataBase_section {
             }
         }, 450, 450);
     }
-
-    /*
-     *
-     * ========================================================
-     *
-     */
 
 }
