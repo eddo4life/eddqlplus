@@ -125,7 +125,7 @@ public class DataBase_section {
      *
      */
 
-    void action(JTable table) {
+    private void action(JTable table) {
         table.addMouseListener(new MouseAdapter() {
 
             public void mousePressed(MouseEvent e) {
@@ -190,7 +190,7 @@ public class DataBase_section {
 
     }
 
-    void createDatabase() {
+    private void createDatabase() {
         JDialog dialog = new JDialog();
         dialog.setIconImage(Home.frame.getIconImage());
         dialog.setModal(true);
@@ -272,7 +272,7 @@ public class DataBase_section {
 
     }
 
-    public void header() {
+    private void header() {
         JPanel panel = new JPanel();
         panel.setLayout(null);
         JPanel searchPanel = new JPanel();
@@ -293,7 +293,7 @@ public class DataBase_section {
 
     }
 
-    void revalidate(JPanel panel) {
+    private void revalidate(JPanel panel) {
         panel.revalidate();
         panel.repaint();
     }
@@ -305,7 +305,7 @@ public class DataBase_section {
      */
 
     @SuppressWarnings("static-access")
-    public void action(String act, String dataBase) {
+    private void action(String act, String dataBase) {
         try {
             switch (act) {
                 case "Connect" -> {
