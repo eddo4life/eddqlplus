@@ -35,10 +35,10 @@ public class Modification {
         events();
     }
 
-    JPanel tablePanel = new JPanel();
-    JPanel northPanel = new JPanel();
+    private JPanel tablePanel = new JPanel();
+    private JPanel northPanel = new JPanel();
 
-    void switchMenu(JPanel panel) {
+    private void switchMenu(JPanel panel) {
         Home.content.remove(northPanel);
         northPanel = new JPanel(new BorderLayout());
         northPanel.add(panel);
@@ -46,24 +46,24 @@ public class Modification {
         revalidateHome();
     }
 
-    void revalidateHome() {
+    private void revalidateHome() {
         Home.content.revalidate();
         Home.content.repaint();
     }
 
-    void revalidate() {
+    private void revalidate() {
         Home.content.remove(northPanel);
         revalidateHome();
     }
 
-    void refreshTable() {
+    private void refreshTable() {
         Home.content.remove(tablePanel);
         tablePanel = new TableToBeSelected().select(tableName);
         Home.content.add(tablePanel);
         revalidateHome();
     }
 
-    JPanel renameTable() {
+    private JPanel renameTable() {
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
         JLabel renameLabel = getLabel("Rename " + tableName + " to ");
@@ -93,7 +93,7 @@ public class Modification {
         return panel;
     }
 
-    void deleteTable() {
+    private void deleteTable() {
         new PupupMessages().confirm("Confirm " + tableName + " deletion?");
         if (PupupMessages.getAction == 1) {
             try {
@@ -140,7 +140,7 @@ public class Modification {
         }
     }
 
-    JPanel addColumn() {
+    private JPanel addColumn() {
         JPanel panel = new JPanel(new GridBagLayout());
         JLabel nameLabel = getLabel("Name");
         JTextField nameField = getTextField(15);
@@ -181,7 +181,7 @@ public class Modification {
         return panel;
     }
 
-    JPanel renameColumn() {
+    private JPanel renameColumn() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JLabel renameLabel = getLabel("Rename");
         JComboBox<String> comboBox = new JComboBox<String>(TableToBeSelected.head);
@@ -215,7 +215,7 @@ public class Modification {
         return panel;
     }
 
-    JPanel deleteColumn() {
+    private JPanel deleteColumn() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JLabel deleteLabel = getLabel("Delete column ");
         JComboBox<String> comboBox = new JComboBox<String>(TableToBeSelected.head);
@@ -244,7 +244,7 @@ public class Modification {
         return panel;
     }
 
-    JPanel deleteRow() {
+    private JPanel deleteRow() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JLabel deleteLabel = getLabel("Delete from " + tableName + " if only ");
         JComboBox<String> comboBox = new JComboBox<String>(TableToBeSelected.head);
@@ -300,14 +300,14 @@ public class Modification {
         return panel;
     }
 
-    String buildQuery = "";
+    private String buildQuery = "";
 
     public void queryBuilder(String string) {
         buildQuery += string;
     }
 
 
-    JPanel updateRow() {
+    private JPanel updateRow() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JLabel updateLabel = getLabel("Update " + tableName + " set the value ");
         panel.add(updateLabel);
@@ -368,21 +368,21 @@ public class Modification {
         refreshTable();
     }
 
-    JLabel getLabel(String text) {
+    private JLabel getLabel(String text) {
         return new JLabel(text);
     }
 
-    JButton getButton(String text) {
+    private JButton getButton(String text) {
 
         return new JButton(text);
     }
 
-    JTextField getTextField(int dim) {
+    private JTextField getTextField(int dim) {
 
         return new JTextField(dim);
     }
 
-    JScrollPane menuPanel() {
+    private JScrollPane menuPanel() {
         JPanel operationsPanel = new JPanel(new GridBagLayout());
 
         GridBagConstraints constraints = new GridBagConstraints();
@@ -436,7 +436,7 @@ public class Modification {
      *
      */
 
-    JButton getMenuButton(String txt) {
+    private JButton getMenuButton(String txt) {
         JButton button = new JButton(txt);
         button.setFocusable(false);
         button.setPreferredSize(new Dimension(150, 25));
@@ -444,7 +444,7 @@ public class Modification {
         return button;
     }
 
-    void events() {
+    private void events() {
 
         rename_table_button.addActionListener((e) -> switchMenu(renameTable()));
 
@@ -477,17 +477,17 @@ public class Modification {
 
     }
 
-    JButton rename_table_button = getMenuButton("Rename table");
+    private final JButton rename_table_button = getMenuButton("Rename table");
 
-    JButton delete_table_button = getMenuButton("Delete table");
-    JButton clear_table_button = getMenuButton("Clear table ");
-    JButton add_column_button = getMenuButton("Add column");
-    JButton rename_column_button = getMenuButton("Rename column");
-    JButton delete_column_button = getMenuButton("Delete column");
-    JButton delete_row_button = getMenuButton("Delete row ");
-    JButton update_row_button = getMenuButton("Update row");
-    JButton add_constraint_button = getMenuButton("Add constraint");
-    JButton change_datatype_button = getMenuButton("Change datatype");
-    JButton quick_change_button = getMenuButton("Quick change");
-    JButton exit_button = getMenuButton("Exit");
+    private final JButton delete_table_button = getMenuButton("Delete table");
+    private final JButton clear_table_button = getMenuButton("Clear table ");
+    private final JButton add_column_button = getMenuButton("Add column");
+    private final JButton rename_column_button = getMenuButton("Rename column");
+    private final JButton delete_column_button = getMenuButton("Delete column");
+    private final JButton delete_row_button = getMenuButton("Delete row ");
+    private final JButton update_row_button = getMenuButton("Update row");
+    private final JButton add_constraint_button = getMenuButton("Add constraint");
+    private final JButton change_datatype_button = getMenuButton("Change datatype");
+    private final JButton quick_change_button = getMenuButton("Quick change");
+    private final JButton exit_button = getMenuButton("Exit");
 }

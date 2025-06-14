@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.Serial;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -94,6 +95,7 @@ public class TableSelector {
                 /**
                  *
                  */
+                @Serial
                 private static final long serialVersionUID = 1L;
 
                 public Class<?> getColumnClass(int columnIndex) {

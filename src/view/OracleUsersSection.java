@@ -23,7 +23,6 @@ public class OracleUsersSection {
 		panel.add(usersPanel(), BorderLayout.CENTER);
 		// testing to add another at the west
 		panel.add(detailsPanel(), BorderLayout.EAST);
-
 		panel.add(operationsPanel(), BorderLayout.SOUTH);
 		return panel;
 	}
@@ -48,9 +47,6 @@ public class OracleUsersSection {
 
 		return operationsPanel;
 	}
-	
-	
-	
 	
 
 	JPanel headerPanel() {
