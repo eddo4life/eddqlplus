@@ -41,6 +41,7 @@ public class TableToBeSelected {
 			JPanel intern = new JPanel();
 			intern.setLayout(new BorderLayout());
 			header = new ArrayList<>();
+			assert selectTable != null;
 			header = (ArrayList<String>) selectTable.get(0);
 			ArrayList<String> data = new ArrayList<>();
 			data = (ArrayList<String>) selectTable.get(1);
