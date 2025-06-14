@@ -27,12 +27,12 @@ import java.util.Objects;
 
 public class CreateTable implements MouseListener, KeyListener {
     public String database;
-    String name;
-    JComboBox<String> rcBox;
-    JButton okButton, exitButton, addButton;// ,searchNextButton;
-    JPanel mainPanel;
-    JLabel tableName;
-    JPanel panel;
+    private String name;
+    private JComboBox<String> rcBox;
+    private JButton okButton, exitButton, addButton;// ,searchNextButton;
+    private JPanel mainPanel;
+    private JLabel tableName;
+    private JPanel panel;
     static JPanel pane;
     JLabel cname;
     String query = "";
@@ -45,7 +45,6 @@ public class CreateTable implements MouseListener, KeyListener {
     CreateTableModel ctm = new CreateTableModel();
 
     public CreateTable() {
-        // saisie();
     }
 
     /*
@@ -214,14 +213,14 @@ public class CreateTable implements MouseListener, KeyListener {
         }
     }
 
-    JPanel panelBuilder;
+    private JPanel panelBuilder;
     /*
      *
      * ========================================================
      *
      */
 
-    int i;
+    private int i;
 
     public Object[] tableBuilder() {
         JTable table = new JTable();
@@ -561,16 +560,14 @@ public class CreateTable implements MouseListener, KeyListener {
      *
      */
 
-    GridBagConstraints c;
-    JPanel eastPanel;
-    JComboBox<String> _data;
-    JLabel limitLabel;
+    private JComboBox<String> _data;
+    private JLabel limitLabel;
 
     boolean internAction = false;
 
     public JPanel east() {
-        c = new GridBagConstraints();
-        eastPanel = new JPanel();
+        GridBagConstraints c = new GridBagConstraints();
+        JPanel eastPanel = new JPanel();
         cname = new JLabel("Column name");
         columnNameField = new JTextField(10);
         columnNameField.addKeyListener(this);
@@ -638,7 +635,7 @@ public class CreateTable implements MouseListener, KeyListener {
         eastPanel.add(acBox);
         JLabel remC = new JLabel("Remove constraints");
         eastPanel.add(remC);
-        rcPanel = new JPanel();
+        JPanel rcPanel = new JPanel();
         rcPanel.setLayout(new GridBagLayout());
         rcBox = new JComboBox<String>(constraintArray());
         rcBox.addActionListener((ActionEvent e) -> {
@@ -702,15 +699,13 @@ public class CreateTable implements MouseListener, KeyListener {
         return eastPanel;
     }
 
-    JPanel rcPanel;
-
-    JPanel southPanel;
-    String tabSelect = "", reference;
-    boolean remove = false;
-    GridBagConstraints c2;
-    JLabel ref, colref;
-    JPanel alternativePanel;
-    JComboBox<String> tables;
+    private JPanel southPanel;
+    private String tabSelect = "";
+    private boolean remove = false;
+    private GridBagConstraints c2;
+    private JLabel ref, colref;
+    private JPanel alternativePanel;
+    private JComboBox<String> tables;
 
     /*
      *
@@ -718,7 +713,7 @@ public class CreateTable implements MouseListener, KeyListener {
      *
      */
 
-    JComboBox<String> columns;
+    private JComboBox<String> columns;
 
     void foreignAssociated() {
         remove = false;
@@ -767,7 +762,7 @@ public class CreateTable implements MouseListener, KeyListener {
      *
      */
 
-    public void tab() {
+    private void tab() {
         c2.gridx = 0;
         c2.gridy = 0;
         alternativePanel.add(ref);
@@ -800,7 +795,7 @@ public class CreateTable implements MouseListener, KeyListener {
      *
      */
 
-    public void constArrayList(String constraint) {
+    private void constArrayList(String constraint) {
         boolean add = true;
         boolean isPrimary = constraint.equalsIgnoreCase("Primary key");
         boolean isForeign = constraint.equalsIgnoreCase("Foreign key");
@@ -829,7 +824,7 @@ public class CreateTable implements MouseListener, KeyListener {
      *
      */
 
-    public void removeC(String data) {
+    private void removeC(String data) {
         int i = constArrayList.size() - 1;
         while (i >= 0) {
             if (data.equals(constArrayList.get(i))) {
@@ -845,9 +840,8 @@ public class CreateTable implements MouseListener, KeyListener {
      *
      */
 
-    public ArrayList<String> add(String data) {
+    private void add(String data) {
         dataTable.add(data);
-        return dataTable;
     }
 
     /*
