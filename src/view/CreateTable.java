@@ -54,11 +54,10 @@ public class CreateTable implements MouseListener, KeyListener {
      *
      */
 
-    public void __init__() {
+    public void initialize() {
         constArrayList.clear();
 
         panel = new JPanel();
-
         panel.setLayout(new FlowLayout());
 
         if (Home.content != null) {
@@ -753,7 +752,7 @@ public class CreateTable implements MouseListener, KeyListener {
                 Home.content.revalidate();
                 Home.content.repaint();
                 columns.addActionListener((ActionEvent e1) -> {
-                    ctm.setReferences(columns.getSelectedItem().toString());
+                    ctm.setReferences(Objects.requireNonNull(columns.getSelectedItem()).toString());
                 });
             } catch (SQLException e1) {
                 e1.printStackTrace();

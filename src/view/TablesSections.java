@@ -45,7 +45,7 @@ public class TablesSections {
 
         createButton.addActionListener((e) -> {
             CreateTable ct = new CreateTable();
-            ct.__init__();
+            ct.initialize();
             ct.openCreation(createField.getText());
         });
 
