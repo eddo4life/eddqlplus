@@ -22,7 +22,6 @@ import java.util.ArrayList;
 public class TableSelector {
 
     public TableSelector() {
-        // TODO Auto-generated constructor stub
     }
 
     public static ArrayList<String> tablesListNames = new ArrayList<>();

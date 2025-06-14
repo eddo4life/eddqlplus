@@ -48,7 +48,7 @@ public class Insertion {
             data = (ArrayList<String>) selectTable.get(1);
 
             String[] head = header.toArray(new String[0]);
-            
+
             int i = 0, k = 0;
             Object[][] obj = new String[data.size() / header.size()][header.size()];
             for (String d : data) {
@@ -77,7 +77,7 @@ public class Insertion {
             titlePanel.add(titleLabel);
             pane.add(titlePanel, BorderLayout.NORTH);
             pane.add(intern, BorderLayout.CENTER);
-            mainPanel = new JPanel();
+            JPanel mainPanel = new JPanel();
             mainPanel.setLayout(new BorderLayout());
             mainPanel.add(pane, BorderLayout.CENTER);
             Home.content.removeAll();
@@ -217,5 +217,4 @@ public class Insertion {
     public static String tabName;
     public static JLabel tableName = new JLabel();
     public static JTextField tableNameField = new JTextField();
-    JPanel mainPanel;
 }
