@@ -200,7 +200,7 @@ public class Insertion {
                 exec = new OracleDaoOperation().insert(tabName, data);
             }
             if (exec > 0) {
-                new PupupMessages().message("Insertion successful!", new _Icon().succesIcon());
+                new PupupMessages().message("Insertion successful!", new _Icon().successIcon());
                 selectTable(tabName);
             }
         } catch (SQLException e) {

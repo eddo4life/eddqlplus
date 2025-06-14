@@ -77,7 +77,7 @@ public class Modification {
             } else {
                 String res = new Modification_controller_sql().renameTable(tableName, newName);
                 if (res.isEmpty()) {
-                    new PupupMessages().message("Process completed", new _Icon().succesIcon());
+                    new PupupMessages().message("Process completed", new _Icon().successIcon());
                     new LoadData().tablesSectionLoader();
                     this.tableName = newName;
                     refreshTable();
@@ -103,7 +103,7 @@ public class Modification {
                     new OracleDaoOperation().dropTable(tableName);
                 }
 
-                new PupupMessages().message(tableName + " deleted successfully!", new _Icon().succesIcon());
+                new PupupMessages().message(tableName + " deleted successfully!", new _Icon().successIcon());
                 new TablesSections().options();
             } catch (SQLException e1) {
                 new PupupMessages().message(e1.getMessage(), new _Icon().exceptionIcon());
@@ -128,7 +128,7 @@ public class Modification {
 
                 if (z > 0) {
                     new PupupMessages().message(z + " row(s) of " + tableName + " cleared successfully",
-                            new _Icon().succesIcon());
+                            new _Icon().successIcon());
                     refreshTable();
                 } else {
                     new PupupMessages().message(z + " row affected, process completed! ", new _Icon().messageIcon());
@@ -162,7 +162,7 @@ public class Modification {
 
                 String res = new Modification_controller_sql().addColumn(select, tableName);
                 if (res.isEmpty()) {
-                    new PupupMessages().message("Process completed", new _Icon().succesIcon());
+                    new PupupMessages().message("Process completed", new _Icon().successIcon());
                     new LoadData().tablesSectionLoader();
                     refreshTable();
                 } else {
@@ -197,7 +197,7 @@ public class Modification {
                 String res = new Modification_controller_sql().renameColumn(tableName,
                         Objects.requireNonNull(comboBox.getSelectedItem()).toString(), newName);
                 if (res.isEmpty()) {
-                    new PupupMessages().message("Renamed completed", new _Icon().succesIcon());
+                    new PupupMessages().message("Renamed completed", new _Icon().successIcon());
                     new LoadData().tablesSectionLoader();
                     refreshTable();
                 } else {
@@ -227,7 +227,7 @@ public class Modification {
             if (y == 1) {
                 String rep = new Modification_controller_sql().dropColumn(tableName, x);
                 if (rep.isEmpty()) {
-                    new PupupMessages().message("Process Completed", new _Icon().succesIcon());
+                    new PupupMessages().message("Process Completed", new _Icon().successIcon());
                     new LoadData().tablesSectionLoader();
                     refreshTable();
                 } else {
@@ -277,7 +277,7 @@ public class Modification {
                 String rep = new Modification_controller_sql().delete_row(tableName, buildQuery);
 
                 if (rep.equals("s")) {
-                    new PupupMessages().message("Deletion successful!", new _Icon().succesIcon());
+                    new PupupMessages().message("Deletion successful!", new _Icon().successIcon());
                     new LoadData().tablesSectionLoader();
                     refreshTable();
                 } else if (rep.equals("f")) {

@@ -360,7 +360,7 @@ public class DataBase_section {
 							break;
 						}
 					}
-					new PupupMessages().message("Process completed", new _Icon().succesIcon());
+					new PupupMessages().message("Process completed", new _Icon().successIcon());
 				} else {
 					new PupupMessages().message("Process canceled", new _Icon().messageIcon());
 				}

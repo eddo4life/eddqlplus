@@ -507,7 +507,7 @@ public class CreateTable implements MouseListener, KeyListener {
                     }
 
                     if (exec >= 0) {
-                        new PupupMessages().message("Created successfully", new _Icon().succesIcon());
+                        new PupupMessages().message("Created successfully", new _Icon().successIcon());
                         // toUpdateTableList
                         new LoadData().tablesSectionLoader();
                         new TablesSections().options();

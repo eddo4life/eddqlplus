@@ -343,14 +343,14 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
             LoadData.wait = true;
             // test if datas are correct
             if (new MySQLConnection().getCon(m) != null) {
-                new PupupMessages().message("Data verified successfully", new _Icon().succesIcon());
+                new PupupMessages().message("Data verified successfully", new _Icon().successIcon());
                 // test if a connection already existed
                 if (new SystemDatabaseTreatment().getDataConnection() != null) {
                     // message choice
                     new PupupMessages().confirm("A connection is currently saved, do you really wanna override it?");
                     if (PupupMessages.getAction == 1) {
                         if (new SystemDatabaseTreatment().updateConnection(m)) {
-                            new PupupMessages().message("Successfully switched", new _Icon().succesIcon());
+                            new PupupMessages().message("Successfully switched", new _Icon().successIcon());
                         } else {
                             new PupupMessages().message("Switch failed, try again", new _Icon().failedIcon());
                         }
@@ -360,7 +360,7 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
                 } else {
                     // insert
                     if (new SystemDatabaseTreatment().newMySQLConnection(m)) {
-                        new PupupMessages().message("Successfully connected", new _Icon().succesIcon());
+                        new PupupMessages().message("Successfully connected", new _Icon().successIcon());
                     } else {
                         new PupupMessages().message("Connection failed, try again", new _Icon().failedIcon());
                     }

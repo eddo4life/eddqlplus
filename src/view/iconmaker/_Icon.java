@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class _Icon {
 
-    int size = 40;
+    private final int size = 40;
 
     public _Icon() {
 
@@ -33,7 +33,7 @@ public class _Icon {
     }
 
 
-    public Icon succesIcon() {
+    public Icon successIcon() {
         return new IconFontGenerator(FontAwesome.CHECK_CIRCLE_O, size, new Color(0, 120, 69)).getIcon();
 
     }
