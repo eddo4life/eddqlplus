@@ -16,7 +16,7 @@ public class DisplayConsole {
         HashMap<String, ArrayList<String>> map = new HashMap<>();
 
         for (int x = 0; x < header.size(); x++) {
-            map.put(header.get(x), getChunckData(tempContent, line, header.size(), x));
+            map.put(header.get(x), getChunkData(tempContent, line, header.size(), x));
 
             refill(tempContent, content);
 
@@ -29,7 +29,7 @@ public class DisplayConsole {
 
     }
 
-    String showHeader(ArrayList<String> header, HashMap<String, ArrayList<String>> map) {
+    private String showHeader(ArrayList<String> header, HashMap<String, ArrayList<String>> map) {
         StringBuilder line = new StringBuilder();
         line.append(getLine(header, map));
         for (String ss : header) {
@@ -50,7 +50,7 @@ public class DisplayConsole {
 
     }
 
-    String showContent(ArrayList<String> header, ArrayList<String> content, HashMap<String, ArrayList<String>> map) {
+    private String showContent(ArrayList<String> header, ArrayList<String> content, HashMap<String, ArrayList<String>> map) {
         StringBuilder line = new StringBuilder();
 
         int i = 0, k = 0, c = 0;
@@ -86,7 +86,7 @@ public class DisplayConsole {
         return line.toString();
     }
 
-    String getLine(ArrayList<String> header, HashMap<String, ArrayList<String>> map) {
+    private String getLine(ArrayList<String> header, HashMap<String, ArrayList<String>> map) {
         StringBuilder line = new StringBuilder("+");
         for (String data : header) {
 
@@ -99,13 +99,13 @@ public class DisplayConsole {
 
     }
 
-    void refill(ArrayList<String> tempContent, ArrayList<String> content) {
+    private void refill(ArrayList<String> tempContent, ArrayList<String> content) {
         tempContent.clear();
         tempContent.addAll(content);
 
     }
 
-    ArrayList<String> getChunckData(ArrayList<String> data, int line, int headerSize, int pos) {
+    private ArrayList<String> getChunkData(ArrayList<String> data, int line, int headerSize, int pos) {
 
         ArrayList<String> dataDivided = new ArrayList<>();
 
@@ -124,7 +124,7 @@ public class DisplayConsole {
 
     }
 
-    int maxLength(String key, HashMap<String, ArrayList<String>> map) {
+    private int maxLength(String key, HashMap<String, ArrayList<String>> map) {
         int length = key.length();
 
         for (String k : map.keySet()) {
@@ -142,11 +142,7 @@ public class DisplayConsole {
         return length;
     }
 
-    String code = "";
-
-    public DisplayConsole() {
-        // TODO Auto-generated constructor stub
-    }
+    private String code = "";
 
     public String getCode() {
         return code;
