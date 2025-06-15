@@ -486,6 +486,5 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
     JPasswordField passwordField;
     GridBagConstraints gb;
     JPanel mainPanel = new JPanel();
-    ;
 
 }

@@ -24,7 +24,4 @@ public class DatabaseMetadataExample {
         tables.close();
         connection.close();
     }
-    void test() {
-    	
-    }
 }
