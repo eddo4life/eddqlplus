@@ -114,12 +114,12 @@ public class DisplayConsole {
                 // adding the column
                 dataDivided.add(data.get(pos));
                 // removing the line
-                for (int i = 0; i < headerSize; i++) {
-                    data.remove(0);
+                if (headerSize > 0) {
+                    data.subList(0, headerSize).clear();
                 }
             }
         }
-
+System.out.println(dataDivided);
         return dataDivided;
 
     }
