@@ -48,7 +48,7 @@ public class Home implements MouseListener, KeyListener, FocusListener {
      *
      */
 
-    public void launch() {
+    private void launch() {
         frame = new JFrame();
         frame.addKeyListener(this);
         content = new JPanel();
@@ -112,17 +112,17 @@ public class Home implements MouseListener, KeyListener, FocusListener {
      *
      */
 
-    JButton logout, refresh, restart, _lock;
-    JLabel tablesSections = new JLabel("Tables");
+    private JButton logout, refresh, restart, _lock;
+    private final JLabel tablesSections = new JLabel("Tables");
 
-    void setDim(JButton button) {
+    private void setDim(JButton button) {
         button.setPreferredSize(new Dimension(35, 30));
         button.setFocusable(false);
     }
 
     public static JLabel oracleUsers;
 
-    public void toolBar() {
+    private void toolBar() {
 
         oracleUsers = new JLabel("Users");
         if (DBMS.dbms != 2) {
@@ -321,7 +321,7 @@ public class Home implements MouseListener, KeyListener, FocusListener {
      *
      */
 
-    Component components;
+    private Component components;
 
     public Component getComponent() {
         return components;
@@ -361,7 +361,7 @@ public class Home implements MouseListener, KeyListener, FocusListener {
      *
      */
 
-    Component component = null;
+    private Component component = null;
 
     void selection(MouseEvent e, boolean select) {
 
@@ -402,7 +402,7 @@ public class Home implements MouseListener, KeyListener, FocusListener {
      *
      */
 
-    void act(int action) {
+    private void act(int action) {
         switch (action) {
             case 0 -> {
                 logOut();
@@ -436,7 +436,7 @@ public class Home implements MouseListener, KeyListener, FocusListener {
      * ========================================================
      *
      */
-    void restart() {
+    private void restart() {
         frame.dispose();
         frame.removeAll();
         MainEddQL.main(null);
