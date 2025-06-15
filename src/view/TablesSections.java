@@ -17,7 +17,6 @@ public class TablesSections {
     }
 
     public static JLabel tableName = new JLabel();
-    JPanel panel;
     // this variable is responsible for the choice
     public static int optionChoice;
 
@@ -25,7 +24,7 @@ public class TablesSections {
         optionChoice = 0;
         tableName = new JLabel("");
 
-        panel = new JPanel();
+        JPanel panel = new JPanel();
         panel.setBorder(BorderFactory.createCompoundBorder(new EmptyBorder(10, 10, 10, 10), new EtchedBorder()));
 
         JPanel operationsPanel = new JPanel(null);
@@ -119,7 +118,7 @@ public class TablesSections {
 
     }
 
-    void createTableAccess(JButton button, JTextField field) {
+    private void createTableAccess(JButton button, JTextField field) {
         button.setVisible(false);
         button.setFocusable(false);
         ArrayList<String> listNames = TableSelector.tablesListNames;
