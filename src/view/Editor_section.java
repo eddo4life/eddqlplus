@@ -12,7 +12,6 @@ import view.scrollpane.Scroll_pane;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-import javax.swing.plaf.DimensionUIResource;
 import javax.swing.text.DefaultCaret;
 import java.awt.*;
 import java.awt.event.*;
@@ -21,9 +20,9 @@ import java.util.ArrayList;
 public class Editor_section implements KeyListener {
     // JDesktopPane desktop;
 
-    FontEditor editorPaneFontMemory = new FontEditor();
+    private final FontEditor editorPaneFontMemory = new FontEditor();
 
-    RTextScrollPane sp;
+    private RTextScrollPane sp;
     public static RSyntaxTextArea textArea;
 
     /*
@@ -37,7 +36,6 @@ public class Editor_section implements KeyListener {
 
     public Editor_section(Object obj) {
 
-        undo = new ArrayList<>();
         JPanel closePanel = new JPanel();
         closePanel.setLayout(new FlowLayout(2, 30, 0));
         JLabel closeLabel = new JLabel("X");
@@ -210,17 +208,13 @@ public class Editor_section implements KeyListener {
         westPanel_fontChooser_parent.setVisible(false);
     }
 
-    JPanel pane;
-
     public static JPanel westPanel_fontChooser_parent = new JPanel();
 
-    JPanel centerPanel = new JPanel();
+    private final JPanel centerPanel = new JPanel();
 
-    JTabbedPane tabbedPane = new JTabbedPane();
+    private final JTabbedPane tabbedPane = new JTabbedPane();
 
-    JTextArea myArea = new JTextArea();
-
-    JTabbedPane tabbedPane() {
+    private JTabbedPane tabbedPane() {
         tabbedPane.setBorder(new TitledBorder("mode"));
         tabbedPane.add("classic", centerPanel);
         tabbedPane.add("console", new ConsoleApp());
@@ -230,29 +224,9 @@ public class Editor_section implements KeyListener {
 
     public static JPanel terminPanel = new JPanel(new BorderLayout());
 
-    void sizeAdapter() {
-        centerPanel.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent evt) {
-                int x = centerPanel.getWidth() / 2;
-                int y = centerPanel.getHeight() / 2;
-                sp.setPreferredSize(new DimensionUIResource(x, y));
-                terminPanel.setPreferredSize(new DimensionUIResource(x, y));
-                revalidate(centerPanel);
-                revalidate(sp);
-                revalidate(terminPanel);
-            }
-        });
-    }
-
-    void revalidate(Component c) {
-        c.revalidate();
-        c.repaint();
-    }
-
     protected void createInternalFrame() {
 
-        pane = new JPanel();
+        JPanel pane = new JPanel();
         // pane.setPreferredSize(new Dimension(600, 100));
         pane.setLayout(new BorderLayout());
 
@@ -286,17 +260,17 @@ public class Editor_section implements KeyListener {
 
     }
 
-    JPanel main_editor_panel = new JPanel(new BorderLayout());
+    private final JPanel main_editor_panel = new JPanel(new BorderLayout());
 
-    String font = "utf-8", style = "Normal";
-    public static int size = 20;
+    private String font = "utf-8", style = "Normal";
+    private static int size = 20;
 
-    void customScrol(JScrollPane scrollPane) {
+    private void customScroll(JScrollPane scrollPane) {
         scrollPane.setViewportBorder(null);
         scrollPane.setBorder(null);
     }
 
-    JScrollPane fontChooser() {
+    private JScrollPane fontChooser() {
 
         JPanel main_style_font_panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
         main_style_font_panel.setPreferredSize(new Dimension(225, 560));
@@ -447,13 +421,13 @@ public class Editor_section implements KeyListener {
         main_style_font_panel.add(closeApplyPanel);
         JScrollPane pane = new JScrollPane(main_style_font_panel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        customScrol(pane);
+        customScroll(pane);
         return pane;
     }
 
-    boolean isClose = true;
+    private boolean isClose = true;
 
-    Font getStyle(String font, String style, int size) {
+    private Font getStyle(String font, String style, int size) {
         Font font2 = new JLabel().getFont();
         switch (style) {
             case "Normal" -> font2 = new Font(font, Font.PLAIN, size);
@@ -473,7 +447,7 @@ public class Editor_section implements KeyListener {
         save += e.getKeyCode();
     }
 
-    String save = "";
+    private String save = "";
 
     @SuppressWarnings("deprecation")
     @Override
@@ -502,7 +476,6 @@ public class Editor_section implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         maxLength = textArea.getText().length();
-        undoRedo(textArea.getText());
 
         DefaultCaret caret = (DefaultCaret) textArea.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
@@ -523,12 +496,5 @@ public class Editor_section implements KeyListener {
         terminPanel.setVisible(false);
     }
 
-    private static ArrayList<String> undo;
-
-    public void undoRedo(String ch) {
-        undo.add(ch);
-    }
-
     public static Color editorPaneCurrentFgColor = Color.white;
-
 }
