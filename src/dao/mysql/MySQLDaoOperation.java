@@ -176,13 +176,7 @@ public class MySQLDaoOperation {
 
         }
 
-        Thread t2 = new Thread() {
-            @Override
-            public void run() {
-
-                new DisplayConsole(header, data);
-            }
-        };
+        Thread t2 = new Thread(() -> new DisplayConsole(header, data));
 
         t2.start();
 

@@ -119,9 +119,7 @@ public class DisplayConsole {
                 }
             }
         }
-System.out.println(dataDivided);
         return dataDivided;
-
     }
 
     private int maxLength(String key, HashMap<String, ArrayList<String>> map) {

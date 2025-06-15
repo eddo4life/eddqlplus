@@ -10,9 +10,6 @@ import java.util.ArrayList;
 
 public class Modification_controller_sql {
 
-	CreateTable ct = new CreateTable();
-	ArrayList<String> listOfNames;
-
 	public Modification_controller_sql() {
 	}
 
