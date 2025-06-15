@@ -14,7 +14,7 @@ import java.awt.print.PrinterException;
 
 class Popup extends JFrame implements ActionListener {
 
-    static JPopupMenu pm;
+    private static JPopupMenu pm;
     private final JMenuItem cut, copy, paste, _new, save, open, print, delete, selectAll, clear, run, debug;
 
     Popup(JPopupMenu pm) {
@@ -111,7 +111,7 @@ class Popup extends JFrame implements ActionListener {
         }
     }
 
-    void doAction(ActionEvent e, RSyntaxTextArea t) {
+    private void doAction(ActionEvent e, RSyntaxTextArea t) {
         if (e.getSource() == cut) {
             t.cut();
         } else if (e.getSource() == copy) {
