@@ -19,10 +19,8 @@ public class TableToBeSelected {
 	public TableToBeSelected() {
 		
 	}
-	
-	public static ArrayList<String> header;
-	
-	public static String head[];
+
+	public static String[] head;
 
 	@SuppressWarnings("unchecked")
 	public JPanel select(String name) {
@@ -40,10 +38,10 @@ public class TableToBeSelected {
 			table.setEnabled(false);
 			JPanel intern = new JPanel();
 			intern.setLayout(new BorderLayout());
-			header = new ArrayList<>();
+			ArrayList<String> header;
 			assert selectTable != null;
 			header = (ArrayList<String>) selectTable.get(0);
-			ArrayList<String> data = new ArrayList<>();
+			ArrayList<String> data;
 			data = (ArrayList<String>) selectTable.get(1);
 
 			 head = new String[header.size()];
