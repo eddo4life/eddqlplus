@@ -98,10 +98,10 @@ public class Insertion {
 
     }
 
-    JPanel insertPanel = new JPanel();
+    private final JPanel insertPanel = new JPanel();
     public static ArrayList<Object> st;
 
-    void insert() {
+    private void insert() {
         insertPanel.setLayout(new BorderLayout());
         String[] head = new String[header.size()];
         st = new ArrayList<>();
@@ -178,7 +178,7 @@ public class Insertion {
         Home.content.add(insertPanel, BorderLayout.NORTH);
     }
 
-    public void doIt() {
+    private void doIt() {
         int count = 0;
         for (Object empty : InsertList.list) {
             if (empty != null) {
@@ -191,7 +191,7 @@ public class Insertion {
         execute(InsertList.list);
     }
 
-    public void execute(ArrayList<Object> data) {
+    private void execute(ArrayList<Object> data) {
         try {
             int exec = 0;
             if (DBMS.dbms == 1) {
