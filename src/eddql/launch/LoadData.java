@@ -60,27 +60,13 @@ public class LoadData {
         //bar.setFont(new Font("mv Boli", 0, 10));
         //bar.setForeground(Color.DARK_GRAY);
         //loadingLabel.setForeground(Color.blue);
-        loadingLabel.setFont(new Font(null, 0, 11));
+        loadingLabel.setFont(new Font(null, Font.PLAIN, 11));
 
         frame.add(panel);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        loadingLabel.setText("Gathering data's connection.");
-        try {
-            Thread.sleep(1000);
-            loadingLabel.setText("Gathering data's connection..");
-            Thread.sleep(500);
-            loadingLabel.setText("Gathering data's connection...");
-            Thread.sleep(500);
-            loadingLabel.setText("Gathering data's connection.");
-            Thread.sleep(300);
-            loadingLabel.setText("Gathering data's connection..");
-            Thread.sleep(300);
-            loadingLabel.setText("Gathering data's connection...");
-            Thread.sleep(1000);
-        } catch (InterruptedException ignored) {
-        }
+
         loadingLabel.setText("Loading databases...");
         databaseSectionLoader();
         if (exit != 0) {
