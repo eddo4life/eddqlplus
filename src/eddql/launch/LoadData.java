@@ -31,7 +31,7 @@ public class LoadData {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        frame = new JFrame();
+        JFrame frame = new JFrame();
         frame.setSize(400, 200);
         frame.setLayout(null);
         frame.setUndecorated(true);
@@ -46,7 +46,7 @@ public class LoadData {
         imgLabel.setIcon(new BufferedImageIO().getIcon(400, 160, "eddql.jpg"));
 
         panel.add(imgLabel, BorderLayout.NORTH);
-        loadingLabel = new JLabel();
+        JLabel loadingLabel = new JLabel();
         loadingLabel.setBounds(0, 20, 250, 25);
         southPanel.add(loadingLabel);
         panel.add(southPanel, BorderLayout.SOUTH);
@@ -172,12 +172,8 @@ public class LoadData {
 
     int lineCount = 0;
 
-    /*
-     * =============================================================
-     */
-
-    public void mathCalcul(int tourTotal, int tourEffectue, int max, boolean add) {
-        float y = (tourEffectue * max) / tourTotal;
+    private void mathCalcul(int tourTotal, int tourEffectue, int max, boolean add) {
+        int y = (tourEffectue * max) / tourTotal;
         int percent = Math.round(y);
         if (add)
             bar.setValue(percent + 51);
@@ -228,17 +224,10 @@ public class LoadData {
      * =============================================================
      */
 
-    int exit = 1;
-    static JFrame frame = new JFrame();
-    static JLabel loadingLabel;
-
-    /*
-     * =============================================================
-     */
+    private int exit = 1;
 
     public void getAll() {
         databaseSectionLoader();
         tablesSectionLoader();
     }
-
 }
