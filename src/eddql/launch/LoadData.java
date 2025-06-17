@@ -66,18 +66,18 @@ public class LoadData {
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        loadingLabel.setText("Gathering datas connection.");
+        loadingLabel.setText("Gathering data's connection.");
         try {
             Thread.sleep(1000);
-            loadingLabel.setText("Gathering datas connection..");
+            loadingLabel.setText("Gathering data's connection..");
             Thread.sleep(500);
-            loadingLabel.setText("Gathering datas connection...");
+            loadingLabel.setText("Gathering data's connection...");
             Thread.sleep(500);
-            loadingLabel.setText("Gathering datas connection.");
+            loadingLabel.setText("Gathering data's connection.");
             Thread.sleep(300);
-            loadingLabel.setText("Gathering datas connection..");
+            loadingLabel.setText("Gathering data's connection..");
             Thread.sleep(300);
-            loadingLabel.setText("Gathering datas connection...");
+            loadingLabel.setText("Gathering data's connection...");
             Thread.sleep(1000);
         } catch (InterruptedException ignored) {
         }
