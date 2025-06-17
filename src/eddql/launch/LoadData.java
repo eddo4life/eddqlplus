@@ -19,10 +19,6 @@ public class LoadData {
 
     public static ArrayList<ShowTablesModel> tables;
 
-    private ShowTablesModel tbm;
-
-    private DataBaseModel dbm;
-
     public LoadData() {
     }
 
@@ -83,7 +79,7 @@ public class LoadData {
             Thread.sleep(300);
             loadingLabel.setText("Gathering datas connection...");
             Thread.sleep(1000);
-        } catch (InterruptedException e) {
+        } catch (InterruptedException ignored) {
         }
         loadingLabel.setText("Loading databases...");
         databaseSectionLoader();
@@ -105,7 +101,7 @@ public class LoadData {
         try {
             Thread.sleep(2000);
             frame.dispose();
-        } catch (InterruptedException e) {
+        } catch (InterruptedException ignored) {
         }
     }
 
@@ -113,7 +109,7 @@ public class LoadData {
      * =============================================================
      */
 
-    JProgressBar bar = new JProgressBar();
+    private final JProgressBar bar = new JProgressBar();
 
     /*
      * =============================================================
@@ -140,7 +136,7 @@ public class LoadData {
             }
             int i = 0;
             for (String data : showTables) {
-                tbm = new ShowTablesModel();
+                ShowTablesModel tbm = new ShowTablesModel();
                 tbm.setNames(data);
                 if (DBMS.dbms == 1) {
                     tbm.setColumnCount(new MySQLDaoOperation().getColumn(data));
@@ -208,7 +204,7 @@ public class LoadData {
             ArrayList<String> names = new MySQLDaoOperation().showDataBases();
             lineCount += names.size();
             for (String s : names) {
-                dbm = new DataBaseModel();
+                DataBaseModel dbm = new DataBaseModel();
                 dbm.setName(s);
                 String[] old = new MySQLDaoOperation().getDbOldestDate(String.valueOf(s)).split(" ");
                 dbm.setOldestTab(old[0]);// date
