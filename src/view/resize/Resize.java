@@ -8,7 +8,7 @@ import java.awt.event.ComponentEvent;
 
 public class Resize {
 
-    int x = Home.frame.getWidth();
+    private int x = Home.frame.getWidth();
 
     public Resize(Component component, String panel) {
         switch (panel) {

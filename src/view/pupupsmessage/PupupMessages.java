@@ -50,7 +50,7 @@ public class PupupMessages extends JDialog {
 
 	// ======================set bgColor
 
-	void bgcolor(JPanel panel) {
+	private void bgColor(JPanel panel) {
 	//	panel.setBackground(Color.lightGray);
 	}
 
@@ -66,7 +66,7 @@ public class PupupMessages extends JDialog {
 		mess = new JLabel(message);
 		centerPanel.setLayout(new GridBagLayout());
 		centerPanel.add(mess);
-		bgcolor(centerPanel);
+		bgColor(centerPanel);
 		this.setTitle("EddoSQL");
 		JButton cancel = createButton("Cancel");
 		cancel.addActionListener((ActionEvent e) -> {
@@ -94,13 +94,13 @@ public class PupupMessages extends JDialog {
 		southPanel.add(yes);
 		southPanel.add(no);
 		southPanel.add(cancel);
-		bgcolor(southPanel);
+		bgColor(southPanel);
 		northPanel = new JPanel();
 		northPanel.setLayout(new GridBagLayout());
 		JLabel label = new JLabel();
 		label.setIcon(new BufferedImageIO().getIcon(25, 25, "question.png"));
 		northPanel.add(label);
-		bgcolor(northPanel);
+		bgColor(northPanel);
 		JPanel borderPanel = new JPanel();
 		borderPanel.setLayout(new BorderLayout());
 		borderPanel.setBorder(BorderFactory.createCompoundBorder(new EmptyBorder(10, 10, 10, 10), new EtchedBorder()));
@@ -117,7 +117,7 @@ public class PupupMessages extends JDialog {
 
 	// ========================================================---------
 
-	JLabel mess;
+	private JLabel mess;
 
 	public void message(String message, Icon icon) {
 
@@ -156,9 +156,9 @@ public class PupupMessages extends JDialog {
 		ok.setBounds((this.getWidth() / 2) - 55, 3, 80, 25);
 		southPanel.setPreferredSize(new Dimension(10, 31));
 		southPanel.add(ok);
-		bgcolor(centerPanel);
-		bgcolor(southPanel);
-		bgcolor(northPanel);
+		bgColor(centerPanel);
+		bgColor(southPanel);
+		bgColor(northPanel);
 
 		JPanel borderPanel = new JPanel();
 		borderPanel.setLayout(new BorderLayout());

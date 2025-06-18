@@ -12,7 +12,6 @@ import javax.swing.table.TableRowSorter;
 public class Sort {
 
 	public Sort() {
-
 	}
 
 	public void tableSortFilter(JTable table) {
