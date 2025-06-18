@@ -79,7 +79,6 @@ public class LoadData {
             loadingLabel.setText("Now loading tables and additional contents...");
             tablesSectionLoader();
             loadingLabel.setText("Completed!");
-            //loadingLabel.setForeground(Color.cyan);
         } else {
             loadingLabel.setText("Failed, connection required!");
             loadingLabel.setForeground(Color.red);

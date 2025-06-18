@@ -23,7 +23,7 @@ public class Terminal {
 
         if (!feedback.isBlank()) {
             exceptionLabel.setText(feedback);
-            setSize(100, 50);
+            setSize(50);
         } else {
             display(query, isShow);
         }
@@ -56,12 +56,12 @@ public class Terminal {
 
     }
 
-    void setSize(int x, int y) {
+    void setSize(int y) {
         Editor_section.terminPanel.removeAll();
         Editor_section.terminPanel.add(mainPanel, BorderLayout.SOUTH);
         Editor_section.terminPanel.revalidate();
         Editor_section.terminPanel.repaint();
-        mainPanel.setPreferredSize(new Dimension(x, y));
+        mainPanel.setPreferredSize(new Dimension(100, y));
     }
 
     ArrayList<String> header;
@@ -140,14 +140,14 @@ public class Terminal {
             if (!data.isEmpty()) {
 
                 tablePanel.add(tabCustom.getScrollPane());
-                setSize(100, length);
+                setSize(length);
                 exceptionLabel.setText("");
             } else {
                 exceptionLabel.setText(space + "Empty result...");
-                setSize(100, length);
+                setSize(length);
             }
         } catch (SQLException e) {
-            setSize(100, length);
+            setSize(length);
             exceptionLabel.setText(space + e.getMessage());
         }
     }
