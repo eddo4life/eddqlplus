@@ -72,6 +72,7 @@ public class Terminal {
     @SuppressWarnings("unchecked")
     public void display(String query, boolean isShow) {
         int length = 50;
+        String space = "          ";
         try {
             ArrayList<Object> selectTable = new ArrayList<>();
             if (DBMS.dbms == 2) {
@@ -152,11 +153,4 @@ public class Terminal {
         }
     }
 
-    String space = "          ";
-
-    void setTable() {
-
-        table.setFont(new Font("Calibri", Font.CENTER_BASELINE, 15));
-
-    }
 }
