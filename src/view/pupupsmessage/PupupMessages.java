@@ -67,7 +67,7 @@ public class PupupMessages extends JDialog {
 		centerPanel.setLayout(new GridBagLayout());
 		centerPanel.add(mess);
 		bgColor(centerPanel);
-		this.setTitle("EddoSQL");
+		this.setTitle("EddQL");
 		JButton cancel = createButton("Cancel");
 		cancel.addActionListener((ActionEvent e) -> {
 			this.dispose();
