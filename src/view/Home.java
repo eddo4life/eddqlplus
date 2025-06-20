@@ -7,6 +7,7 @@ import eddql.launch.LoadData;
 import icon.BufferedImageIO;
 import jiconfont.icons.font_awesome.FontAwesome;
 import model.ConnectingToolsModel;
+import view.button.hover.ButtonHover;
 import view.iconmaker.IconFontGenerator;
 import view.iconmaker._Icon;
 import view.pupupsmessage.PupupMessages;
@@ -118,6 +119,7 @@ public class Home implements MouseListener, KeyListener, FocusListener {
     private void setDim(JButton button) {
         button.setPreferredSize(new Dimension(35, 30));
         button.setFocusable(false);
+        ButtonHover.apply(button, button.getBackground(), Color.lightGray);
     }
 
     public static JLabel oracleUsers;

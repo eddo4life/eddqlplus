@@ -15,7 +15,6 @@ import javax.swing.border.TitledBorder;
 import javax.swing.text.DefaultCaret;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 
 public class Editor_section implements KeyListener {
     // JDesktopPane desktop;

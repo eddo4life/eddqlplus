@@ -3,10 +3,8 @@ package controller.sql.modification;
 import dao.DBMS;
 import dao.mysql.MySQLDaoOperation;
 import dao.oracle.OracleDaoOperation;
-import view.CreateTable;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class Modification_controller_sql {
 
