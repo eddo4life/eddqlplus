@@ -69,7 +69,7 @@ public class LoadData {
 
         loadingLabel.setText("Loading databases...");
         databaseSectionLoader();
-        if (exit != 0) {
+        if (!exit) {
             loadingLabel.setText("Done  loading databases!");
             try {
                 Thread.sleep(1500);
@@ -147,7 +147,7 @@ public class LoadData {
                 Home.frame.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         } catch (Exception e) {
             //e.printStackTrace();
-            exit = 0;
+            exit = true;
         }
     }
 
@@ -155,7 +155,7 @@ public class LoadData {
      * =============================================================
      */
 
-    int lineCount = 0;
+    private int lineCount = 0;
 
     private void mathCalcul(int tourTotal, int tourEffectue, int max, boolean add) {
         int y = (tourEffectue * max) / tourTotal;
@@ -201,7 +201,7 @@ public class LoadData {
             if (wait)
                 Home.frame.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         } catch (Exception e) {
-            exit = 0;
+            exit = true;
         }
     }
 
@@ -209,7 +209,7 @@ public class LoadData {
      * =============================================================
      */
 
-    private int exit = 1;
+    private boolean exit = false;
 
     public void getAll() {
         databaseSectionLoader();
