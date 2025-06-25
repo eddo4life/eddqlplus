@@ -36,13 +36,16 @@ public class LoadData {
         frame.setLayout(null);
         frame.setUndecorated(true);
         JPanel panel = new JPanel();
+
         frame.setIconImage(new BufferedImageIO().getIcon(500, 500, "logo.jpg").getImage());
+
         panel.setLayout(new BorderLayout());
         JPanel southPanel = new JPanel();
         southPanel.setBackground(Color.black);
         southPanel.setLayout(null);
         southPanel.setPreferredSize(new Dimension(600, 50));
         JLabel imgLabel = new JLabel();
+
         imgLabel.setIcon(new BufferedImageIO().getIcon(400, 160, "eddql.jpg"));
 
         panel.add(imgLabel, BorderLayout.NORTH);

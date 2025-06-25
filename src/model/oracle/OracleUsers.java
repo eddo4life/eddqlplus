@@ -1,34 +1,34 @@
 package model.oracle;
 
 public class OracleUsers {
-	
-	String id,name,date;
-	
-	public OracleUsers() {
-	}
 
-	public String getId() {
-		return id;
-	}
+    String id, name, date;
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public OracleUsers() {
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public String getDate() {
-		return date;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setDate(String date) {
-		this.date = date;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
 }

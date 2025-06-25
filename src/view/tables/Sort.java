@@ -11,49 +11,49 @@ import javax.swing.table.TableRowSorter;
 
 public class Sort {
 
-	public Sort() {
-	}
+    public Sort() {
+    }
 
-	public void tableSortFilter(JTable table) {
-		TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(table.getModel());
-		table.setRowSorter(rowSorter);
-		Home.searchField.getDocument().addDocumentListener(new DocumentListener() {
+    public void tableSortFilter(JTable table) {
+        TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(table.getModel());
+        table.setRowSorter(rowSorter);
+        Home.searchField.getDocument().addDocumentListener(new DocumentListener() {
 
-			@Override
-			public void insertUpdate(DocumentEvent e) {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
 
-				try {
-					String text = Home.searchField.getText();
-					if (text.isBlank()) {
-						rowSorter.setRowFilter(null);
+                try {
+                    String text = Home.searchField.getText();
+                    if (text.isBlank()) {
+                        rowSorter.setRowFilter(null);
 
-					} else {
-						rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
-					}
-				} catch (Exception ignored) {
-				}
-			}
+                    } else {
+                        rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                    }
+                } catch (Exception ignored) {
+                }
+            }
 
-			@Override
-			public void removeUpdate(DocumentEvent e) {
+            @Override
+            public void removeUpdate(DocumentEvent e) {
 
-				String text = Home.searchField.getText();
-				try {
-					if (text.isBlank()) {
-						rowSorter.setRowFilter(null);
-					} else {
-						rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                String text = Home.searchField.getText();
+                try {
+                    if (text.isBlank()) {
+                        rowSorter.setRowFilter(null);
+                    } else {
+                        rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
 
-					}
-				} catch (Exception ignored) {
-				}
-			}
+                    }
+                } catch (Exception ignored) {
+                }
+            }
 
-			@Override
-			public void changedUpdate(DocumentEvent e) {
-				throw new UnsupportedOperationException("Not supported yet.");
-			}
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
 
-		});
-	}
+        });
+    }
 }

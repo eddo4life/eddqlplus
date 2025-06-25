@@ -121,10 +121,8 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
         return panel;
     }
 
-    JPanel aboutUsPanel = new JPanel();
-
     public void aboutUs() {
-        aboutUsPanel = new JPanel();
+        JPanel aboutUsPanel = new JPanel();
         aboutUsPanel.setLayout(new BorderLayout());
         JPanel centerPanel = new JPanel();
         JPanel northPanel = new JPanel();
@@ -213,7 +211,7 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
         revalidate();
     }
 
-    JComboBox<String> host;
+    private JComboBox<String> host;
 
     public JPanel sqlConnector() {
         JPanel northPanel = new JPanel();
@@ -225,7 +223,7 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
         southPanel.setPreferredSize(new Dimension(0, 100));
         mainPanel.setLayout(new BorderLayout());
         mainPanel.setPreferredSize(new Dimension(500, 300));
-        connectionPanel = new JPanel();
+        JPanel connectionPanel = new JPanel();
         connectionPanel.setLayout(new GridBagLayout());
         JLabel port = new JLabel(new IconFontGenerator(FontAwesome.USB, 15, null).getIcon());
         field(portField);
@@ -239,7 +237,7 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
         passwordField.addKeyListener(this);
         passwordField.setForeground(null);
         passwordField.setBorder(new BevelBorder(1, Color.darkGray, Color.darkGray));
-        gb = new GridBagConstraints();
+        GridBagConstraints gb = new GridBagConstraints();
         gb.insets = new Insets(5, 5, 5, 5);
 
         JPanel switchPanel = new JPanel();
@@ -323,7 +321,7 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
         return mainPanel;
     }
 
-    void field(JTextField field) {
+    private void field(JTextField field) {
         field.requestFocus();
         field.addFocusListener(this);
         field.addKeyListener(this);
@@ -332,7 +330,7 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
     }
 
     @SuppressWarnings("deprecation")
-    public void save() {
+    private void save() {
 
         String pass = "";
         pass = passwordField.getText();
@@ -438,7 +436,7 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
         }
     }
 
-    Component component;
+    private Component component;
 
     public Component getComponent() {
         return component;
@@ -478,13 +476,11 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
 
     public static ConnectingToolsModel ct = new ConnectingToolsModel();
 
-    JPanel menuPanel = new JPanel();
-    JPanel connectionPanel = new JPanel();
-    JButton connectionLabel, displayLabel, securityLabel, helpLabel, rulesLabel, aboutLabel, editorLabel;
-    JTextField portField = new JTextField(20);
-    JTextField userField = new JTextField(20);
-    JPasswordField passwordField;
-    GridBagConstraints gb;
-    JPanel mainPanel = new JPanel();
+    private final JPanel menuPanel = new JPanel();
+    private JButton connectionLabel, displayLabel, securityLabel, helpLabel, rulesLabel, aboutLabel, editorLabel;
+    private final JTextField portField = new JTextField(20);
+    private final JTextField userField = new JTextField(20);
+    private JPasswordField passwordField;
+    private final JPanel mainPanel = new JPanel();
 
 }

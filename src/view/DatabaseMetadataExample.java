@@ -9,7 +9,7 @@ public class DatabaseMetadataExample {
         String password = "password";
         Connection connection = DriverManager.getConnection(url, username, password);
         DatabaseMetaData metaData = connection.getMetaData();
-        ResultSet tables = metaData.getTables(null, null, "%", new String[] { "TABLE" });
+        ResultSet tables = metaData.getTables(null, null, "%", new String[]{"TABLE"});
         while (tables.next()) {
             String tableName = tables.getString("TABLE_NAME");
             System.out.println("Table: " + tableName);

@@ -7,14 +7,14 @@ import javax.swing.*;
 import java.awt.*;
 
 public class IconFontGenerator {
-	private Icon icon;
+    private Icon icon;
 
-	public Icon getIcon() {
-		return icon;
-	}
+    public Icon getIcon() {
+        return icon;
+    }
 
-	public IconFontGenerator(FontAwesome font, int size, Color color) {
-		IconFontSwing.register(FontAwesome.getIconFont());
-		icon = IconFontSwing.buildIcon(font, size);
-	}
+    public IconFontGenerator(FontAwesome font, int size, Color color) {
+        IconFontSwing.register(FontAwesome.getIconFont());
+        icon = IconFontSwing.buildIcon(font, size);
+    }
 }

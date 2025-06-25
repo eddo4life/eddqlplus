@@ -16,87 +16,87 @@ import java.util.Objects;
 
 public class TableToBeSelected {
 
-	public TableToBeSelected() {
-		
-	}
+    public TableToBeSelected() {
 
-	public static String[] head;
+    }
 
-	@SuppressWarnings("unchecked")
-	public JPanel select(String name) {
-		JPanel pane = new JPanel();
-		pane.setLayout(new BorderLayout());
-		try {
-			ArrayList<Object> selectTable=null;
-			if (DBMS.dbms == 1) {
-				selectTable = new MySQLDaoOperation().selectTable(name);
-			} else if (DBMS.dbms == 2){
-				selectTable = new OracleDaoOperation().showDataFrom(name);
-			}
+    public static String[] head;
 
-			JTable table = new JTable();
-			table.setEnabled(false);
-			JPanel intern = new JPanel();
-			intern.setLayout(new BorderLayout());
-			ArrayList<String> header;
-			assert selectTable != null;
-			header = (ArrayList<String>) selectTable.get(0);
-			ArrayList<String> data;
-			data = (ArrayList<String>) selectTable.get(1);
+    @SuppressWarnings("unchecked")
+    public JPanel select(String name) {
+        JPanel pane = new JPanel();
+        pane.setLayout(new BorderLayout());
+        try {
+            ArrayList<Object> selectTable = null;
+            if (DBMS.dbms == 1) {
+                selectTable = new MySQLDaoOperation().selectTable(name);
+            } else if (DBMS.dbms == 2) {
+                selectTable = new OracleDaoOperation().showDataFrom(name);
+            }
 
-			 head = new String[header.size()];
-			int m = 0;
-			for (String hd : header) {
-				head[m] = hd;
-				m++;
-			}
-			int i = 0, k = 0;
-			Object[][] obj = new String[data.size() / header.size()][header.size()];
-			for (String d : data) {
+            JTable table = new JTable();
+            table.setEnabled(false);
+            JPanel intern = new JPanel();
+            intern.setLayout(new BorderLayout());
+            ArrayList<String> header;
+            assert selectTable != null;
+            header = (ArrayList<String>) selectTable.get(0);
+            ArrayList<String> data;
+            data = (ArrayList<String>) selectTable.get(1);
 
-				if (i < data.size() / header.size()) {
-					obj[i][k] = Objects.requireNonNullElse(d, "null");
-				}
+            head = new String[header.size()];
+            int m = 0;
+            for (String hd : header) {
+                head[m] = hd;
+                m++;
+            }
+            int i = 0, k = 0;
+            Object[][] obj = new String[data.size() / header.size()][header.size()];
+            for (String d : data) {
 
-				k++;
-				if (k % header.size() == 0) {
-					i++;
-					k = 0;
-				}
-			}
+                if (i < data.size() / header.size()) {
+                    obj[i][k] = Objects.requireNonNullElse(d, "null");
+                }
 
-			table.setModel(new DefaultTableModel(obj, head));
-			if (header.size() > 15) {
-				table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-			}
-			
+                k++;
+                if (k % header.size() == 0) {
+                    i++;
+                    k = 0;
+                }
+            }
 
-			JTableUtilities.setCellsAlignment(table, SwingConstants.CENTER, 0);
-			
-			Custom tabCustom = new Custom(table, false, false, 30, null, null);
-			intern.add(tabCustom.getScrollPane());
-			
-			JPanel titlePanel = new JPanel();
-			
-			JLabel titleLabel ;
-			
-			if(DBMS.dbms == 1) {
-			 titleLabel = new JLabel(new MySQLConnection().getDbName() + "." + name);
-			}else {
-				//getUser
-				 titleLabel = new JLabel("SCOTT" + "." + name);
-			}
-			
-			titlePanel.add(titleLabel);
-			
-			pane.add(titlePanel, BorderLayout.NORTH);
-			pane.add(intern, BorderLayout.CENTER);
-			
+            table.setModel(new DefaultTableModel(obj, head));
+            if (header.size() > 15) {
+                table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            }
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-			//new CreateTable().warning();
-		}
-		return pane;
-	}
+
+            JTableUtilities.setCellsAlignment(table, SwingConstants.CENTER, 0);
+
+            Custom tabCustom = new Custom(table, false, false, 30, null, null);
+            intern.add(tabCustom.getScrollPane());
+
+            JPanel titlePanel = new JPanel();
+
+            JLabel titleLabel;
+
+            if (DBMS.dbms == 1) {
+                titleLabel = new JLabel(new MySQLConnection().getDbName() + "." + name);
+            } else {
+                //getUser
+                titleLabel = new JLabel("SCOTT" + "." + name);
+            }
+
+            titlePanel.add(titleLabel);
+
+            pane.add(titlePanel, BorderLayout.NORTH);
+            pane.add(intern, BorderLayout.CENTER);
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            //new CreateTable().warning();
+        }
+        return pane;
+    }
 }

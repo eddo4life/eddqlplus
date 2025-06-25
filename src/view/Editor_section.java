@@ -183,12 +183,10 @@ public class Editor_section implements KeyListener {
         });
 
         // setting the icons
-
         file.setIcon(new BufferedImageIO().getIcon(20, 20, "folder.png"));
         edit.setIcon(new BufferedImageIO().getIcon(20, 20, "edit.png"));
         font.setIcon(new BufferedImageIO().getIcon(20, 20, "font.png"));
         run.setIcon(new BufferedImageIO().getIcon(18, 20, "energy.png"));
-
         menu_bar.add(file);
         menu_bar.add(edit);
         menu_bar.add(font);
