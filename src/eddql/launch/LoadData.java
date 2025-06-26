@@ -142,7 +142,7 @@ public class LoadData {
                 String[] dt = dteTime.get(i).split(" ");
                 tbm.setDate(dt[0]);
                 tbm.setTime(dt[1]);
-                mathCalcul(lineCount, tourTotal + i, 50, true);
+                updateProgressBar(lineCount, tourTotal + i, 50, true);
                 i++;
                 tables.add(tbm);
             }
@@ -160,10 +160,10 @@ public class LoadData {
 
     private int lineCount = 0;
 
-    private void mathCalcul(int tourTotal, int tourEffectue, int max, boolean add) {
-        int y = (tourEffectue * max) / tourTotal;
+    private void updateProgressBar(int totalSteps, int currentStep, int maxValue, boolean addOffset) {
+        int y = (currentStep * maxValue) / totalSteps;
         int percent = Math.round(y);
-        if (add)
+        if (addOffset)
             bar.setValue(percent + 51);
         else
             bar.setValue(percent);
@@ -198,7 +198,7 @@ public class LoadData {
                 dbm.setLatestTabTime(late[1]);// time
                 dbm.setTablesCount(new MySQLDaoOperation().showTablesFrom(String.valueOf(s)));
                 database.add(dbm);
-                mathCalcul(lineCount, i, 50, false);
+                updateProgressBar(lineCount, i, 50, false);
                 i++;
             }
             if (wait)
