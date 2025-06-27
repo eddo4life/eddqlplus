@@ -12,6 +12,7 @@ import view.Home;
 import javax.swing.*;
 import java.awt.*;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class LoadData {
@@ -108,6 +109,7 @@ public class LoadData {
     public void tablesSectionLoader() {
 
         tables = new ArrayList<>();
+        Connection con = null;
         if (wait)
             Home.frame.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         try {
@@ -120,14 +122,13 @@ public class LoadData {
             int currentStep = totalSteps;
             totalSteps += showTables.size();
             ArrayList<String> dteTime;
-            System.out.println("Show tables size " + showTables.size());
             if (DBMS.dbms == 1) {
                 dteTime = new MySQLDaoOperation().getDate();
             } else {
                 dteTime = new OracleDaoOperation().getDate();
             }
             int i = 0;
-            Connection con=dao.getNewConnection();
+            con = dao.getNewConnection();
             for (String data : showTables) {
                 ShowTablesModel tbm = new ShowTablesModel();
                 tbm.setNames(data);
@@ -151,15 +152,19 @@ public class LoadData {
                 i++;
                 tables.add(tbm);
             }
-            System.out.println("Final size " + tables.size());
             if (wait)
                 Home.frame.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         } catch (Exception e) {
-            System.out.println(e.getMessage() + " +===+ " + e.getCause());
             e.printStackTrace();
             exit = true;
-        }finally {
-
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 

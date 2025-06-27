@@ -108,22 +108,6 @@ public class MySQLDaoOperation {
      * =============================================================
      */
 
-//    public int getColumn(String name) throws SQLException {
-//        String requete = " DESC " + name;
-//        con = connection.getCon(toolsModel);
-//        pst = con.prepareStatement(requete);
-//        rs = pst.executeQuery();
-//        int count = 0;
-//
-//        while (rs.next()) {
-//            count++;
-//        }
-//
-//        MySQLConnection.closeCon(rs, pst, con);
-//        return count;
-//
-//    }
-
     public int getColumn(Connection con, String name) throws SQLException {
         String requete = " DESC " + name;
         int count = 0;
@@ -140,18 +124,6 @@ public class MySQLDaoOperation {
      * =============================================================
      */
 
-    //    public int getRows(String name) throws SQLException {
-//        String requete = "SELECT * from " + name;
-//        int count = 0;
-//        con = connection.getCon(toolsModel);
-//        pst = con.prepareStatement(requete);
-//        rs = pst.executeQuery();
-//        while (rs.next()) {
-//            count++;
-//        }
-//        MySQLConnection.closeCon(rs, pst, con);
-//        return count;
-//    }
     public int getRows(Connection con, String name) throws SQLException {
         String requete = "SELECT * from " + name;
         int count = 0;

@@ -38,8 +38,6 @@ public class TableSelector {
             } else {
                 showtables = new OracleDaoOperation().showTables();
             }
-            System.out.println(showtables);
-            System.out.println("-=-=-=-=-");
             arr = showtables;
             String title = "(" + showtables.size() + ") tables from " + new MySQLConnection().getDbName();
             if (showtables.size() == 1) {
