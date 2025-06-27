@@ -142,7 +142,7 @@ public class LoadData {
                 String[] dt = dteTime.get(i).split(" ");
                 tbm.setDate(dt[0]);
                 tbm.setTime(dt[1]);
-                updateProgressBar(totalSteps, currentStep + i, 50, true);
+                updateProgressBar(totalSteps, currentStep + i, true);
                 i++;
                 tables.add(tbm);
             }
@@ -160,13 +160,26 @@ public class LoadData {
 
     private int totalSteps = 0;
 
-    private void updateProgressBar(int totalSteps, int currentStep, int maxValue, boolean addOffset) {
-        int y = (currentStep * maxValue) / totalSteps;
-        int percent = Math.round(y);
-        if (addOffset)
+    /**
+     * Updates the progress bar to reflect the current progress of a multiphase loading process.
+     * <p>
+     * The progress bar is visually split into two phases:
+     * <ul>
+     *   <li>Phase 1 (e.g., loading databases): fills from 0 to 50%.</li>
+     *   <li>Phase 2 (e.g., loading tables): fills from 51% to 100%.</li>
+     * </ul>
+     *
+     * @param totalSteps    the total number of steps in the current phase
+     * @param currentStep   the number of steps completed in the current phase
+     * @param isSecondPhase if true, progress is offset to start from 51% (second phase)
+     */
+    private void updateProgressBar(int totalSteps, int currentStep, boolean isSecondPhase) {
+        int percent = (currentStep * 50) / totalSteps;
+        if (isSecondPhase) {
             bar.setValue(percent + 51);
-        else
+        } else {
             bar.setValue(percent);
+        }
     }
 
     /*
@@ -198,7 +211,7 @@ public class LoadData {
                 dbm.setLatestTabTime(late[1]);// time
                 dbm.setTablesCount(new MySQLDaoOperation().showTablesFrom(String.valueOf(s)));
                 database.add(dbm);
-                updateProgressBar(totalSteps, currentStep, 50, false);
+                updateProgressBar(totalSteps, currentStep, false);
                 currentStep++;
             }
             if (wait)
