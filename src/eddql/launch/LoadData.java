@@ -11,6 +11,7 @@ import view.Home;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.Connection;
 import java.util.ArrayList;
 
 public class LoadData {
@@ -18,6 +19,8 @@ public class LoadData {
     public static ArrayList<DataBaseModel> database;
 
     public static ArrayList<ShowTablesModel> tables;
+
+    private final MySQLDaoOperation dao = new MySQLDaoOperation();
 
     public LoadData() {
     }
@@ -117,18 +120,20 @@ public class LoadData {
             int currentStep = totalSteps;
             totalSteps += showTables.size();
             ArrayList<String> dteTime;
+            System.out.println("Show tables size " + showTables.size());
             if (DBMS.dbms == 1) {
                 dteTime = new MySQLDaoOperation().getDate();
             } else {
                 dteTime = new OracleDaoOperation().getDate();
             }
             int i = 0;
+            Connection con=dao.getNewConnection();
             for (String data : showTables) {
                 ShowTablesModel tbm = new ShowTablesModel();
                 tbm.setNames(data);
                 if (DBMS.dbms == 1) {
-                    tbm.setColumnCount(new MySQLDaoOperation().getColumn(data));
-                    tbm.setRowCount(new MySQLDaoOperation().getRows(data));
+                    tbm.setColumnCount(dao.getColumn(con, data));
+                    tbm.setRowCount(dao.getRows(con, data));
                 } else {
                     try {
                         tbm.setColumnCount(new OracleDaoOperation().getColumn(data));
@@ -146,11 +151,15 @@ public class LoadData {
                 i++;
                 tables.add(tbm);
             }
+            System.out.println("Final size " + tables.size());
             if (wait)
                 Home.frame.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         } catch (Exception e) {
-            //e.printStackTrace();
+            System.out.println(e.getMessage() + " +===+ " + e.getCause());
+            e.printStackTrace();
             exit = true;
+        }finally {
+
         }
     }
 

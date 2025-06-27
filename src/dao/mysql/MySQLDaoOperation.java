@@ -26,7 +26,11 @@ public class MySQLDaoOperation {
         new Tools();
     }
 
-    ConnectingToolsModel toolsModel = new SystemDatabaseTreatment().getDataConnection();
+    private final ConnectingToolsModel toolsModel = new SystemDatabaseTreatment().getDataConnection();
+
+    public Connection getNewConnection() throws SQLException {
+        return connection.getCon(toolsModel);
+    }
 
     public ArrayList<String> showDataBases() throws SQLException, NullPointerException {
         ArrayList<String> dataBases = new ArrayList<>();
@@ -104,38 +108,62 @@ public class MySQLDaoOperation {
      * =============================================================
      */
 
-    public int getColumn(String name) throws SQLException {
+//    public int getColumn(String name) throws SQLException {
+//        String requete = " DESC " + name;
+//        con = connection.getCon(toolsModel);
+//        pst = con.prepareStatement(requete);
+//        rs = pst.executeQuery();
+//        int count = 0;
+//
+//        while (rs.next()) {
+//            count++;
+//        }
+//
+//        MySQLConnection.closeCon(rs, pst, con);
+//        return count;
+//
+//    }
+
+    public int getColumn(Connection con, String name) throws SQLException {
         String requete = " DESC " + name;
-        con = connection.getCon(toolsModel);
-        pst = con.prepareStatement(requete);
-        rs = pst.executeQuery();
         int count = 0;
-
-        while (rs.next()) {
-            count++;
+        try (PreparedStatement pst = con.prepareStatement(requete);
+             ResultSet rs = pst.executeQuery()) {
+            while (rs.next()) {
+                count++;
+            }
         }
-
-        MySQLConnection.closeCon(rs, pst, con);
         return count;
-
     }
 
     /*
      * =============================================================
      */
 
-    public int getRows(String name) throws SQLException {
+    //    public int getRows(String name) throws SQLException {
+//        String requete = "SELECT * from " + name;
+//        int count = 0;
+//        con = connection.getCon(toolsModel);
+//        pst = con.prepareStatement(requete);
+//        rs = pst.executeQuery();
+//        while (rs.next()) {
+//            count++;
+//        }
+//        MySQLConnection.closeCon(rs, pst, con);
+//        return count;
+//    }
+    public int getRows(Connection con, String name) throws SQLException {
         String requete = "SELECT * from " + name;
         int count = 0;
-        con = connection.getCon(toolsModel);
-        pst = con.prepareStatement(requete);
-        rs = pst.executeQuery();
-        while (rs.next()) {
-            count++;
+        try (PreparedStatement pst = con.prepareStatement(requete);
+             ResultSet rs = pst.executeQuery()) {
+            while (rs.next()) {
+                count++;
+            }
         }
-        MySQLConnection.closeCon(rs, pst, con);
         return count;
     }
+
 
     /*
      * =============================================================
