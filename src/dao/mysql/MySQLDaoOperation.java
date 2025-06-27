@@ -34,9 +34,9 @@ public class MySQLDaoOperation {
 
     public ArrayList<String> showDataBases() throws SQLException, NullPointerException {
         ArrayList<String> dataBases = new ArrayList<>();
-        String requete = " SHOW DATABASES ";
+        String query = " SHOW DATABASES ";
         con = connection.getCon(toolsModel);
-        pst = con.prepareStatement(requete);
+        pst = con.prepareStatement(query);
         rs = pst.executeQuery();
         while (rs.next()) {
             dataBases.add(rs.getString(1));
@@ -52,9 +52,9 @@ public class MySQLDaoOperation {
      */
 
     public int create(String name) throws SQLException {
-        String requete = " CREATE DATABASE " + name;
+        String query = " CREATE DATABASE " + name;
         con = connection.getCon(toolsModel);
-        pst = con.prepareStatement(requete);
+        pst = con.prepareStatement(query);
         int x = pst.executeUpdate();
         MySQLConnection.closeCon(rs, pst, con);
         return x;
@@ -65,9 +65,9 @@ public class MySQLDaoOperation {
      */
 
     public void use(String name) throws SQLException {
-        String requete = " USE " + name;
+        String query = " USE " + name;
         con = connection.getCon(toolsModel);
-        pst = con.prepareStatement(requete);
+        pst = con.prepareStatement(query);
         pst.executeUpdate();
         MySQLConnection.closeCon(rs, pst, con);
     }
@@ -77,9 +77,9 @@ public class MySQLDaoOperation {
      */
 
     public int deleteDb(String name) throws SQLException {
-        String requete = " DROP DATABASE " + name;
+        String query = " DROP DATABASE " + name;
         con = connection.getCon(toolsModel);
-        pst = con.prepareStatement(requete);
+        pst = con.prepareStatement(query);
         int x = pst.executeUpdate();
         MySQLConnection.closeCon(rs, pst, con);
         return x;
@@ -91,9 +91,9 @@ public class MySQLDaoOperation {
 
     public ArrayList<String> showTables() throws SQLException {
         ArrayList<String> dataBases = new ArrayList<>();
-        String requete = " SHOW TABLES ";
+        String query = " SHOW TABLES ";
         con = connection.getCon(toolsModel);
-        pst = con.prepareStatement(requete);
+        pst = con.prepareStatement(query);
         rs = pst.executeQuery();
         while (rs.next()) {
             dataBases.add(rs.getString(1).toLowerCase());
@@ -124,9 +124,9 @@ public class MySQLDaoOperation {
      */
 
     public int getRows(Connection con, String name) throws SQLException {
-        String requete = "SELECT count(*) from " + name;
+        String query = "SELECT count(*) from " + name;
         int count = 0;
-        try (PreparedStatement pst = con.prepareStatement(requete);
+        try (PreparedStatement pst = con.prepareStatement(query);
              ResultSet rs = pst.executeQuery()) {
             while (rs.next()) {
                 count++;
@@ -157,9 +157,9 @@ public class MySQLDaoOperation {
         ArrayList<Object> pack = new ArrayList<>();
         ArrayList<String> header = new ArrayList<>();
         ArrayList<String> data = new ArrayList<>();
-        String requete = "SELECT * from " + name;
+        String query = "SELECT * from " + name;
         con = connection.getCon(toolsModel);
-        pst = con.prepareStatement(requete);
+        pst = con.prepareStatement(query);
         rs = pst.executeQuery();
         if (rs != null) {
             for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
@@ -191,9 +191,9 @@ public class MySQLDaoOperation {
 
     public String[] selectColumn(String name) throws SQLException {
         String[] arr = null;
-        String requete = "SELECT * from " + name;
+        String query = "SELECT * from " + name;
         con = connection.getCon(toolsModel);
-        pst = con.prepareStatement(requete);
+        pst = con.prepareStatement(query);
         rs = pst.executeQuery();
         if (rs != null) {
 
@@ -222,10 +222,10 @@ public class MySQLDaoOperation {
         if (!builder.toString().isBlank())
             builder = new StringBuilder(builder.substring(0, builder.length() - 1));
 
-        String requete = " INSERT INTO " + name + " VALUES(" + builder + ");";
+        String query = " INSERT INTO " + name + " VALUES(" + builder + ");";
 
         con = connection.getCon(toolsModel);
-        pst = con.prepareStatement(requete);
+        pst = con.prepareStatement(query);
         int count = 1;
         for (Object data : build) {
             pst.setObject(count, data);
@@ -242,9 +242,9 @@ public class MySQLDaoOperation {
 
     public int delete(String name, String condition) throws SQLException {
 
-        String requete = "DELETE FROM " + name + " WHERE " + condition;
+        String query = "DELETE FROM " + name + " WHERE " + condition;
         con = connection.getCon(toolsModel);
-        pst = con.prepareStatement(requete);
+        pst = con.prepareStatement(query);
         int x = pst.executeUpdate();
         MySQLConnection.closeCon(rs, pst, con);
 
@@ -404,10 +404,10 @@ public class MySQLDaoOperation {
      */
 
     public int showTablesFrom(String name) throws SQLException {
-        String requete = "SHOW TABLES FROM " + name;
+        String query = "SHOW TABLES FROM " + name;
         int count = 0;
         con = connection.getCon(toolsModel);
-        pst = con.prepareStatement(requete);
+        pst = con.prepareStatement(query);
         rs = pst.executeQuery();
         while (rs.next()) {
             count++;
