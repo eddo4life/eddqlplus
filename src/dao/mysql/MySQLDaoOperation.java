@@ -125,7 +125,7 @@ public class MySQLDaoOperation {
      */
 
     public int getRows(Connection con, String name) throws SQLException {
-        String requete = "SELECT * from " + name;
+        String requete = "SELECT count(*) from " + name;
         int count = 0;
         try (PreparedStatement pst = con.prepareStatement(requete);
              ResultSet rs = pst.executeQuery()) {
