@@ -86,9 +86,6 @@ public class TableSelector {
                 i++;
                 k++;
             }
-            System.out.println(tablesListNames);
-            System.out.println(tablesListNames.size());
-            System.out.println(obj.length);
             @SuppressWarnings("rawtypes")
             Class[] columnClass = new Class[]{Integer.class, String.class, Integer.class, Integer.class, String.class,
                     String.class};
