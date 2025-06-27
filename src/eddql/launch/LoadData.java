@@ -79,7 +79,7 @@ public class LoadData {
         if (!exit) {
             loadingLabel.setText("Done  loading databases!");
             try {
-                Thread.sleep(1500);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -91,7 +91,7 @@ public class LoadData {
             loadingLabel.setForeground(Color.red);
         }
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1000);
             frame.dispose();
         } catch (InterruptedException ignored) {
         }
