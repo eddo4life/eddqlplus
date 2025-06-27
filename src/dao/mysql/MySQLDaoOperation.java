@@ -108,17 +108,16 @@ public class MySQLDaoOperation {
      * =============================================================
      */
 
-    public int getColumn(Connection con, String name) throws SQLException {
-        String requete = " DESC " + name;
-        int count = 0;
-        try (PreparedStatement pst = con.prepareStatement(requete);
-             ResultSet rs = pst.executeQuery()) {
+    public int getColumn(Connection con, String tableName) throws SQLException {
+        int columnCount = 0;
+        try (ResultSet rs = con.getMetaData().getColumns(null, null, tableName, null)) {
             while (rs.next()) {
-                count++;
+                columnCount++;
             }
         }
-        return count;
+        return columnCount;
     }
+
 
     /*
      * =============================================================
