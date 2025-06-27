@@ -114,8 +114,8 @@ public class LoadData {
             } else {
                 showTables = new OracleDaoOperation().showTables();
             }
-            int tourTotal = lineCount;
-            lineCount += showTables.size();
+            int currentStep = totalSteps;
+            totalSteps += showTables.size();
             ArrayList<String> dteTime;
             if (DBMS.dbms == 1) {
                 dteTime = new MySQLDaoOperation().getDate();
@@ -142,7 +142,7 @@ public class LoadData {
                 String[] dt = dteTime.get(i).split(" ");
                 tbm.setDate(dt[0]);
                 tbm.setTime(dt[1]);
-                updateProgressBar(lineCount, tourTotal + i, 50, true);
+                updateProgressBar(totalSteps, currentStep + i, 50, true);
                 i++;
                 tables.add(tbm);
             }
@@ -158,7 +158,7 @@ public class LoadData {
      * =============================================================
      */
 
-    private int lineCount = 0;
+    private int totalSteps = 0;
 
     private void updateProgressBar(int totalSteps, int currentStep, int maxValue, boolean addOffset) {
         int y = (currentStep * maxValue) / totalSteps;
@@ -183,10 +183,10 @@ public class LoadData {
         database = new ArrayList<>();
         if (wait)
             Home.frame.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-        int i = 1;
+        int currentStep = 1;
         try {
             ArrayList<String> names = new MySQLDaoOperation().showDataBases();
-            lineCount += names.size();
+            totalSteps += names.size();
             for (String s : names) {
                 DataBaseModel dbm = new DataBaseModel();
                 dbm.setName(s);
@@ -198,8 +198,8 @@ public class LoadData {
                 dbm.setLatestTabTime(late[1]);// time
                 dbm.setTablesCount(new MySQLDaoOperation().showTablesFrom(String.valueOf(s)));
                 database.add(dbm);
-                updateProgressBar(lineCount, i, 50, false);
-                i++;
+                updateProgressBar(totalSteps, currentStep, 50, false);
+                currentStep++;
             }
             if (wait)
                 Home.frame.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
