@@ -848,15 +848,7 @@ public class CreateTable implements MouseListener, KeyListener {
      */
 
     public String[] constraintArray() {
-        int j = constraintArrayList.size();
-        String[] r = new String[j];
-        if (j > 0) {
-            for (int i = 0; i < r.length; i++) {
-                r[i] = constraintArrayList.get(i);
-            }
-        }
-
-        return r;
+        return constraintArrayList.toArray(new String[0]);
     }
 
     /*
