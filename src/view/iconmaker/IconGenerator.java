@@ -5,11 +5,11 @@ import jiconfont.icons.font_awesome.FontAwesome;
 import javax.swing.*;
 import java.awt.*;
 
-public class _Icon {
+public class IconGenerator {
 
     private final int size = 40;
 
-    public _Icon() {
+    public IconGenerator() {
 
     }
 

@@ -8,7 +8,7 @@ import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
 import view.console.ConsoleApp;
 import view.ide.event.FileEvent;
-import view.scrollpane.Scroll_pane;
+import view.scrollpane.CustomScrollPane;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -16,7 +16,7 @@ import javax.swing.text.DefaultCaret;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Editor_section implements KeyListener {
+public class EditorSection implements KeyListener {
     // JDesktopPane desktop;
 
     private final FontEditor editorPaneFontMemory = new FontEditor();
@@ -29,11 +29,11 @@ public class Editor_section implements KeyListener {
      * ========================================================
      *
      */
-    public Editor_section() {
+    public EditorSection() {
 
     }
 
-    public Editor_section(Object obj) {
+    public EditorSection(Object obj) {
 
         JPanel closePanel = new JPanel();
         closePanel.setLayout(new FlowLayout(2, 30, 0));
@@ -351,7 +351,7 @@ public class Editor_section implements KeyListener {
         });
 
         main_style_font_panel.add(new JLabel("Font "));
-        main_style_font_panel.add(new Scroll_pane(fonts_list).getScrollPane());
+        main_style_font_panel.add(new CustomScrollPane(fonts_list).getScrollPane());
         JLabel sze = new JLabel("Size");
 
         main_style_font_panel.add(sze);

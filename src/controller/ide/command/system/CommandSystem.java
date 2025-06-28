@@ -1,7 +1,7 @@
 package controller.ide.command.system;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
-import view.Editor_section;
+import view.EditorSection;
 import view.Home;
 
 import javax.swing.*;
@@ -16,20 +16,20 @@ public class CommandSystem {
 
     void execute(String cmd) {
         if (!cls(cmd)) {
-            RSyntaxTextArea t = Editor_section.textArea;
+            RSyntaxTextArea t = EditorSection.textArea;
             switch (cmd) {
-                case "cls;" -> Editor_section.reset();
+                case "cls;" -> EditorSection.reset();
                 case "clear;" -> {
                     t.setText("");
                 }
                 case "exit;", "quit;", "close;" -> t.setEditable(false);//welcome page...
                 case "hbar;", "hide bar" -> Home.toolBar.setVisible(false);
                 case "sbar;", "show bar" -> Home.toolBar.setVisible(true);
-                case "open font;", "choose font;", "pick font;" -> Editor_section.westPanel_fontChooser_parent.setVisible(true);
+                case "open font;", "choose font;", "pick font;" -> EditorSection.westPanel_fontChooser_parent.setVisible(true);
                 case "font color;" -> {
                     Color color = JColorChooser.showDialog(Home.frame, "Choose a color", null);
                     t.setForeground(color);
-                    Editor_section.editorPaneCurrentFgColor = color;
+                    EditorSection.editorPaneCurrentFgColor = color;
                 }
                 case "w -resize;" -> {
                     Home.frame.setResizable(!Home.frame.isResizable());
@@ -42,7 +42,7 @@ public class CommandSystem {
 
     boolean cls(String str) {
         if (isClsCommand(str)) {
-            Editor_section.reset();
+            EditorSection.reset();
             return true;
         }
         return false;

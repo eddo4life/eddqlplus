@@ -3,7 +3,7 @@ package dao.mysql;
 import dao.sqlite.SQLiteINFO;
 import dao.sqlite.SystemDatabaseTreatment;
 import model.ConnectingToolsModel;
-import view.iconmaker._Icon;
+import view.iconmaker.IconGenerator;
 import view.pupupsmessage.PupupMessages;
 import view.tools.Tools;
 
@@ -25,7 +25,7 @@ public class MySQLConnection {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(url, "root", "password");
         } catch (ClassNotFoundException ex) {
-            new PupupMessages().message(ex.getMessage(), new _Icon().exceptionIcon());
+            new PupupMessages().message(ex.getMessage(), new IconGenerator().exceptionIcon());
         }
         return con;
     }
@@ -59,7 +59,7 @@ public class MySQLConnection {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            new PupupMessages().message(e.getMessage(), new _Icon().exceptionIcon());
+            new PupupMessages().message(e.getMessage(), new IconGenerator().exceptionIcon());
         }
 
     }

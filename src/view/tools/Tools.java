@@ -6,12 +6,12 @@ import dao.sqlite.SystemDatabaseTreatment;
 import eddql.launch.LoadData;
 import jiconfont.icons.font_awesome.FontAwesome;
 import model.ConnectingToolsModel;
-import view.Editor_section;
+import view.EditorSection;
 import view.Home;
 import view.iconmaker.IconFontGenerator;
-import view.iconmaker._Icon;
+import view.iconmaker.IconGenerator;
 import view.pupupsmessage.PupupMessages;
-import view.scrollpane.Scroll_pane;
+import view.scrollpane.CustomScrollPane;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -314,7 +314,7 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
         gb.gridy = 3;
 
         mainPanel.removeAll();
-        mainPanel.add(new Scroll_pane(connectionPanel).getScrollPane(), BorderLayout.CENTER);
+        mainPanel.add(new CustomScrollPane(connectionPanel).getScrollPane(), BorderLayout.CENTER);
         mainPanel.add(southPanel, BorderLayout.SOUTH);
         mainPanel.add(northPanel, BorderLayout.NORTH);
 
@@ -341,36 +341,36 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
             LoadData.wait = true;
             // test if datas are correct
             if (new MySQLConnection().getCon(m) != null) {
-                new PupupMessages().message("Data verified successfully", new _Icon().successIcon());
+                new PupupMessages().message("Data verified successfully", new IconGenerator().successIcon());
                 // test if a connection already existed
                 if (new SystemDatabaseTreatment().getDataConnection() != null) {
                     // message choice
                     new PupupMessages().confirm("A connection is currently saved, do you really wanna override it?");
                     if (PupupMessages.getAction == 1) {
                         if (new SystemDatabaseTreatment().updateConnection(m)) {
-                            new PupupMessages().message("Successfully switched", new _Icon().successIcon());
+                            new PupupMessages().message("Successfully switched", new IconGenerator().successIcon());
                         } else {
-                            new PupupMessages().message("Switch failed, try again", new _Icon().failedIcon());
+                            new PupupMessages().message("Switch failed, try again", new IconGenerator().failedIcon());
                         }
                     } else {
-                        new PupupMessages().message("Operation canceled!", new _Icon().messageIcon());
+                        new PupupMessages().message("Operation canceled!", new IconGenerator().messageIcon());
                     }
                 } else {
                     // insert
                     if (new SystemDatabaseTreatment().newMySQLConnection(m)) {
-                        new PupupMessages().message("Successfully connected", new _Icon().successIcon());
+                        new PupupMessages().message("Successfully connected", new IconGenerator().successIcon());
                     } else {
-                        new PupupMessages().message("Connection failed, try again", new _Icon().failedIcon());
+                        new PupupMessages().message("Connection failed, try again", new IconGenerator().failedIcon());
                     }
                 }
                 new LoadData().databaseSectionLoader();
                 Home.editor();
             } else {
-                new PupupMessages().message("Incorrect credentials, try again", new _Icon().failedIcon());
+                new PupupMessages().message("Incorrect credentials, try again", new IconGenerator().failedIcon());
             }
 
         } catch (SQLException e) {
-            new PupupMessages().message(e.getMessage(), new _Icon().failedIcon());
+            new PupupMessages().message(e.getMessage(), new IconGenerator().failedIcon());
         }
     }
 
@@ -406,7 +406,7 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
     }
 
     public void editor() {
-        new Editor_section(menuPanel);
+        new EditorSection(menuPanel);
 
     }
 

@@ -2,7 +2,7 @@ package view.ide.event;
 
 import controller.ide.filemanager.FileManager;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
-import view.Editor_section;
+import view.EditorSection;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +13,7 @@ import java.awt.event.KeyListener;
 
 public class FileEvent implements ActionListener, KeyListener {
 
-    RSyntaxTextArea editor_pane = Editor_section.textArea;
+    RSyntaxTextArea editor_pane = EditorSection.textArea;
 
     public FileEvent() {
 
@@ -70,7 +70,7 @@ public class FileEvent implements ActionListener, KeyListener {
                     editor_pane.setEditable(true);
                     editor_pane.setText("");
                 }
-                case "Close" -> Editor_section.close_font();
+                case "Close" -> EditorSection.close_font();
             }
         }
 

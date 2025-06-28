@@ -6,9 +6,9 @@ import dao.oracle.OracleDaoOperation;
 
 import java.sql.SQLException;
 
-public class Modification_controller_sql {
+public class ModificationControllerSQL {
 
-    public Modification_controller_sql() {
+    public ModificationControllerSQL() {
     }
 
     public String dropColumn(String table_name, String column_name) {

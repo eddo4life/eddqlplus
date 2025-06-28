@@ -6,7 +6,7 @@ import dao.mysql.MySQLConnection;
 import dao.mysql.MySQLDaoOperation;
 import dao.oracle.OracleDaoOperation;
 import model.InsertList;
-import view.iconmaker._Icon;
+import view.iconmaker.IconGenerator;
 import view.pupupsmessage.PupupMessages;
 import view.tables.Custom;
 import view.tables.JTableUtilities;
@@ -118,7 +118,7 @@ public class Insertion {
                 dataType = new OracleDaoOperation().getDataType(tabName);
             }
         } catch (Exception e) {
-            new PupupMessages().message(e.getMessage(), new _Icon().exceptionIcon());
+            new PupupMessages().message(e.getMessage(), new IconGenerator().exceptionIcon());
             new TablesSections().options();
         }
 
@@ -158,7 +158,7 @@ public class Insertion {
                     if (PupupMessages.getAction == 0) {
                         doIt();
                     } else if (PupupMessages.getAction == -1) {
-                        new PupupMessages().message("Insertion canceled", new _Icon().messageIcon());
+                        new PupupMessages().message("Insertion canceled", new IconGenerator().messageIcon());
                     }
                 } else {
                     execute(InsertList.list);
@@ -168,7 +168,7 @@ public class Insertion {
                 if (PupupMessages.getAction == 1) {
                     doIt();
                 } else {
-                    new PupupMessages().message("Insertion canceled", new _Icon().messageIcon());
+                    new PupupMessages().message("Insertion canceled", new IconGenerator().messageIcon());
                 }
             }
 
@@ -200,11 +200,11 @@ public class Insertion {
                 exec = new OracleDaoOperation().insert(tabName, data);
             }
             if (exec > 0) {
-                new PupupMessages().message("Insertion successful!", new _Icon().successIcon());
+                new PupupMessages().message("Insertion successful!", new IconGenerator().successIcon());
                 selectTable(tabName);
             }
         } catch (SQLException e) {
-            new PupupMessages().message("Process failed! " + e.getMessage(), new _Icon().failedIcon());
+            new PupupMessages().message("Process failed! " + e.getMessage(), new IconGenerator().failedIcon());
         }
     }
 

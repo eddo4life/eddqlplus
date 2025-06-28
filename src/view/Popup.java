@@ -105,7 +105,7 @@ class Popup extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        RSyntaxTextArea t = Editor_section.textArea;
+        RSyntaxTextArea t = EditorSection.textArea;
         if (t.isEditable() && t.isEnabled()) {
             doAction(e, t);
         }
@@ -128,13 +128,13 @@ class Popup extends JFrame implements ActionListener {
             new FileManager().saveFile();
         } else if (e.getSource() == print) {
             try {
-                if (Editor_section.editorPaneCurrentFgColor == Color.white)
+                if (EditorSection.editorPaneCurrentFgColor == Color.white)
                     t.setForeground(Color.black);
                 t.print();
             } catch (PrinterException e1) {
                 e1.printStackTrace();
             }
-            t.setForeground(Editor_section.editorPaneCurrentFgColor);
+            t.setForeground(EditorSection.editorPaneCurrentFgColor);
         } else if (e.getSource() == delete) {
             // TODO: put it delete row and select the row current row to make the action
         } else if (e.getSource() == selectAll) {
@@ -142,7 +142,7 @@ class Popup extends JFrame implements ActionListener {
         } else if (e.getSource() == clear) {
             t.setText("");
         } else if (e.getSource() == run) {
-            new Editor_section().execute();
+            new EditorSection().execute();
         } else if (e.getSource() == debug) {
             t.setEditable(true);
             t.setEnabled(true);

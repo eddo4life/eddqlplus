@@ -6,7 +6,7 @@ import dao.mysql.MySQLDaoOperation;
 import eddql.launch.LoadData;
 import export.view.DatabaseExporterUI;
 import model.DataBaseModel;
-import view.iconmaker._Icon;
+import view.iconmaker.IconGenerator;
 import view.pupupsmessage.PupupMessages;
 import view.tables.Custom;
 import view.tables.JTableUtilities;
@@ -23,7 +23,7 @@ import java.util.TimerTask;
 
 //color static from the class background an stuff...
 
-public class DataBase_section {
+public class DatabaseSection {
     // theme for panels
 
     private ArrayList<String> names = new ArrayList<>();
@@ -36,7 +36,7 @@ public class DataBase_section {
      *
      */
 
-    public DataBase_section() {
+    public DatabaseSection() {
 
         msgLabel.setFocusable(false);
         timer();
@@ -235,7 +235,7 @@ public class DataBase_section {
                 LoadData.database.add(x);
                 dataBases();
             } catch (SQLException e1) {
-                new PupupMessages().message(e1.getMessage(), new _Icon().exceptionIcon());
+                new PupupMessages().message(e1.getMessage(), new IconGenerator().exceptionIcon());
             }
         });
 
@@ -329,15 +329,15 @@ public class DataBase_section {
                                 break;
                             }
                         }
-                        new PupupMessages().message("Process completed", new _Icon().successIcon());
+                        new PupupMessages().message("Process completed", new IconGenerator().successIcon());
                     } else {
-                        new PupupMessages().message("Process canceled", new _Icon().messageIcon());
+                        new PupupMessages().message("Process canceled", new IconGenerator().messageIcon());
                     }
                 }
 
             }
         } catch (SQLException e) {
-            new PupupMessages().message(e.getMessage(), new _Icon().exceptionIcon());
+            new PupupMessages().message(e.getMessage(), new IconGenerator().exceptionIcon());
         }
         try {
             dataBases();
@@ -349,12 +349,12 @@ public class DataBase_section {
                 Home.dbn = new MySQLConnection().getDbName();
                 dataBases();
             } catch (SQLException e1) {
-                new PupupMessages().message("A terrible error occurred", new _Icon().exceptionIcon());
+                new PupupMessages().message("A terrible error occurred", new IconGenerator().exceptionIcon());
                 Home.frame.dispose();
                 Home.frame.removeAll();
                 new PupupMessages().message(
                         "if that didn't fix it, please restart the program manually or contact assistance",
-                        new _Icon().exceptionIcon());
+                        new IconGenerator().exceptionIcon());
                 new MainEddQL().main(null);
             }
         }

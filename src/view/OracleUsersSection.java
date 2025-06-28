@@ -2,7 +2,7 @@ package view;
 
 import dao.oracle.OracleDaoOperation;
 import model.oracle.OracleUsers;
-import view.scrollpane.Scroll_pane;
+import view.scrollpane.CustomScrollPane;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -84,7 +84,7 @@ public class OracleUsersSection {
             gbc.gridy = x++;
             gridBagPanel.add(getPanels(user.getId(), user.getName(), user.getDate()), gbc);
         }
-        JScrollPane scrollPane = new Scroll_pane(gridBagPanel).getScrollPane();
+        JScrollPane scrollPane = new CustomScrollPane(gridBagPanel).getScrollPane();
         usersPanel.add(scrollPane);
         usersPanel.setPreferredSize(new Dimension(800, 300));
 

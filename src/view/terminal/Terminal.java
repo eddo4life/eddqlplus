@@ -3,7 +3,7 @@ package view.terminal;
 import dao.DBMS;
 import dao.mysql.MySQLDaoOperation;
 import dao.oracle.OracleDaoOperation;
-import view.Editor_section;
+import view.EditorSection;
 import view.Home;
 import view.tables.Custom;
 import view.tables.JTableUtilities;
@@ -57,10 +57,10 @@ public class Terminal {
     }
 
     void setSize(int y) {
-        Editor_section.terminPanel.removeAll();
-        Editor_section.terminPanel.add(mainPanel, BorderLayout.SOUTH);
-        Editor_section.terminPanel.revalidate();
-        Editor_section.terminPanel.repaint();
+        EditorSection.terminPanel.removeAll();
+        EditorSection.terminPanel.add(mainPanel, BorderLayout.SOUTH);
+        EditorSection.terminPanel.revalidate();
+        EditorSection.terminPanel.repaint();
         mainPanel.setPreferredSize(new Dimension(100, y));
     }
 

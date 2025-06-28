@@ -1,7 +1,7 @@
 package controller.ide.filemanager;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
-import view.Editor_section;
+import view.EditorSection;
 import view.Home;
 
 import javax.swing.*;
@@ -9,7 +9,7 @@ import java.io.*;
 
 public class FileManager {
 
-    RSyntaxTextArea editor_pane = Editor_section.textArea;
+    RSyntaxTextArea editor_pane = EditorSection.textArea;
 
     public FileManager() {
 

@@ -8,7 +8,7 @@ import jiconfont.icons.font_awesome.FontAwesome;
 import model.ConnectingToolsModel;
 import view.button.hover.ButtonHover;
 import view.iconmaker.IconFontGenerator;
-import view.iconmaker._Icon;
+import view.iconmaker.IconGenerator;
 import view.pupupsmessage.PupupMessages;
 import view.resize.Resize;
 import view.tools.Tools;
@@ -242,7 +242,7 @@ public class Home implements MouseListener, KeyListener, FocusListener {
     public static JTextField searchField = new JTextField(15);
 
     public static void editor() {
-        new Editor_section(null);
+        new EditorSection(null);
     }
 
     private static JPasswordField passwordField;
@@ -292,7 +292,7 @@ public class Home implements MouseListener, KeyListener, FocusListener {
                     }
                 } else if (e.getSource() == db) {
                     try {
-                        new DataBase_section().dataBases();
+                        new DatabaseSection().dataBases();
                     } catch (SQLException e1) {
                         new MySQLConnection().setDbName("");
                     }
@@ -421,7 +421,7 @@ public class Home implements MouseListener, KeyListener, FocusListener {
             }
             case 3 -> {
                 new PupupMessages().message("The default password is \"eddo\", until this functionality is completed!",
-                        new _Icon().messageIcon());
+                        new IconGenerator().messageIcon());
                 unlock = false;
                 lock = 0;
                 passwordField.setText("");

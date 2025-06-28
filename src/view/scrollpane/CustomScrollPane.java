@@ -4,11 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class Scroll_pane {
+public class CustomScrollPane {
 
-    JScrollPane scrollPane;
+    private final JScrollPane scrollPane;
 
-    public Scroll_pane(Component component) {
+    public CustomScrollPane(Component component) {
         scrollPane = new JScrollPane(component, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setViewportBorder(null);

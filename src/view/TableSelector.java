@@ -122,9 +122,9 @@ public class TableSelector {
         } catch (SQLException e) {
             //	new PupupMessages().message(e.getMessage(), new _Icon().exceptionIcon());
             try {
-                new DataBase_section().dataBases();
+                new DatabaseSection().dataBases();
             } catch (SQLException e1) {
-                new Editor_section(e1);
+                new EditorSection(e1);
             }
         } catch (Exception e) {
             new LoadData().tablesSectionLoader();

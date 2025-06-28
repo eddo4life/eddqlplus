@@ -4,7 +4,7 @@ import dao.mysql.MySQLDaoOperation;
 import dao.oracle.OracleDaoOperation;
 import model.InsertList;
 import view.Insertion;
-import view.iconmaker._Icon;
+import view.iconmaker.IconGenerator;
 import view.pupupsmessage.PupupMessages;
 
 import javax.swing.table.AbstractTableModel;
@@ -59,7 +59,7 @@ public class InsertData extends AbstractTableModel {
             columnClass = columnC;
 
         } catch (SQLException e) {
-            new PupupMessages().message(e.getMessage(), new _Icon().exceptionIcon());
+            new PupupMessages().message(e.getMessage(), new IconGenerator().exceptionIcon());
         }
         return columnClass;
     }

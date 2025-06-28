@@ -1,11 +1,11 @@
 package view;
 
-import controller.sql.modification.Modification_controller_sql;
+import controller.sql.modification.ModificationControllerSQL;
 import dao.DBMS;
 import dao.mysql.MySQLDaoOperation;
 import dao.oracle.OracleDaoOperation;
 import eddql.launch.LoadData;
-import view.iconmaker._Icon;
+import view.iconmaker.IconGenerator;
 import view.pupupsmessage.PupupMessages;
 
 import javax.swing.*;
@@ -73,16 +73,16 @@ public class Modification {
         renameButton.addActionListener((e) -> {
             String newName = field.getText();
             if (newName.isBlank()) {
-                new PupupMessages().message("Please write a new name", new _Icon().messageIcon());
+                new PupupMessages().message("Please write a new name", new IconGenerator().messageIcon());
             } else {
-                String res = new Modification_controller_sql().renameTable(tableName, newName);
+                String res = new ModificationControllerSQL().renameTable(tableName, newName);
                 if (res.isEmpty()) {
-                    new PupupMessages().message("Process completed", new _Icon().successIcon());
+                    new PupupMessages().message("Process completed", new IconGenerator().successIcon());
                     new LoadData().tablesSectionLoader();
                     this.tableName = newName;
                     refreshTable();
                 } else {
-                    new PupupMessages().message(res, new _Icon().exceptionIcon());
+                    new PupupMessages().message(res, new IconGenerator().exceptionIcon());
                 }
             }
         });
@@ -103,10 +103,10 @@ public class Modification {
                     new OracleDaoOperation().dropTable(tableName);
                 }
 
-                new PupupMessages().message(tableName + " deleted successfully!", new _Icon().successIcon());
+                new PupupMessages().message(tableName + " deleted successfully!", new IconGenerator().successIcon());
                 new TablesSections().options();
             } catch (SQLException e1) {
-                new PupupMessages().message(e1.getMessage(), new _Icon().exceptionIcon());
+                new PupupMessages().message(e1.getMessage(), new IconGenerator().exceptionIcon());
             }
             new TablesSections().options();
         }
@@ -128,13 +128,13 @@ public class Modification {
 
                 if (z > 0) {
                     new PupupMessages().message(z + " row(s) of " + tableName + " cleared successfully",
-                            new _Icon().successIcon());
+                            new IconGenerator().successIcon());
                     refreshTable();
                 } else {
-                    new PupupMessages().message(z + " row affected, process completed! ", new _Icon().messageIcon());
+                    new PupupMessages().message(z + " row affected, process completed! ", new IconGenerator().messageIcon());
                 }
             } catch (SQLException e1) {
-                new PupupMessages().message(e1.getMessage(), new _Icon().exceptionIcon());
+                new PupupMessages().message(e1.getMessage(), new IconGenerator().exceptionIcon());
             }
             revalidate();
         }
@@ -160,16 +160,16 @@ public class Modification {
 
                 select = nameField.getText() + " " + select;
 
-                String res = new Modification_controller_sql().addColumn(select, tableName);
+                String res = new ModificationControllerSQL().addColumn(select, tableName);
                 if (res.isEmpty()) {
-                    new PupupMessages().message("Process completed", new _Icon().successIcon());
+                    new PupupMessages().message("Process completed", new IconGenerator().successIcon());
                     new LoadData().tablesSectionLoader();
                     refreshTable();
                 } else {
-                    new PupupMessages().message(res, new _Icon().exceptionIcon());
+                    new PupupMessages().message(res, new IconGenerator().exceptionIcon());
                 }
             } else {
-                new PupupMessages().message("Please name your column", new _Icon().messageIcon());
+                new PupupMessages().message("Please name your column", new IconGenerator().messageIcon());
             }
         });
 
@@ -192,16 +192,16 @@ public class Modification {
         renameButton.addActionListener((e) -> {
             String newName = newNameField.getText();
             if (newName.isBlank()) {
-                new PupupMessages().message("Please write a new name", new _Icon().messageIcon());
+                new PupupMessages().message("Please write a new name", new IconGenerator().messageIcon());
             } else {
-                String res = new Modification_controller_sql().renameColumn(tableName,
+                String res = new ModificationControllerSQL().renameColumn(tableName,
                         Objects.requireNonNull(comboBox.getSelectedItem()).toString(), newName);
                 if (res.isEmpty()) {
-                    new PupupMessages().message("Renamed completed", new _Icon().successIcon());
+                    new PupupMessages().message("Renamed completed", new IconGenerator().successIcon());
                     new LoadData().tablesSectionLoader();
                     refreshTable();
                 } else {
-                    new PupupMessages().message(res, new _Icon().exceptionIcon());
+                    new PupupMessages().message(res, new IconGenerator().exceptionIcon());
                 }
             }
         });
@@ -225,16 +225,16 @@ public class Modification {
             new PupupMessages().confirm("Would you really like to drop " + x + "?");
             int y = PupupMessages.getAction;
             if (y == 1) {
-                String rep = new Modification_controller_sql().dropColumn(tableName, x);
+                String rep = new ModificationControllerSQL().dropColumn(tableName, x);
                 if (rep.isEmpty()) {
-                    new PupupMessages().message("Process Completed", new _Icon().successIcon());
+                    new PupupMessages().message("Process Completed", new IconGenerator().successIcon());
                     new LoadData().tablesSectionLoader();
                     refreshTable();
                 } else {
-                    new PupupMessages().message(rep, new _Icon().exceptionIcon());
+                    new PupupMessages().message(rep, new IconGenerator().exceptionIcon());
                 }
             } else {
-                new PupupMessages().message("Process canceled", new _Icon().messageIcon());
+                new PupupMessages().message("Process canceled", new IconGenerator().messageIcon());
             }
         });
 
@@ -267,27 +267,27 @@ public class Modification {
                 field.setText("");
 
             } else {
-                new PupupMessages().message("Please specify a condition", new _Icon().messageIcon());
+                new PupupMessages().message("Please specify a condition", new IconGenerator().messageIcon());
             }
 
         });
 
         deleteButton.addActionListener((e) -> {
             if (!buildQuery.isBlank()) {
-                String rep = new Modification_controller_sql().delete_row(tableName, buildQuery);
+                String rep = new ModificationControllerSQL().delete_row(tableName, buildQuery);
 
                 if (rep.equals("s")) {
-                    new PupupMessages().message("Deletion successful!", new _Icon().successIcon());
+                    new PupupMessages().message("Deletion successful!", new IconGenerator().successIcon());
                     new LoadData().tablesSectionLoader();
                     refreshTable();
                 } else if (rep.equals("f")) {
-                    new PupupMessages().message("0 row(s) affected", new _Icon().failedIcon());
+                    new PupupMessages().message("0 row(s) affected", new IconGenerator().failedIcon());
                 } else {
-                    new PupupMessages().message(rep, new _Icon().exceptionIcon());
+                    new PupupMessages().message(rep, new IconGenerator().exceptionIcon());
                 }
 
             } else {
-                new PupupMessages().message("Incorrect condition! " + buildQuery, new _Icon().failedIcon());
+                new PupupMessages().message("Incorrect condition! " + buildQuery, new IconGenerator().failedIcon());
             }
         });
 
@@ -346,13 +346,13 @@ public class Modification {
                         // //comboBox2 Column constraint applied from
                         triggerUpdate(val_field, comboBox, constBox, comboBox2, const_field);
                     } else {
-                        new PupupMessages().message("The condition is missing!", new _Icon().messageIcon());
+                        new PupupMessages().message("The condition is missing!", new IconGenerator().messageIcon());
                     }
                 } else {
                     triggerUpdate(val_field, comboBox, constBox, comboBox2, const_field);
                 }
             } else {
-                new PupupMessages().message("Please set a value!", new _Icon().messageIcon());
+                new PupupMessages().message("Please set a value!", new IconGenerator().messageIcon());
             }
         });
 
@@ -360,10 +360,10 @@ public class Modification {
     }
 
     private void triggerUpdate(JTextField val_field, JComboBox<String> comboBox, JCheckBox constBox, JComboBox<String> comboBox2, JTextField const_field) {
-        String rep = new Modification_controller_sql().updating(val_field.getText(),
+        String rep = new ModificationControllerSQL().updating(val_field.getText(),
                 Objects.requireNonNull(comboBox.getSelectedItem()).toString(), const_field.getText(),
                 Objects.requireNonNull(comboBox2.getSelectedItem()).toString(), constBox.isSelected(), tableName);
-        new PupupMessages().message(rep, new _Icon().messageIcon());
+        new PupupMessages().message(rep, new IconGenerator().messageIcon());
         new LoadData().tablesSectionLoader();
         refreshTable();
     }

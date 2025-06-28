@@ -1,6 +1,6 @@
 package icon;
 
-import view.iconmaker._Icon;
+import view.iconmaker.IconGenerator;
 import view.pupupsmessage.PupupMessages;
 
 import javax.imageio.ImageIO;
@@ -22,7 +22,7 @@ public class BufferedImageIO {
         } catch (Exception e) {
             new PupupMessages().message(
                     "Error system, some resources couldn't be loaded, restart the app or contact assistance.",
-                    new _Icon().exceptionIcon());
+                    new IconGenerator().exceptionIcon());
             return new ImageIcon(new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB));
 
         }

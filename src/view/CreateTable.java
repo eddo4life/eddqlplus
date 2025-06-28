@@ -9,7 +9,7 @@ import dao.oracle.OracleDaoOperation;
 import eddql.launch.LoadData;
 import model.CreateTableModel;
 import model.ShowTablesModel;
-import view.iconmaker._Icon;
+import view.iconmaker.IconGenerator;
 import view.pupupsmessage.PupupMessages;
 import view.resize.Resize;
 import view.tables.Custom;
@@ -258,7 +258,7 @@ public class CreateTable implements MouseListener, KeyListener {
 
                         int rep = JOptionPane.showOptionDialog(null, "do you want to delete or update?",
                                 "delete or update", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE,
-                                new _Icon().questionIcon(), reps, 0);
+                                new IconGenerator().questionIcon(), reps, 0);
                         if (rep == 0) {
                             for (CreateTableModel cm : dataLine) {
                                 if (cm.getName().equals(id)) {
@@ -506,22 +506,22 @@ public class CreateTable implements MouseListener, KeyListener {
                     }
 
                     if (exec >= 0) {
-                        new PupupMessages().message("Created successfully", new _Icon().successIcon());
+                        new PupupMessages().message("Created successfully", new IconGenerator().successIcon());
                         // toUpdateTableList
                         new LoadData().tablesSectionLoader();
                         new TablesSections().options();
                     } else {
-                        new PupupMessages().message("Process failed", new _Icon().failedIcon());
+                        new PupupMessages().message("Process failed", new IconGenerator().failedIcon());
                     }
                 } catch (SQLException e1) {
                     new PupupMessages().message("Operation failed, please consider giving proper name to your fields",
-                            new _Icon().exceptionIcon());
+                            new IconGenerator().exceptionIcon());
                 }
 
                 dataLine.clear();
 
             } else {
-                new PupupMessages().message("Please make sure adding a column", new _Icon().failedIcon());
+                new PupupMessages().message("Please make sure adding a column", new IconGenerator().failedIcon());
             }
         });
 
@@ -599,7 +599,7 @@ public class CreateTable implements MouseListener, KeyListener {
             String item = (String) acBox.getSelectedItem();
             if (item != null) {
                 if (acBox.getSelectedIndex() > 3) {
-                    new PupupMessages().message(item + " constraint is unavailable", new _Icon().messageIcon());
+                    new PupupMessages().message(item + " constraint is unavailable", new IconGenerator().messageIcon());
                 } else {
                     if (item.equals("Foreign key")) {
                         /*
@@ -664,7 +664,7 @@ public class CreateTable implements MouseListener, KeyListener {
         addButton.addActionListener(e -> {
 
             if (constArrayList.contains("Foreign key") && ctm.getReferences() == null) {
-                new PupupMessages().message("Please select a reference!", new _Icon().messageIcon());
+                new PupupMessages().message("Please select a reference!", new IconGenerator().messageIcon());
             } else {
                 if (!isColumnExist(columnNameField.getText())) {
                     if (toModify != null) {
@@ -689,7 +689,7 @@ public class CreateTable implements MouseListener, KeyListener {
                     ctm = new CreateTableModel();
                     constArrayList.clear();
                 } else {
-                    new PupupMessages().message("two columns can not have same name!", new _Icon().exceptionIcon());
+                    new PupupMessages().message("two columns can not have same name!", new IconGenerator().exceptionIcon());
                 }
             }
         });
