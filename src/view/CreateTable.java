@@ -269,7 +269,7 @@ public class CreateTable implements MouseListener, KeyListener {
 
                         } else if (rep == 1) {
                             columnNameField.setText(id);
-                            _data.setSelectedItem(String.valueOf(table.getValueAt(table.getSelectedRow(), 1)));
+                            comboBoxDataType.setSelectedItem(String.valueOf(table.getValueAt(table.getSelectedRow(), 1)));
                             String limit = String.valueOf(table.getValueAt(table.getSelectedRow(), 2));
                             limitTextField.setText(limit);
                             if (limitTextField.getText().equals("null")) {
@@ -529,10 +529,7 @@ public class CreateTable implements MouseListener, KeyListener {
         exitButton.setPreferredSize(new Dimension(70, 30));
         exitButton.setFocusable(false);
 
-        exitButton.addActionListener((ActionEvent e) -> {
-            new TablesSections().options();
-
-        });
+        exitButton.addActionListener((ActionEvent e) -> new TablesSections().options());
         exitButton.setForeground(Color.red);
 
         p = new JPanel();
@@ -560,7 +557,7 @@ public class CreateTable implements MouseListener, KeyListener {
      *
      */
 
-    private JComboBox<String> _data;
+    private JComboBox<String> comboBoxDataType;
     private JLabel limitLabel;
 
     boolean internAction = false;
@@ -577,9 +574,9 @@ public class CreateTable implements MouseListener, KeyListener {
         JLabel dataTypeLabel = new JLabel("Data type");
         JLabel addC = new JLabel("Add constraints");
         String[] dataTypeArray = {"int", "varchar", "real", "blob", "decimal", "date"};
-        _data = new JComboBox<String>(dataTypeArray);
-        _data.addActionListener((ActionEvent e) -> {
-            ctm.setDatatype(Objects.requireNonNull(_data.getSelectedItem()).toString());
+        comboBoxDataType = new JComboBox<String>(dataTypeArray);
+        comboBoxDataType.addActionListener((ActionEvent e) -> {
+            ctm.setDatatype(Objects.requireNonNull(comboBoxDataType.getSelectedItem()).toString());
             limitTextField.setEnabled(hasLimit(ctm.getDatatype()));
             if (!EddoLibrary.isNumber(limitTextField.getText())) {
                 limitTextField.setForeground(Color.red);
@@ -628,7 +625,7 @@ public class CreateTable implements MouseListener, KeyListener {
         eastPanel.add(cname);
         eastPanel.add(columnNameField);
         eastPanel.add(dataTypeLabel);
-        eastPanel.add(_data);
+        eastPanel.add(comboBoxDataType);
         eastPanel.add(limitLabel);
         eastPanel.add(limitTextField);
         eastPanel.add(addC);
@@ -725,11 +722,11 @@ public class CreateTable implements MouseListener, KeyListener {
         southPanel.setLayout(new BorderLayout());
         alternativePanel = new JPanel();
         alternativePanel.setLayout(new FlowLayout());
-        tables = new JComboBox<String>(tabs);
+        tables = new JComboBox<>(tabs);
         tables.addActionListener((ActionEvent e) -> {
-            tabSelect = tables.getSelectedItem().toString();
+            tabSelect = Objects.requireNonNull(tables.getSelectedItem()).toString();
             try {
-                columns = new JComboBox<String>(new MySQLDaoOperation().selectColumn(tabSelect));
+                columns = new JComboBox<>(new MySQLDaoOperation().selectColumn(tabSelect));
                 ctm.setTabSelectForReference(tabSelect);
                 if (remove) {
                     alternativePanel.removeAll();
