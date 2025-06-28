@@ -28,7 +28,7 @@ import java.util.Objects;
 public class CreateTable implements MouseListener, KeyListener {
     public String database;
     private String name;
-    private JComboBox<String> rcBox;
+    private JComboBox<String> removeConstraintComboBox;
     private JButton okButton, exitButton, addButton;// ,searchNextButton;
     private JPanel mainPanel;
     private JLabel tableName;
@@ -40,7 +40,7 @@ public class CreateTable implements MouseListener, KeyListener {
     ArrayList<String> listNames = new ArrayList<>();
     JTextField tableNameField, columnNameField;
     ArrayList<String> dataTable = new ArrayList<>();
-    ArrayList<String> constArrayList = new ArrayList<String>();
+    ArrayList<String> constraintArrayList = new ArrayList<String>();
     ArrayList<CreateTableModel> dataLine = new ArrayList<>();
     CreateTableModel ctm = new CreateTableModel();
 
@@ -54,7 +54,7 @@ public class CreateTable implements MouseListener, KeyListener {
      */
 
     public void initialize() {
-        constArrayList.clear();
+        constraintArrayList.clear();
 
         panel = new JPanel();
         panel.setLayout(new FlowLayout());
@@ -591,11 +591,11 @@ public class CreateTable implements MouseListener, KeyListener {
         eastPanel.add(okButton);
         eastPanel.add(exitButton);
         String[] constraints = {"Not null", "Unique", "Primary key", "Foreign key", "Check", "Default"};
-        JComboBox<String> acBox = new JComboBox<String>(constraints);
-        acBox.addActionListener((ActionEvent e) -> {
-            String item = (String) acBox.getSelectedItem();
+        JComboBox<String> constraintPickerComboBox = new JComboBox<String>(constraints);
+        constraintPickerComboBox.addActionListener((ActionEvent e) -> {
+            String item = (String) constraintPickerComboBox.getSelectedItem();
             if (item != null) {
-                if (acBox.getSelectedIndex() > 3) {
+                if (constraintPickerComboBox.getSelectedIndex() > 3) {
                     new PupupMessages().message(item + " constraint is unavailable", new IconGenerator().messageIcon());
                 } else {
                     if (item.equals("Foreign key")) {
@@ -604,7 +604,7 @@ public class CreateTable implements MouseListener, KeyListener {
                          * associated
                          */
                         if (tabs.length != 0) {
-                            if (!constArrayList.contains("Primary key")) {
+                            if (!constraintArrayList.contains("Primary key")) {
                                 constArrayList(item);
                                 foreignAssociated();
                             }
@@ -613,10 +613,10 @@ public class CreateTable implements MouseListener, KeyListener {
                         constArrayList(item);
                     }
                     internAction = true;
-                    rcBox.removeAllItems();
+                    removeConstraintComboBox.removeAllItems();
                     for (int i = 0; i < constraintArray().length; i++) {
                         internAction = true;
-                        rcBox.addItem(constraintArray()[i]);
+                        removeConstraintComboBox.addItem(constraintArray()[i]);
                     }
                     internAction = false;
                 }
@@ -629,19 +629,19 @@ public class CreateTable implements MouseListener, KeyListener {
         eastPanel.add(limitLabel);
         eastPanel.add(limitTextField);
         eastPanel.add(addC);
-        eastPanel.add(acBox);
+        eastPanel.add(constraintPickerComboBox);
         JLabel remC = new JLabel("Remove constraints");
         eastPanel.add(remC);
         JPanel rcPanel = new JPanel();
         rcPanel.setLayout(new GridBagLayout());
-        rcBox = new JComboBox<String>(constraintArray());
-        rcBox.addActionListener((ActionEvent e) -> {
-            String constraint = (String) rcBox.getSelectedItem();
+        removeConstraintComboBox = new JComboBox<>(constraintArray());
+        removeConstraintComboBox.addActionListener((ActionEvent e) -> {
+            String constraint = (String) removeConstraintComboBox.getSelectedItem();
             if (!internAction) {
-                removeC(constraint);
-                rcBox.removeAllItems();
+                removeConstraint(constraint);
+                removeConstraintComboBox.removeAllItems();
                 for (int i = 0; i < constraintArray().length; i++) {
-                    rcBox.addItem(constraintArray()[i]);
+                    removeConstraintComboBox.addItem(constraintArray()[i]);
                 }
                 assert constraint != null;
                 if (constraint.equals("Foreign key")) {
@@ -655,12 +655,12 @@ public class CreateTable implements MouseListener, KeyListener {
             internAction = false;
         });
         // rcPanel.add(rcBox);
-        eastPanel.add(rcBox);
+        eastPanel.add(removeConstraintComboBox);
         addButton = new JButton("Add column");
         addButton.setEnabled(false);
         addButton.addActionListener(e -> {
 
-            if (constArrayList.contains("Foreign key") && ctm.getReferences() == null) {
+            if (constraintArrayList.contains("Foreign key") && ctm.getReferences() == null) {
                 new PupupMessages().message("Please select a reference!", new IconGenerator().messageIcon());
             } else {
                 if (!isColumnExist(columnNameField.getText())) {
@@ -684,7 +684,7 @@ public class CreateTable implements MouseListener, KeyListener {
                     showTables();
                     panelBuilder.setVisible(true);
                     ctm = new CreateTableModel();
-                    constArrayList.clear();
+                    constraintArrayList.clear();
                 } else {
                     new PupupMessages().message("two columns can not have same name!", new IconGenerator().exceptionIcon());
                 }
@@ -796,7 +796,7 @@ public class CreateTable implements MouseListener, KeyListener {
         boolean add = true;
         boolean isPrimary = constraint.equalsIgnoreCase("Primary key");
         boolean isForeign = constraint.equalsIgnoreCase("Foreign key");
-        for (String data : constArrayList) {
+        for (String data : constraintArrayList) {
             if (constraint.equals(data)) {
                 add = false;
             }
@@ -811,7 +811,7 @@ public class CreateTable implements MouseListener, KeyListener {
             }
         }
         if (add) {
-            constArrayList.add(constraint);
+            constraintArrayList.add(constraint);
         }
     }
 
@@ -821,11 +821,11 @@ public class CreateTable implements MouseListener, KeyListener {
      *
      */
 
-    private void removeC(String data) {
-        int i = constArrayList.size() - 1;
+    private void removeConstraint(String constraint) {
+        int i = constraintArrayList.size() - 1;
         while (i >= 0) {
-            if (data.equals(constArrayList.get(i))) {
-                constArrayList.remove(i);
+            if (constraint.equals(constraintArrayList.get(i))) {
+                constraintArrayList.remove(i);
             }
             i--;
         }
@@ -848,11 +848,11 @@ public class CreateTable implements MouseListener, KeyListener {
      */
 
     public String[] constraintArray() {
-        int j = constArrayList.size();
+        int j = constraintArrayList.size();
         String[] r = new String[j];
         if (j > 0) {
             for (int i = 0; i < r.length; i++) {
-                r[i] = constArrayList.get(i);
+                r[i] = constraintArrayList.get(i);
             }
         }
 
@@ -903,8 +903,8 @@ public class CreateTable implements MouseListener, KeyListener {
 
     public String constraintAnalysis() {
         StringBuilder line = new StringBuilder();
-        if (!constArrayList.isEmpty()) {
-            for (String c : constArrayList) {
+        if (!constraintArrayList.isEmpty()) {
+            for (String c : constraintArrayList) {
                 line.append(" ").append(c);
             }
         }
