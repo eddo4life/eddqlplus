@@ -822,14 +822,9 @@ public class CreateTable implements MouseListener, KeyListener {
      */
 
     private void removeConstraint(String constraint) {
-        int i = constraintArrayList.size() - 1;
-        while (i >= 0) {
-            if (constraint.equals(constraintArrayList.get(i))) {
-                constraintArrayList.remove(i);
-            }
-            i--;
-        }
+        constraintArrayList.removeIf(constraint::equals);
     }
+
 
     /*
      *
