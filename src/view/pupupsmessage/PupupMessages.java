@@ -100,18 +100,7 @@ public class PupupMessages extends JDialog {
         JLabel label = new JLabel();
         label.setIcon(new BufferedImageIO().getIcon(25, 25, "question.png"));
         northPanel.add(label);
-        bgColor(northPanel);
-        JPanel borderPanel = new JPanel();
-        borderPanel.setLayout(new BorderLayout());
-        borderPanel.setBorder(BorderFactory.createCompoundBorder(new EmptyBorder(10, 10, 10, 10), new EtchedBorder()));
-        borderPanel.add(northPanel, BorderLayout.NORTH);
-        borderPanel.add(centerPanel, BorderLayout.CENTER);
-        borderPanel.add(southPanel, BorderLayout.SOUTH);
-        this.add(borderPanel);
-
-        this.revalidate();
-        this.repaint();
-        this.setVisible(true);
+        setupLayout();
 
     }
 
@@ -158,6 +147,11 @@ public class PupupMessages extends JDialog {
         southPanel.add(ok);
         bgColor(centerPanel);
         bgColor(southPanel);
+        setupLayout();
+
+    }
+
+    private void setupLayout() {
         bgColor(northPanel);
 
         JPanel borderPanel = new JPanel();
@@ -170,7 +164,6 @@ public class PupupMessages extends JDialog {
         this.revalidate();
         this.repaint();
         this.setVisible(true);
-
     }
 
 
