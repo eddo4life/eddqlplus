@@ -638,12 +638,12 @@ public class CreateTable implements MouseListener, KeyListener {
         removeConstraintComboBox.addActionListener((ActionEvent e) -> {
             String constraint = (String) removeConstraintComboBox.getSelectedItem();
             if (!internAction) {
+                assert constraint != null;
                 removeConstraint(constraint);
                 removeConstraintComboBox.removeAllItems();
                 for (int i = 0; i < getConstraintArray().length; i++) {
                     removeConstraintComboBox.addItem(getConstraintArray()[i]);
                 }
-                assert constraint != null;
                 if (constraint.equals("Foreign key")) {
                     if (southPanel != null) {
                         p.remove(southPanel);
@@ -712,7 +712,7 @@ public class CreateTable implements MouseListener, KeyListener {
 
     private JComboBox<String> columns;
 
-    void foreignAssociated() {
+    private void foreignAssociated() {
         remove = false;
         c2 = new GridBagConstraints();
         c2.insets = new Insets(5, 5, 5, 5);
