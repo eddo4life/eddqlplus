@@ -9,14 +9,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 
-public class PupupMessages extends JDialog {
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
-    JPanel northPanel, southPanel, westPanel, eastPanel, centerPanel;
+public class PopupMessages extends JDialog {
 
-    public PupupMessages() {
+    private JPanel northPanel;
+    private JPanel southPanel;
+    private final JPanel westPanel;
+    private final JPanel eastPanel;
+    private final JPanel centerPanel;
+
+    public PopupMessages() {
         getAction = -2;
         this.setLayout(new BorderLayout());
         northPanel = new JPanel();
@@ -45,13 +46,7 @@ public class PupupMessages extends JDialog {
         this.setUndecorated(true);
         this.setResizable(false);
         this.setModal(true);
-        this.setDefaultCloseOperation(PupupMessages.DISPOSE_ON_CLOSE);
-    }
-
-    // ======================set bgColor
-
-    private void bgColor(JPanel panel) {
-        //	panel.setBackground(Color.lightGray);
+        this.setDefaultCloseOperation(PopupMessages.DISPOSE_ON_CLOSE);
     }
 
     // ========================================================---------
@@ -66,7 +61,6 @@ public class PupupMessages extends JDialog {
         mess = new JLabel(message);
         centerPanel.setLayout(new GridBagLayout());
         centerPanel.add(mess);
-        bgColor(centerPanel);
         this.setTitle("EddQL");
         JButton cancel = createButton("Cancel");
         cancel.addActionListener((ActionEvent e) -> {
@@ -94,7 +88,6 @@ public class PupupMessages extends JDialog {
         southPanel.add(yes);
         southPanel.add(no);
         southPanel.add(cancel);
-        bgColor(southPanel);
         northPanel = new JPanel();
         northPanel.setLayout(new GridBagLayout());
         JLabel label = new JLabel();
@@ -124,8 +117,6 @@ public class PupupMessages extends JDialog {
                 centerPanel.add(mess, BorderLayout.CENTER);
                 westPanel.setPreferredSize(new Dimension(11, 10));
                 eastPanel.setPreferredSize(new Dimension(11, 10));
-                //	westPanel.setBackground(Color.white);
-                //eastPanel.setBackground(Color.white);
             } else {
                 centerPanel.setLayout(new GridBagLayout());
                 mess.setText(message);
@@ -145,15 +136,11 @@ public class PupupMessages extends JDialog {
         ok.setBounds((this.getWidth() / 2) - 55, 3, 80, 25);
         southPanel.setPreferredSize(new Dimension(10, 31));
         southPanel.add(ok);
-        bgColor(centerPanel);
-        bgColor(southPanel);
         setupLayout();
 
     }
 
     private void setupLayout() {
-        bgColor(northPanel);
-
         JPanel borderPanel = new JPanel();
         borderPanel.setLayout(new BorderLayout());
         borderPanel.setBorder(BorderFactory.createCompoundBorder(new EmptyBorder(10, 10, 10, 10), new EtchedBorder()));

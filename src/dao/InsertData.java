@@ -5,7 +5,7 @@ import dao.oracle.OracleDaoOperation;
 import model.InsertList;
 import view.Insertion;
 import view.iconmaker.IconGenerator;
-import view.pupupsmessage.PupupMessages;
+import view.pupupsmessage.PopupMessages;
 
 import javax.swing.table.AbstractTableModel;
 import java.sql.SQLException;
@@ -59,7 +59,7 @@ public class InsertData extends AbstractTableModel {
             columnClass = columnC;
 
         } catch (SQLException e) {
-            new PupupMessages().message(e.getMessage(), new IconGenerator().exceptionIcon());
+            new PopupMessages().message(e.getMessage(), new IconGenerator().exceptionIcon());
         }
         return columnClass;
     }

@@ -9,7 +9,7 @@ import model.ConnectingToolsModel;
 import view.button.hover.ButtonHover;
 import view.iconmaker.IconFontGenerator;
 import view.iconmaker.IconGenerator;
-import view.pupupsmessage.PupupMessages;
+import view.pupupsmessage.PopupMessages;
 import view.resize.Resize;
 import view.tools.Tools;
 
@@ -420,7 +420,7 @@ public class Home implements MouseListener, KeyListener, FocusListener {
                 restart();
             }
             case 3 -> {
-                new PupupMessages().message("The default password is \"eddo\", until this functionality is completed!",
+                new PopupMessages().message("The default password is \"eddo\", until this functionality is completed!",
                         new IconGenerator().messageIcon());
                 unlock = false;
                 lock = 0;

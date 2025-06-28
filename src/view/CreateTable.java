@@ -10,7 +10,7 @@ import eddql.launch.LoadData;
 import model.CreateTableModel;
 import model.ShowTablesModel;
 import view.iconmaker.IconGenerator;
-import view.pupupsmessage.PupupMessages;
+import view.pupupsmessage.PopupMessages;
 import view.resize.Resize;
 import view.tables.Custom;
 import view.tables.JTableUtilities;
@@ -506,22 +506,22 @@ public class CreateTable implements MouseListener, KeyListener {
                     }
 
                     if (exec >= 0) {
-                        new PupupMessages().message("Created successfully", new IconGenerator().successIcon());
+                        new PopupMessages().message("Created successfully", new IconGenerator().successIcon());
                         // toUpdateTableList
                         new LoadData().tablesSectionLoader();
                         new TablesSections().options();
                     } else {
-                        new PupupMessages().message("Process failed", new IconGenerator().failedIcon());
+                        new PopupMessages().message("Process failed", new IconGenerator().failedIcon());
                     }
                 } catch (SQLException e1) {
-                    new PupupMessages().message("Operation failed, please consider giving proper name to your fields",
+                    new PopupMessages().message("Operation failed, please consider giving proper name to your fields",
                             new IconGenerator().exceptionIcon());
                 }
 
                 dataLine.clear();
 
             } else {
-                new PupupMessages().message("Please make sure adding a column", new IconGenerator().failedIcon());
+                new PopupMessages().message("Please make sure adding a column", new IconGenerator().failedIcon());
             }
         });
 
@@ -596,7 +596,7 @@ public class CreateTable implements MouseListener, KeyListener {
             String item = (String) constraintPickerComboBox.getSelectedItem();
             if (item != null) {
                 if (constraintPickerComboBox.getSelectedIndex() > 3) {
-                    new PupupMessages().message(item + " constraint is unavailable", new IconGenerator().messageIcon());
+                    new PopupMessages().message(item + " constraint is unavailable", new IconGenerator().messageIcon());
                 } else {
                     if (item.equals("Foreign key")) {
                         /*
@@ -661,7 +661,7 @@ public class CreateTable implements MouseListener, KeyListener {
         addButton.addActionListener(e -> {
 
             if (constraintArrayList.contains("Foreign key") && ctm.getReferences() == null) {
-                new PupupMessages().message("Please select a reference!", new IconGenerator().messageIcon());
+                new PopupMessages().message("Please select a reference!", new IconGenerator().messageIcon());
             } else {
                 if (!isColumnExist(columnNameField.getText())) {
                     if (toModify != null) {
@@ -686,7 +686,7 @@ public class CreateTable implements MouseListener, KeyListener {
                     ctm = new CreateTableModel();
                     constraintArrayList.clear();
                 } else {
-                    new PupupMessages().message("two columns can not have same name!", new IconGenerator().exceptionIcon());
+                    new PopupMessages().message("two columns can not have same name!", new IconGenerator().exceptionIcon());
                 }
             }
         });
@@ -901,8 +901,8 @@ public class CreateTable implements MouseListener, KeyListener {
             for (CreateTableModel c : dataLine) {
                 if (c.getKey() != null) {
                     if (c.getKey().equals("Primary key")) {
-                        new PupupMessages().confirm("SQL table can't have two primary key, wanna update it?");
-                        if (PupupMessages.getAction == 1) {
+                        new PopupMessages().confirm("SQL table can't have two primary key, wanna update it?");
+                        if (PopupMessages.getAction == 1) {
                             ctm.setKey("Primary key");
                             c.setConstraint(c.getConstraint().replace("Primary key", ""));
                             c.setKey(null);

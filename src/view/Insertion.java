@@ -7,7 +7,7 @@ import dao.mysql.MySQLDaoOperation;
 import dao.oracle.OracleDaoOperation;
 import model.InsertList;
 import view.iconmaker.IconGenerator;
-import view.pupupsmessage.PupupMessages;
+import view.pupupsmessage.PopupMessages;
 import view.tables.Custom;
 import view.tables.JTableUtilities;
 
@@ -118,7 +118,7 @@ public class Insertion {
                 dataType = new OracleDaoOperation().getDataType(tabName);
             }
         } catch (Exception e) {
-            new PupupMessages().message(e.getMessage(), new IconGenerator().exceptionIcon());
+            new PopupMessages().message(e.getMessage(), new IconGenerator().exceptionIcon());
             new TablesSections().options();
         }
 
@@ -151,24 +151,24 @@ public class Insertion {
         JButton insert = new JButton("Insert");
         insert.setFocusable(false);
         insert.addActionListener((e) -> {
-            new PupupMessages().confirm("Did you hit enter to save all the data?");
-            if (PupupMessages.getAction == 1) {
+            new PopupMessages().confirm("Did you hit enter to save all the data?");
+            if (PopupMessages.getAction == 1) {
                 if (InsertList.list.contains("")) {
-                    new PupupMessages().confirm("Some value(s) are however null, wanna review the insertion?");
-                    if (PupupMessages.getAction == 0) {
+                    new PopupMessages().confirm("Some value(s) are however null, wanna review the insertion?");
+                    if (PopupMessages.getAction == 0) {
                         doIt();
-                    } else if (PupupMessages.getAction == -1) {
-                        new PupupMessages().message("Insertion canceled", new IconGenerator().messageIcon());
+                    } else if (PopupMessages.getAction == -1) {
+                        new PopupMessages().message("Insertion canceled", new IconGenerator().messageIcon());
                     }
                 } else {
                     execute(InsertList.list);
                 }
-            } else if (PupupMessages.getAction == 0) {
-                new PupupMessages().confirm("Do you wanna continue with the process?");
-                if (PupupMessages.getAction == 1) {
+            } else if (PopupMessages.getAction == 0) {
+                new PopupMessages().confirm("Do you wanna continue with the process?");
+                if (PopupMessages.getAction == 1) {
                     doIt();
                 } else {
-                    new PupupMessages().message("Insertion canceled", new IconGenerator().messageIcon());
+                    new PopupMessages().message("Insertion canceled", new IconGenerator().messageIcon());
                 }
             }
 
@@ -200,11 +200,11 @@ public class Insertion {
                 exec = new OracleDaoOperation().insert(tabName, data);
             }
             if (exec > 0) {
-                new PupupMessages().message("Insertion successful!", new IconGenerator().successIcon());
+                new PopupMessages().message("Insertion successful!", new IconGenerator().successIcon());
                 selectTable(tabName);
             }
         } catch (SQLException e) {
-            new PupupMessages().message("Process failed! " + e.getMessage(), new IconGenerator().failedIcon());
+            new PopupMessages().message("Process failed! " + e.getMessage(), new IconGenerator().failedIcon());
         }
     }
 

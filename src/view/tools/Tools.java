@@ -10,7 +10,7 @@ import view.EditorSection;
 import view.Home;
 import view.iconmaker.IconFontGenerator;
 import view.iconmaker.IconGenerator;
-import view.pupupsmessage.PupupMessages;
+import view.pupupsmessage.PopupMessages;
 import view.scrollpane.CustomScrollPane;
 
 import javax.swing.*;
@@ -341,36 +341,36 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
             LoadData.wait = true;
             // test if datas are correct
             if (new MySQLConnection().getCon(m) != null) {
-                new PupupMessages().message("Data verified successfully", new IconGenerator().successIcon());
+                new PopupMessages().message("Data verified successfully", new IconGenerator().successIcon());
                 // test if a connection already existed
                 if (new SystemDatabaseTreatment().getDataConnection() != null) {
                     // message choice
-                    new PupupMessages().confirm("A connection is currently saved, do you really wanna override it?");
-                    if (PupupMessages.getAction == 1) {
+                    new PopupMessages().confirm("A connection is currently saved, do you really wanna override it?");
+                    if (PopupMessages.getAction == 1) {
                         if (new SystemDatabaseTreatment().updateConnection(m)) {
-                            new PupupMessages().message("Successfully switched", new IconGenerator().successIcon());
+                            new PopupMessages().message("Successfully switched", new IconGenerator().successIcon());
                         } else {
-                            new PupupMessages().message("Switch failed, try again", new IconGenerator().failedIcon());
+                            new PopupMessages().message("Switch failed, try again", new IconGenerator().failedIcon());
                         }
                     } else {
-                        new PupupMessages().message("Operation canceled!", new IconGenerator().messageIcon());
+                        new PopupMessages().message("Operation canceled!", new IconGenerator().messageIcon());
                     }
                 } else {
                     // insert
                     if (new SystemDatabaseTreatment().newMySQLConnection(m)) {
-                        new PupupMessages().message("Successfully connected", new IconGenerator().successIcon());
+                        new PopupMessages().message("Successfully connected", new IconGenerator().successIcon());
                     } else {
-                        new PupupMessages().message("Connection failed, try again", new IconGenerator().failedIcon());
+                        new PopupMessages().message("Connection failed, try again", new IconGenerator().failedIcon());
                     }
                 }
                 new LoadData().databaseSectionLoader();
                 Home.editor();
             } else {
-                new PupupMessages().message("Incorrect credentials, try again", new IconGenerator().failedIcon());
+                new PopupMessages().message("Incorrect credentials, try again", new IconGenerator().failedIcon());
             }
 
         } catch (SQLException e) {
-            new PupupMessages().message(e.getMessage(), new IconGenerator().failedIcon());
+            new PopupMessages().message(e.getMessage(), new IconGenerator().failedIcon());
         }
     }
 

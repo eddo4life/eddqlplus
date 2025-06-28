@@ -1,7 +1,7 @@
 package icon.tools;
 
 import view.iconmaker.IconGenerator;
-import view.pupupsmessage.PupupMessages;
+import view.pupupsmessage.PopupMessages;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -20,7 +20,7 @@ public class BufferedImageIO {
         try {
             bufferedImage = ImageIO.read(BufferedImageIO.class.getResource(name));
         } catch (IOException e) {
-            new PupupMessages().message(
+            new PopupMessages().message(
                     "Error system, some resources couldn't be loaded, restart the app or contact assistance.",
                     new IconGenerator().exceptionIcon());
             return null;
