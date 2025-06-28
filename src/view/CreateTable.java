@@ -614,9 +614,9 @@ public class CreateTable implements MouseListener, KeyListener {
                     }
                     internAction = true;
                     removeConstraintComboBox.removeAllItems();
-                    for (int i = 0; i < constraintArray().length; i++) {
+                    for (int i = 0; i < getConstraintArray().length; i++) {
                         internAction = true;
-                        removeConstraintComboBox.addItem(constraintArray()[i]);
+                        removeConstraintComboBox.addItem(getConstraintArray()[i]);
                     }
                     internAction = false;
                 }
@@ -634,14 +634,14 @@ public class CreateTable implements MouseListener, KeyListener {
         eastPanel.add(remC);
         JPanel rcPanel = new JPanel();
         rcPanel.setLayout(new GridBagLayout());
-        removeConstraintComboBox = new JComboBox<>(constraintArray());
+        removeConstraintComboBox = new JComboBox<>(getConstraintArray());
         removeConstraintComboBox.addActionListener((ActionEvent e) -> {
             String constraint = (String) removeConstraintComboBox.getSelectedItem();
             if (!internAction) {
                 removeConstraint(constraint);
                 removeConstraintComboBox.removeAllItems();
-                for (int i = 0; i < constraintArray().length; i++) {
-                    removeConstraintComboBox.addItem(constraintArray()[i]);
+                for (int i = 0; i < getConstraintArray().length; i++) {
+                    removeConstraintComboBox.addItem(getConstraintArray()[i]);
                 }
                 assert constraint != null;
                 if (constraint.equals("Foreign key")) {
@@ -847,7 +847,7 @@ public class CreateTable implements MouseListener, KeyListener {
      *
      */
 
-    public String[] constraintArray() {
+    public String[] getConstraintArray() {
         return constraintArrayList.toArray(new String[0]);
     }
 
