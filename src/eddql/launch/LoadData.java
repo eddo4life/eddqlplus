@@ -12,7 +12,6 @@ import view.Home;
 import javax.swing.*;
 import java.awt.*;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class LoadData {
@@ -109,10 +108,9 @@ public class LoadData {
     public void tablesSectionLoader() {
 
         tables = new ArrayList<>();
-        Connection con = null;
         if (wait)
             Home.frame.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-        try {
+        try (Connection con = dao.getNewConnection()) {
             ArrayList<String> showTables;
             if (DBMS.dbms == 1) {
                 showTables = new MySQLDaoOperation().showTables();
@@ -128,7 +126,6 @@ public class LoadData {
                 dteTime = new OracleDaoOperation().getDate();
             }
             int i = 0;
-            con = dao.getNewConnection();
             for (String data : showTables) {
                 ShowTablesModel tbm = new ShowTablesModel();
                 tbm.setNames(data);
@@ -157,14 +154,6 @@ public class LoadData {
         } catch (Exception e) {
             e.printStackTrace();
             exit = true;
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 
