@@ -485,7 +485,7 @@ public class CreateTable implements MouseListener, KeyListener {
      */
 
 
-    public static JPanel p;
+    private JPanel p;
 
     public void create() {
         Home.content.remove(panel);

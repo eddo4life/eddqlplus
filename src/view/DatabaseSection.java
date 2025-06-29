@@ -21,11 +21,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-//color static from the class background an stuff...
-
 public class DatabaseSection {
-    // theme for panels
-
     private ArrayList<String> names = new ArrayList<>();
     private JTextField dbNameField;
     private JPanel mainPanel;
@@ -369,12 +365,10 @@ public class DatabaseSection {
      *
      */
 
-    JLabel msgLabel = new JLabel();
-
-    Timer timer = new Timer();
+   private final JLabel msgLabel = new JLabel();
 
     public void timer() {
-        timer = new Timer();
+        Timer timer = new Timer();
         timer.schedule(new TimerTask() {
 
             int i = 0;
