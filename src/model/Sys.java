@@ -2,8 +2,8 @@ package model;
 
 public class Sys {
 
-    int look, systemColor, editorColor;
-    String customForeground;
+    private int look, systemColor, editorColor;
+    private String customForeground;
 
     public String getCustomForeground() {
         return customForeground;

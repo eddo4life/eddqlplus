@@ -2,8 +2,8 @@ package model;
 
 public class ShowTablesModel {
 
-    String names, date, time;
-    int rowCount, columnCount;
+    private String names, date, time;
+    private int rowCount, columnCount;
 
     public ShowTablesModel() {
         super();

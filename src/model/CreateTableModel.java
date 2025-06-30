@@ -2,8 +2,8 @@ package model;
 
 public class CreateTableModel {
 
-    String name, datatype = "INT", limit, constraint, references;
-    String key, constraintAff, tabSelectForReference;
+    private String name, datatype = "INT", limit, constraint, references;
+    private String key, constraintAff, tabSelectForReference;
 
     public String getTabSelectForReference() {
         return tabSelectForReference;

@@ -2,8 +2,8 @@ package model;
 
 public class DataBaseModel {
 
-    String name, oldestTab, oldestTabTime, latestTab, latestTabTime;
-    int tablesCount;
+    private String name, oldestTab, oldestTabTime, latestTab, latestTabTime;
+    private int tablesCount;
 
     public DataBaseModel() {
     }
