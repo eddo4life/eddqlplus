@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class FontEditor {
 
-    Font font = new Font("utf-8", 0, 17);
+    private Font font = new Font("utf-8", Font.PLAIN, 17);
 
     public FontEditor() {
     }
