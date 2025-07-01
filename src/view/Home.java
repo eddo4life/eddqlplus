@@ -283,7 +283,7 @@ public class Home implements MouseListener, KeyListener, FocusListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         setComponent(e.getComponent());
-        if (Tools.ct != null) {
+        if (Tools.connectingToolsModel != null) {
             if (true) {
                 if (e.getSource() == tablesSections) {
                     try {
@@ -301,7 +301,7 @@ public class Home implements MouseListener, KeyListener, FocusListener {
                 } else if (e.getSource() == home) {
                     editor();
                 } else if (e.getSource() == tools) {
-                    new Tools().menu();
+                    new Tools().showMenu();
                 } else if (e.getSource() == logout) {
                     act(0);
                 } else if (e.getSource() == refresh) {

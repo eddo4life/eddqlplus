@@ -35,7 +35,7 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
         return button;
     }
 
-    public void menu() {
+    public void showMenu() {
         connectionLabel = getButton("Connection");
         displayLabel = getButton("Display");
         securityLabel = getButton("Security");
@@ -134,7 +134,7 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
         closeJLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                menu();
+                showMenu();
             }
         });
         northPanel.add(closeJLabel, BorderLayout.EAST);
@@ -474,7 +474,7 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
      *
      */
 
-    public static ConnectingToolsModel ct = new ConnectingToolsModel();
+    public static ConnectingToolsModel connectingToolsModel = new ConnectingToolsModel();
 
     private final JPanel menuPanel = new JPanel();
     private JButton connectionLabel, displayLabel, securityLabel, helpLabel, rulesLabel, aboutLabel, editorLabel;
