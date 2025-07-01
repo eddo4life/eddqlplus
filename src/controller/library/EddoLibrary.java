@@ -16,11 +16,12 @@ public class EddoLibrary {
     public EddoLibrary() {
     }
 
-    static public boolean isNumber(String txt) {
+    public static boolean isNumber(String txt) {
+        if (txt == null) return false;
         try {
             Integer.parseInt(txt);
             return true;
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             return false;
         }
     }
