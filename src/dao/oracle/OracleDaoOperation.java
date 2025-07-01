@@ -8,6 +8,9 @@ import java.util.ArrayList;
 
 public class OracleDaoOperation {
 
+    private PreparedStatement pst;
+    private ResultSet rs;
+
     public OracleDaoOperation() {
     }
 
@@ -48,8 +51,8 @@ public class OracleDaoOperation {
         ArrayList<String> data = new ArrayList<>();
 
         try {
-            String requete = "SELECT * from " + name;
-            PreparedStatement pst = OracleConnection.con().prepareStatement(requete);
+            String query = "SELECT * from " + name;
+            PreparedStatement pst = OracleConnection.con().prepareStatement(query);
             ResultSet rs = pst.executeQuery();
             if (rs != null) {
                 for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
@@ -73,8 +76,8 @@ public class OracleDaoOperation {
      */
 
     public int getColumn(String name) throws SQLException {
-        String requete = " select * from " + name;
-        pst = OracleConnection.con().prepareStatement(requete);
+        String query = " select * from " + name;
+        pst = OracleConnection.con().prepareStatement(query);
 
         rs = pst.executeQuery();
 
@@ -85,13 +88,11 @@ public class OracleDaoOperation {
     /*
      * =============================================================
      */
-    PreparedStatement pst;
-    ResultSet rs;
 
     public int getRows(String name) throws SQLException {
-        String requete = "SELECT * from " + name;
+        String query = "SELECT * from " + name;
         int count = 0;
-        pst = OracleConnection.con().prepareStatement(requete);
+        pst = OracleConnection.con().prepareStatement(query);
         rs = pst.executeQuery();
         while (rs.next()) {
             count++;

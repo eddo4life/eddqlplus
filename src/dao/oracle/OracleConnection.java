@@ -8,7 +8,7 @@ import java.util.TimeZone;
 
 public class OracleConnection {
 
-    String url, name, password;
+    private String url, name, password;
 
     public static Connection con() {
         try {

@@ -17,10 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MySQLDaoOperation {
-    MySQLConnection connection = new MySQLConnection();
-    Connection con = null;
-    PreparedStatement pst = null;
-    ResultSet rs = null;
+    private final MySQLConnection connection = new MySQLConnection();
+    private Connection con = null;
+    private PreparedStatement pst = null;
+    private ResultSet rs = null;
 
     public MySQLDaoOperation() {
         new Tools();
@@ -152,7 +152,7 @@ public class MySQLDaoOperation {
     /*
      * =============================================================
      */
-//manage the insertion section
+
     public ArrayList<Object> selectTable(String name) throws SQLException {
         ArrayList<Object> pack = new ArrayList<>();
         ArrayList<String> header = new ArrayList<>();

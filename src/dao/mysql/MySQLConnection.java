@@ -5,13 +5,10 @@ import dao.sqlite.SystemDatabaseTreatment;
 import model.ConnectingToolsModel;
 import view.iconmaker.IconGenerator;
 import view.pupupsmessage.PopupMessages;
-import view.tools.Tools;
 
 import java.sql.*;
 
 public class MySQLConnection {
-
-    Tools setting = new Tools();
 
     public Connection getCon(ConnectingToolsModel ctm) throws SQLException, NullPointerException {
 
@@ -19,7 +16,6 @@ public class MySQLConnection {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             String url = "jdbc:mysql://" + ctm.getHost() + ":" + ctm.getPort() + "/" + ctm.getDbName();
-            ;
             con = DriverManager.getConnection(url, ctm.getPortNme(), ctm.getPassword());
 
             Class.forName("com.mysql.cj.jdbc.Driver");
