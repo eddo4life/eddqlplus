@@ -156,18 +156,7 @@ public class CreateTable implements MouseListener, KeyListener {
             JTableHeader hea = table.getTableHeader();
             hea.setUI(new javax.swing.plaf.basic.BasicTableHeaderUI());
 
-            JTableUtilities.setCellsAlignment(table, SwingConstants.CENTER, 0);
-            Custom tabCustom = new Custom(table, false, false, 30, null, null);
-            intern.add(tabCustom.getScrollPane());
-            JPanel tableNorth = new JPanel();
-            tableNorth.setLayout(new BorderLayout());
-            JPanel titlePanel = new JPanel();
-            JLabel titleLabel = new JLabel(title);
-            titlePanel.add(titleLabel);
-            tableNorth.add(titlePanel, BorderLayout.WEST);
-            pane.setLayout(new BorderLayout());
-            pane.add(tableNorth, BorderLayout.NORTH);
-            pane.add(intern, BorderLayout.CENTER);
+            TableSelector.tableSetup(title, intern, table, pane);
             mainPanel = new JPanel();
             mainPanel.setLayout(new BorderLayout());
             mainPanel.add(pane, BorderLayout.CENTER);

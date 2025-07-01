@@ -71,13 +71,11 @@ public class TableSelector {
             intern.setLayout(new BorderLayout());
             Object[] header = {"#", "Names", "Columns count", "Rows count", "Date", "Time"};
             int i = 0, j = showtables.size(), k = 1;
-            String[] tabs = new String[j];
             Home.frame.setCursor(new Cursor(Cursor.WAIT_CURSOR));
             Object[][] obj = new Object[j][6];
             for (ShowTablesModel data : LoadData.tables) {
                 obj[i][0] = k;
                 obj[i][1] = data.getNames();
-                tabs[i] = data.getNames();
                 obj[i][2] = data.getColumnCount();
                 obj[i][3] = data.getRowCount();
                 obj[i][4] = data.getDate();
@@ -101,19 +99,7 @@ public class TableSelector {
                 }
             };
             table.setModel(defaultTableModel);
-            JTableUtilities.setCellsAlignment(table, SwingConstants.CENTER, 0);
-            Custom tabCustom = new Custom(table, false, false, 30, null, null);
-            intern.add(tabCustom.getScrollPane());
-
-            JPanel tableNorth = new JPanel();
-            tableNorth.setLayout(new BorderLayout());
-            JPanel titlePanel = new JPanel();
-            JLabel titleLabel = new JLabel(title);
-            titlePanel.add(titleLabel);
-            tableNorth.add(titlePanel, BorderLayout.WEST);
-            pane.setLayout(new BorderLayout());
-            pane.add(tableNorth, BorderLayout.NORTH);
-            pane.add(intern, BorderLayout.CENTER);
+            tableSetup(title, intern, table, pane);
 
             Home.frame.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 
@@ -131,5 +117,21 @@ public class TableSelector {
             showTables();
         }
         return pane;
+    }
+
+    static void tableSetup(String title, JPanel intern, JTable table, JPanel pane) {
+        JTableUtilities.setCellsAlignment(table, SwingConstants.CENTER, 0);
+        Custom tabCustom = new Custom(table, false, false, 30, null, null);
+        intern.add(tabCustom.getScrollPane());
+
+        JPanel tableNorth = new JPanel();
+        tableNorth.setLayout(new BorderLayout());
+        JPanel titlePanel = new JPanel();
+        JLabel titleLabel = new JLabel(title);
+        titlePanel.add(titleLabel);
+        tableNorth.add(titlePanel, BorderLayout.WEST);
+        pane.setLayout(new BorderLayout());
+        pane.add(tableNorth, BorderLayout.NORTH);
+        pane.add(intern, BorderLayout.CENTER);
     }
 }

@@ -8,7 +8,7 @@ public class ConnectingToolsModel implements Serializable {
      *
      */
     private static final long serialVersionUID = 1L;
-    String dbName = "", port = "", password = "", portNme = "", host = "";
+    private String dbName = "", port = "", password = "", portNme = "", host = "";
 //password was initiaized with eddo
 
 
