@@ -365,7 +365,7 @@ public class DatabaseSection {
      *
      */
 
-   private final JLabel msgLabel = new JLabel();
+    private final JLabel msgLabel = new JLabel();
 
     public void timer() {
         Timer timer = new Timer();

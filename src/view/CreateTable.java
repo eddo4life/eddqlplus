@@ -12,7 +12,6 @@ import model.ShowTablesModel;
 import view.iconmaker.IconGenerator;
 import view.pupupsmessage.PopupMessages;
 import view.resize.Resize;
-import view.tables.Custom;
 import view.tables.JTableUtilities;
 import view.tables.Sort;
 
@@ -34,15 +33,14 @@ public class CreateTable implements MouseListener, KeyListener {
     private JLabel tableName;
     private JPanel panel;
     static JPanel pane;
-    JLabel cname;
-    String query = "";
-    JTextField limitTextField;
-    ArrayList<String> listNames = new ArrayList<>();
-    JTextField tableNameField, columnNameField;
-    ArrayList<String> dataTable = new ArrayList<>();
-    ArrayList<String> constraintArrayList = new ArrayList<String>();
-    ArrayList<CreateTableModel> dataLine = new ArrayList<>();
-    CreateTableModel ctm = new CreateTableModel();
+    private String query = "";
+    private JTextField limitTextField;
+    private final ArrayList<String> listNames = new ArrayList<>();
+    private JTextField tableNameField, columnNameField;
+    private final ArrayList<String> dataTable = new ArrayList<>();
+    private final ArrayList<String> constraintArrayList = new ArrayList<>();
+    private final ArrayList<CreateTableModel> dataLine = new ArrayList<>();
+    private CreateTableModel ctm = new CreateTableModel();
 
     public CreateTable() {
     }
@@ -327,7 +325,7 @@ public class CreateTable implements MouseListener, KeyListener {
         return new Object[]{scrollPane, i * 20 + 25};
     }
 
-    CreateTableModel toModify = null;
+    private CreateTableModel toModify = null;
 
     /*
      *
@@ -554,7 +552,7 @@ public class CreateTable implements MouseListener, KeyListener {
     public JPanel east() {
         GridBagConstraints c = new GridBagConstraints();
         JPanel eastPanel = new JPanel();
-        cname = new JLabel("Column name");
+        JLabel cname = new JLabel("Column name");
         columnNameField = new JTextField(10);
         columnNameField.addKeyListener(this);
         limitLabel = new JLabel("Limit");
