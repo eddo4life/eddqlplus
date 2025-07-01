@@ -474,7 +474,7 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
      *
      */
 
-    public static ConnectingToolsModel connectingToolsModel = new ConnectingToolsModel();
+    public static ConnectingToolsModel connectionModel = new ConnectingToolsModel();
 
     private final JPanel menuPanel = new JPanel();
     private JButton connectionLabel, displayLabel, securityLabel, helpLabel, rulesLabel, aboutLabel, editorLabel;

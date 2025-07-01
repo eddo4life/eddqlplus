@@ -283,7 +283,7 @@ public class Home implements MouseListener, KeyListener, FocusListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         setComponent(e.getComponent());
-        if (Tools.connectingToolsModel != null) {
+        if (Tools.connectionModel != null) {
             if (true) {
                 if (e.getSource() == tablesSections) {
                     try {
