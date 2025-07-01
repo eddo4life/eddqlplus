@@ -386,9 +386,6 @@ public class CreateTable implements MouseListener, KeyListener {
             columnNameField.setForeground(Color.RED);
             disableButton();
         }
-        System.out.println("limit: "+limitValidOrNotNeeded);
-        System.out.println("valid: "+validName);
-        System.out.println("!dupl: "+notDuplicate);
     }
 
     private void handleLimitField() {

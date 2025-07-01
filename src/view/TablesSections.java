@@ -128,8 +128,8 @@ public class TablesSections {
                 String tableName = field.getText();
                 if (tableName.length() > 0) {
                     if (listNames != null) {
-                        if (EddoLibrary.getDigitStrings().contains(tableName.substring(0, 1)) || listNames.contains(tableName.toUpperCase())
-                                || tableName.contains(" ")) {
+                        if (!EddoLibrary.isValidSqlTableName(tableName) || listNames.contains(tableName.toUpperCase())
+                        ) {
                             field.setForeground(Color.red);
                             button.setVisible(false);
                         } else {
