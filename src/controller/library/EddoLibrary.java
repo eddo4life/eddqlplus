@@ -35,5 +35,34 @@ public class EddoLibrary {
         return PROHIBITED_NAMES;
     }
 
+    /**
+     * Checks if a given string is a valid SQL column name.
+     * Valid if:
+     * - Not null or blank
+     * - Not a number
+     * - Not in the list of prohibited SQL keywords
+     * - Matches SQL identifier naming rules:
+     * starts with a letter or underscore,
+     * followed by letters, digits, or underscores
+     */
+    public static boolean isValidSqlColumnName(String input) {
+
+        if (input == null || input.isBlank()) {
+            return false;
+        }
+
+        String columnName = input.trim();
+
+        if (isNumber(columnName)) {
+            return false;
+        }
+
+        if (PROHIBITED_NAMES.contains(columnName.toLowerCase())) {
+            return false;
+        }
+
+        return columnName.matches("^[a-zA-Z_][a-zA-Z0-9_]*$");
+    }
+
 
 }

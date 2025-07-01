@@ -363,34 +363,58 @@ public class CreateTable implements MouseListener, KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
+        Object source = e.getSource();
 
-        if (e.getSource() == columnNameField) {
-            if (!columnNameField.getText().isBlank() && !isColumnExist(columnNameField.getText())
-                    && !EddoLibrary.isNumber(columnNameField.getText())) {
-                if (EddoLibrary.isNumber(limitTextField.getText()) || !hasLimit(ctm.getDatatype())) {
-                    columnNameField.setForeground(Color.black);
-                    enableButton();
-                }
-            } else {
-                disableButton();
-                columnNameField.setForeground(Color.red);
-            }
-        } else if (e.getSource() == limitTextField) {
-            if (!EddoLibrary.isNumber(limitTextField.getText())) {
-                limitTextField.setForeground(Color.red);
-                if (hasLimit(ctm.getDatatype()))
-                    disableButton();
-            } else if (Integer.parseInt(limitTextField.getText()) < 1) {
-                limitTextField.setForeground(null);
-                disableButton();
-            } else {
-
-                if (columnNameField.getText().isBlank()) {
-                    enableButton();
-                }
-            }
+        if (source == columnNameField) {
+            handleColumnNameField();
+        } else if (source == limitTextField) {
+            handleLimitField();
         }
     }
+
+    private void handleColumnNameField() {
+        String columnName = columnNameField.getText().trim();
+
+        boolean validName = EddoLibrary.isValidSqlColumnName(columnName);
+        boolean notDuplicate = !isColumnExist(columnName);
+        boolean limitValidOrNotNeeded = EddoLibrary.isNumber(limitTextField.getText()) || !hasLimit(ctm.getDatatype());
+
+        if (validName && notDuplicate && limitValidOrNotNeeded) {
+            columnNameField.setForeground(Color.BLACK);
+            enableButton();
+        } else {
+            columnNameField.setForeground(Color.RED);
+            disableButton();
+        }
+        System.out.println("limit: "+limitValidOrNotNeeded);
+        System.out.println("valid: "+validName);
+        System.out.println("!dupl: "+notDuplicate);
+    }
+
+    private void handleLimitField() {
+        String limitText = limitTextField.getText().trim();
+        boolean limitRequired = hasLimit(ctm.getDatatype());
+
+        if (!EddoLibrary.isNumber(limitText)) {
+            limitTextField.setForeground(Color.RED);
+            if (limitRequired) disableButton();
+            return;
+        }
+
+        if (Integer.parseInt(limitText) < 1) {
+            limitTextField.setForeground(Color.RED);
+            disableButton();
+            return;
+        }
+
+        limitTextField.setForeground(Color.BLACK);
+
+        // Re-evaluate column name validity to possibly re-enable
+        if (!columnNameField.getText().isBlank()) {
+            enableButton();
+        }
+    }
+
 
     /*
      *
