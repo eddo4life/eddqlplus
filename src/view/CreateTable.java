@@ -207,39 +207,15 @@ public class CreateTable implements MouseListener, KeyListener {
      *
      */
 
-    private int i;
-
     public Object[] tableBuilder() {
         JTable table = new JTable();
         table.setRowHeight(20);
-        Object[][] obj = new Object[dataLine.size()][7];
-        i = 0;
-        for (CreateTableModel d : dataLine) {
-            obj[i][0] = d.getName();
-            obj[i][1] = d.getDatatype();
-            if (hasLimit(d.getDatatype()))
-                obj[i][2] = d.getLimit();
-            else {
-                obj[i][2] = null;
-            }
-            if (d.getConstraint().toLowerCase().contains("null"))
-                obj[i][3] = "No";
-            else
-                obj[i][3] = "Yes";
-            if (d.getConstraint().toLowerCase().contains("primary"))
-                obj[i][4] = "primary";
-            if (d.getConstraint().toLowerCase().contains("foreign"))
-                obj[i][4] = "foreign";
-            obj[i][5] = "Null";
-            obj[i][6] = "";
-            i++;
-        }
-
+        int size = dataLine.size();
         if (table.isEnabled()) {
             table.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    if (i > 0) {
+                    if (size > 0) {
                         String id = String.valueOf(table.getValueAt(table.getSelectedRow(), 0));
                         String[] reps = {"Delete", "Update", "Cancel"};
 
@@ -322,7 +298,7 @@ public class CreateTable implements MouseListener, KeyListener {
         JTableUtilities.setCellsAlignment(table, SwingConstants.CENTER, 0);
         scrollPane.setViewportBorder(null);
         scrollPane.setBorder(null);
-        return new Object[]{scrollPane, i * 20 + 25};
+        return new Object[]{scrollPane, size * 20 + 25};
     }
 
     private CreateTableModel toModify = null;
