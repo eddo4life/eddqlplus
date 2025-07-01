@@ -365,7 +365,7 @@ public class CreateTable implements MouseListener, KeyListener {
     public void keyReleased(KeyEvent e) {
 
         if (e.getSource() == columnNameField) {
-            if (columnNameField.getText().isBlank() && !isColumnExist(columnNameField.getText())
+            if (!columnNameField.getText().isBlank() && !isColumnExist(columnNameField.getText())
                     && !EddoLibrary.isNumber(columnNameField.getText())) {
                 if (EddoLibrary.isNumber(limitTextField.getText()) || !hasLimit(ctm.getDatatype())) {
                     columnNameField.setForeground(Color.black);
