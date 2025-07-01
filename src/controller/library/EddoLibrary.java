@@ -1,9 +1,6 @@
 package controller.library;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class EddoLibrary {
 
@@ -26,10 +23,10 @@ public class EddoLibrary {
         }
     }
 
-    public static ArrayList<String> getDigitStrings() {
-        ArrayList<String> list = new ArrayList<>();
+    public static List<String> getDigitStrings() {
+        List<String> list = new ArrayList<>();
         for (int i = 0; i <= 9; i++) {
-            list.add("" + i);
+            list.add(String.valueOf(i));
         }
         return list;
     }
