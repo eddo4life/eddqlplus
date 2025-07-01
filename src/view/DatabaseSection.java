@@ -245,8 +245,8 @@ public class DatabaseSection {
                         if (names.contains(txt)) {
                             createButton.setEnabled(false);
                             label.setText("Database already existed");
-                        } else if (EddoLibrary.prohibitedName().contains(txt) || txt.contains(" ")
-                                || EddoLibrary.numbers().contains(txt.substring(0, 1))) {
+                        } else if (EddoLibrary.getProhibitedNames().contains(txt) || txt.contains(" ")
+                                || EddoLibrary.getDigitStrings().contains(txt.substring(0, 1))) {
                             createButton.setEnabled(false);
                             label.setText("Incorrect name");
                         } else {
