@@ -73,10 +73,10 @@ public class Home implements MouseListener, KeyListener, FocusListener {
         DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, locale);
         String date = dateFormat.format(new Date());
         JLabel copyright = new JLabel("EddQL 1.4.0 " + date + "--20"
-                + (1 + Integer.parseInt(date.substring(date.length() - 2, date.length()))));
+                + (1 + Integer.parseInt(date.substring(date.length() - 2))));
 
         JPanel p = new JPanel();
-        p.setLayout(new FlowLayout(2));
+        p.setLayout(new FlowLayout(FlowLayout.RIGHT));
         p.setPreferredSize(new Dimension(10, 35));
 
         p.add(copyright);
