@@ -87,8 +87,7 @@ public class Home implements MouseListener, KeyListener, FocusListener {
     }
 
     private JPanel createFooter() {
-        Locale locale = new Locale("fr", "FR");
-        String date = DateFormat.getDateInstance(DateFormat.DEFAULT, locale).format(new Date());
+        String date = DateFormat.getDateInstance(DateFormat.DEFAULT, Locale.FRANCE).format(new Date());
         JLabel copyright = new JLabel(
                 "EddQL 1.4.0 " + date + "--20" + (1 + Integer.parseInt(date.substring(date.length() - 2)))
         );
@@ -104,7 +103,7 @@ public class Home implements MouseListener, KeyListener, FocusListener {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (AWTKeyStroke.getAWTKeyStrokeForEvent(e).equals(
-                        AWTKeyStroke.getAWTKeyStroke(KeyEvent.VK_F4, InputEvent.ALT_MASK))) {
+                        AWTKeyStroke.getAWTKeyStroke(KeyEvent.VK_F4, InputEvent.ALT_DOWN_MASK))) {
                     System.exit(0);
                 }
             }
@@ -284,7 +283,7 @@ public class Home implements MouseListener, KeyListener, FocusListener {
         log = new JDialog(frame, "Unlock", true);
         log.setLayout(new GridBagLayout());
         log.setSize(220, 35);
-        passwordField.setBorder(new BevelBorder(1));
+        passwordField.setBorder(new BevelBorder(BevelBorder.LOWERED));
         log.add(new JLabel("🔐"));
         log.add(passwordField);
         log.setLocationRelativeTo(frame);
