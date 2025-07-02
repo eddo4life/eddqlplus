@@ -300,7 +300,7 @@ public class Home implements MouseListener, KeyListener, FocusListener {
     }
 
     private boolean access() {
-        String input = passwordField.getText();
+        String input = new String(passwordField.getPassword());
         if (input.equals(password) || input.equals(online)) {
             online = password;
             lock = 1;
