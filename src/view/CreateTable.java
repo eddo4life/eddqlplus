@@ -784,20 +784,15 @@ public class CreateTable implements MouseListener, KeyListener {
         boolean add = true;
         boolean isPrimary = constraint.equalsIgnoreCase("Primary key");
         boolean isForeign = constraint.equalsIgnoreCase("Foreign key");
-        for (String data : constraintManager.getArray()) {
-            if (constraint.equals(data)) {
-                add = false;
-            }
-            if (isPrimary) {
-                if (data.equalsIgnoreCase("Foreign key")) {
-                    add = false;
-                }
-            } else if (isForeign) {
-                if (data.equalsIgnoreCase("Primary key")) {
-                    add = false;
-                }
-            }
+        if (constraintManager.contains(constraint)) {
+            add = false;
         }
+        if (isPrimary && constraintManager.contains("Foreign key")) {
+            add = false;
+        } else if (isForeign && constraintManager.contains("Primary key")) {
+            add = false;
+        }
+
         if (add) {
             constraintManager.add(constraint);
         }
