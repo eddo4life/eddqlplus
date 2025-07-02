@@ -28,7 +28,7 @@ public class CreateTable implements MouseListener, KeyListener {
     public String database;
     private String name;
     private JComboBox<String> removeConstraintComboBox;
-    private JButton okButton, exitButton, addButton;// ,searchNextButton;
+    private JButton createButton, exitButton, addColumnButton;// ,searchNextButton;
     private JPanel mainPanel;
     private JLabel tableName;
     private JPanel panel;
@@ -41,11 +41,19 @@ public class CreateTable implements MouseListener, KeyListener {
     private final ConstraintManager constraintManager = new ConstraintManager();
     private final String[] constraints = {"Not null", "Unique", "Primary key", "Foreign key", "Check", "Default"};
     private final JComboBox<String> constraintPickerComboBox = new JComboBox<>(constraints);
+    private CreateTableModel columnToModify = null;
 
     private final ArrayList<CreateTableModel> dataLine = new ArrayList<>();
     private String[] tabs;
 
     private CreateTableModel ctm = new CreateTableModel();
+    private JPanel southPanel;
+    private String tabSelect = "";
+    private boolean remove = false;
+    private GridBagConstraints c2;
+    private JLabel ref, colref;
+    private JPanel alternativePanel;
+    private JComboBox<String> tables;
 
     public CreateTable() {
     }
@@ -302,8 +310,6 @@ public class CreateTable implements MouseListener, KeyListener {
         return new Object[]{scrollPane, size * 20 + 25};
     }
 
-    private CreateTableModel columnToModify = null;
-
     /*
      *
      * ========================================================
@@ -319,7 +325,7 @@ public class CreateTable implements MouseListener, KeyListener {
     @Override
     public void mouseClicked(MouseEvent e) {
 
-        if (e.getSource() == addButton) {
+        if (e.getSource() == addColumnButton) {
             add(columnNameField.getText());
         }
     }
@@ -421,9 +427,9 @@ public class CreateTable implements MouseListener, KeyListener {
      */
 
     public void disableButton() {
-        if (okButton != null) {
-            okButton.setEnabled(false);
-            addButton.setEnabled(false);
+        if (createButton != null) {
+            createButton.setEnabled(false);
+            addColumnButton.setEnabled(false);
         }
     }
 
@@ -434,9 +440,9 @@ public class CreateTable implements MouseListener, KeyListener {
      */
 
     public void enableButton() {
-        if (okButton != null) {
-            okButton.setEnabled(true);
-            addButton.setEnabled(true);
+        if (createButton != null) {
+            createButton.setEnabled(true);
+            addColumnButton.setEnabled(true);
         }
     }
 
@@ -474,11 +480,11 @@ public class CreateTable implements MouseListener, KeyListener {
 
     public void create() {
         Home.content.remove(panel);
-        okButton = new JButton("Create");
-        okButton.setEnabled(false);
-        okButton.setPreferredSize(new Dimension(70, 30));
+        createButton = new JButton("Create");
+        createButton.setEnabled(false);
+        createButton.setPreferredSize(new Dimension(70, 30));
 
-        okButton.addActionListener((ActionEvent e) -> {
+        createButton.addActionListener((ActionEvent e) -> {
             if (dataLine.size() > 0) {
                 try {
                     query = queryBuilder(dataLine);
@@ -573,7 +579,7 @@ public class CreateTable implements MouseListener, KeyListener {
             }
         });
         eastPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        eastPanel.add(okButton);
+        eastPanel.add(createButton);
         eastPanel.add(exitButton);
         constraintPickerComboBox.addActionListener((ActionEvent e) -> {
             String item = (String) constraintPickerComboBox.getSelectedItem();
@@ -630,9 +636,9 @@ public class CreateTable implements MouseListener, KeyListener {
         });
         // rcPanel.add(rcBox);
         eastPanel.add(removeConstraintComboBox);
-        addButton = new JButton("Add column");
-        addButton.setEnabled(false);
-        addButton.addActionListener(e -> {
+        addColumnButton = new JButton("Add column");
+        addColumnButton.setEnabled(false);
+        addColumnButton.addActionListener(e -> {
 
             if (isInvalidForeignKey()) {
                 new PopupMessages().message("Please select a reference!", new IconGenerator().messageIcon());
@@ -665,7 +671,7 @@ public class CreateTable implements MouseListener, KeyListener {
         });
         c.gridx = 11;
         c.gridy = 0;
-        eastPanel.add(addButton);
+        eastPanel.add(addColumnButton);
         return eastPanel;
     }
 
@@ -683,7 +689,7 @@ public class CreateTable implements MouseListener, KeyListener {
         constraintManager.clear();
         refreshRemoveConstraintComboBox();
 
-       addButton.setEnabled(false);
+        addColumnButton.setEnabled(false);
     }
 
 
@@ -700,14 +706,6 @@ public class CreateTable implements MouseListener, KeyListener {
     private boolean isInvalidForeignKey() {
         return constraintManager.contains("Foreign key") && ctm.getReferences() == null;
     }
-
-    private JPanel southPanel;
-    private String tabSelect = "";
-    private boolean remove = false;
-    private GridBagConstraints c2;
-    private JLabel ref, colref;
-    private JPanel alternativePanel;
-    private JComboBox<String> tables;
 
     /*
      *
