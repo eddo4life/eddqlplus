@@ -38,7 +38,8 @@ public class CreateTable implements MouseListener, KeyListener {
     private final ArrayList<String> listNames = new ArrayList<>();
     private JTextField tableNameField, columnNameField;
     private final ArrayList<String> dataTable = new ArrayList<>();
-    private final ArrayList<String> constraintArrayList = new ArrayList<>();
+    private final ConstraintManager constraintManager = new ConstraintManager();
+
     private final ArrayList<CreateTableModel> dataLine = new ArrayList<>();
     private String[] tabs;
 
@@ -54,7 +55,7 @@ public class CreateTable implements MouseListener, KeyListener {
      */
 
     public void initialize() {
-        constraintArrayList.clear();
+        constraintManager.clear();
 
         panel = new JPanel();
         panel.setLayout(new FlowLayout());
@@ -586,7 +587,7 @@ public class CreateTable implements MouseListener, KeyListener {
                          * associated
                          */
                         if (tabs.length != 0) {
-                            if (!constraintArrayList.contains("Primary key")) {
+                            if (!constraintManager.contains("Primary key")) {
                                 constArrayList(item);
                                 foreignAssociated();
                             }
@@ -596,9 +597,11 @@ public class CreateTable implements MouseListener, KeyListener {
                     }
                     internAction = true;
                     removeConstraintComboBox.removeAllItems();
-                    for (int i = 0; i < getConstraintArray().length; i++) {
+                    for (int i = 0; i < constraintManager.getArray()
+                            .length; i++) {
                         internAction = true;
-                        removeConstraintComboBox.addItem(getConstraintArray()[i]);
+                        removeConstraintComboBox.addItem(constraintManager.getArray()
+                                [i]);
                     }
                     internAction = false;
                 }
@@ -616,15 +619,18 @@ public class CreateTable implements MouseListener, KeyListener {
         eastPanel.add(remC);
         JPanel rcPanel = new JPanel();
         rcPanel.setLayout(new GridBagLayout());
-        removeConstraintComboBox = new JComboBox<>(getConstraintArray());
+        removeConstraintComboBox = new JComboBox<>(constraintManager.getArray()
+        );
         removeConstraintComboBox.addActionListener((ActionEvent e) -> {
             String constraint = (String) removeConstraintComboBox.getSelectedItem();
             if (!internAction) {
                 assert constraint != null;
-                removeConstraint(constraint);
+                constraintManager.removeConstraint(constraint);
                 removeConstraintComboBox.removeAllItems();
-                for (int i = 0; i < getConstraintArray().length; i++) {
-                    removeConstraintComboBox.addItem(getConstraintArray()[i]);
+                for (int i = 0; i < constraintManager.getArray()
+                        .length; i++) {
+                    removeConstraintComboBox.addItem(constraintManager.getArray()
+                            [i]);
                 }
                 if (constraint.equals("Foreign key")) {
                     if (southPanel != null) {
@@ -642,7 +648,7 @@ public class CreateTable implements MouseListener, KeyListener {
         addButton.setEnabled(false);
         addButton.addActionListener(e -> {
 
-            if (constraintArrayList.contains("Foreign key") && ctm.getReferences() == null) {
+            if (constraintManager.contains("Foreign key") && ctm.getReferences() == null) {
                 new PopupMessages().message("Please select a reference!", new IconGenerator().messageIcon());
             } else {
                 if (!isColumnExist(columnNameField.getText())) {
@@ -666,7 +672,7 @@ public class CreateTable implements MouseListener, KeyListener {
                     showTables();
                     panelBuilder.setVisible(true);
                     ctm = new CreateTableModel();
-                    constraintArrayList.clear();
+                    constraintManager.clear();
                 } else {
                     new PopupMessages().message("two columns can not have same name!", new IconGenerator().exceptionIcon());
                 }
@@ -778,7 +784,7 @@ public class CreateTable implements MouseListener, KeyListener {
         boolean add = true;
         boolean isPrimary = constraint.equalsIgnoreCase("Primary key");
         boolean isForeign = constraint.equalsIgnoreCase("Foreign key");
-        for (String data : constraintArrayList) {
+        for (String data : constraintManager.getArray()) {
             if (constraint.equals(data)) {
                 add = false;
             }
@@ -793,7 +799,7 @@ public class CreateTable implements MouseListener, KeyListener {
             }
         }
         if (add) {
-            constraintArrayList.add(constraint);
+            constraintManager.add(constraint);
         }
     }
 
@@ -803,36 +809,11 @@ public class CreateTable implements MouseListener, KeyListener {
      *
      */
 
-    private void removeConstraint(String constraint) {
-        constraintArrayList.removeIf(constraint::equals);
-    }
-
-
-    /*
-     *
-     * ========================================================
-     *
-     */
 
     private void add(String data) {
         dataTable.add(data);
     }
 
-    /*
-     *
-     * ========================================================
-     *
-     */
-
-    public String[] getConstraintArray() {
-        return constraintArrayList.toArray(new String[0]);
-    }
-
-    /*
-     *
-     * ========================================================
-     *
-     */
 
     public String queryBuilder(ArrayList<CreateTableModel> qb) {
         StringBuilder queryBuilder = new StringBuilder("CREATE TABLE " + getName() + " (");
@@ -870,46 +851,8 @@ public class CreateTable implements MouseListener, KeyListener {
      *
      */
 
-    public String constraintAnalysis() {
-        StringBuilder line = new StringBuilder();
-        if (!constraintArrayList.isEmpty()) {
-            for (String c : constraintArrayList) {
-                line.append(" ").append(c);
-            }
-        }
-
-        if (line.toString().contains("Primary key")) {
-            ctm.setKey("Primary key");
-            for (CreateTableModel c : dataLine) {
-                if (c.getKey() != null) {
-                    if (c.getKey().equals("Primary key")) {
-                        new PopupMessages().confirm("SQL table can't have two primary key, wanna update it?");
-                        if (PopupMessages.getAction == 1) {
-                            ctm.setKey("Primary key");
-                            c.setConstraint(c.getConstraint().replace("Primary key", ""));
-                            c.setKey(null);
-                            break;
-                        } else {
-                            ctm.setKey(null);
-                            line = new StringBuilder(line.toString().replace("Primary key", ""));
-                        }
-                    }
-                }
-            }
-            ctm.setConstraintAff(line.toString().replace("Primary key", ""));
-        } else if (line.toString().contains("Foreign key")) {
-            ctm.setConstraintAff(line.toString().replace("Foreign key", ""));
-        } else {
-            ctm.setConstraintAff(line.toString());
-        }
-
-        if (line.toString().contains("Foreign key")) {
-            ctm.setKey("Foreign key");
-            line = new StringBuilder(line.toString().replace("Foreign key",
-                    "Foreign key (" + columnNameField.getText() + ") " + "REFERENCES (" + ctm.getReferences() + ")"));
-        }
-
-        return line.toString();
+    private String constraintAnalysis() {
+        return constraintManager.analyze(ctm, dataLine);
     }
 
     /*
