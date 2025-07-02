@@ -242,16 +242,16 @@ public class CreateTable implements MouseListener, KeyListener {
                                 limitTextField.setVisible(true);
                                 limitLabel.setVisible(true);
                             }
-                            for (CreateTableModel cm : dataLine) {
-                                if (cm.getName().equals(id)) {
+                            for (CreateTableModel createTableModel : dataLine) {
+                                if (createTableModel.getName().equals(id)) {
                                     boolean exist = false;
                                     String[] constraints = {};
-                                    if (cm.getConstraintAff().contains("Not null")) {
-                                        cm.setConstraintAff(cm.getConstraintAff().replace("Not null", ""));
-                                        constraints = cm.getConstraintAff().split(" ");
+                                    if (createTableModel.getConstraintAff().contains("Not null")) {
+                                        createTableModel.setConstraintAff(createTableModel.getConstraintAff().replace("Not null", ""));
+                                        constraints = createTableModel.getConstraintAff().split(" ");
                                         exist = true;
                                     } else {
-                                        constraints = cm.getConstraintAff().trim().split(" ");
+                                        constraints = createTableModel.getConstraintAff().trim().split(" ");
                                     }
                                     for (String constraint : constraints) {
                                         constArrayList(constraint);
@@ -259,21 +259,21 @@ public class CreateTable implements MouseListener, KeyListener {
                                     if (exist) {
                                         constArrayList("Not null");
                                     }
-                                    if (cm.getKey() != null) {
-                                        if (cm.getKey().equals("Foreign key")) {
-                                            tables.setSelectedItem(cm.getTabSelectForReference());
-                                            columns.setSelectedItem(cm.getReferences());
+                                    if (createTableModel.getKey() != null) {
+                                        if (createTableModel.getKey().equals("Foreign key")) {
+                                            tables.setSelectedItem(createTableModel.getTabSelectForReference());
+                                            columns.setSelectedItem(createTableModel.getReferences());
                                             foreignAssociated();
                                         }
                                     }
-                                    if (cm.getKey() == null || cm.getKey().equals("Primary key")) {
+                                    if (createTableModel.getKey() == null || createTableModel.getKey().equals("Primary key")) {
                                         if (southPanel != null) {
                                             p.remove(southPanel);
                                             Home.content.revalidate();
                                             Home.content.repaint();
                                         }
                                     }
-                                    toModify = cm;
+                                    columnToModify = createTableModel;
                                     break;
                                 }
                             }
@@ -300,7 +300,7 @@ public class CreateTable implements MouseListener, KeyListener {
         return new Object[]{scrollPane, size * 20 + 25};
     }
 
-    private CreateTableModel toModify = null;
+    private CreateTableModel columnToModify = null;
 
     /*
      *
@@ -648,14 +648,14 @@ public class CreateTable implements MouseListener, KeyListener {
         addButton.setEnabled(false);
         addButton.addActionListener(e -> {
 
-            if (constraintManager.contains("Foreign key") && ctm.getReferences() == null) {
+            if (isInvalidForeignKey()) {
                 new PopupMessages().message("Please select a reference!", new IconGenerator().messageIcon());
             } else {
                 if (!isColumnExist(columnNameField.getText())) {
-                    if (toModify != null) {
-                        dataLine.remove(toModify);
+                    if (columnToModify != null) {
+                        dataLine.remove(columnToModify);
                     }
-                    toModify = null;
+                    columnToModify = null;
                     ctm.setName(columnNameField.getText());
                     if (hasLimit(ctm.getDatatype()))
                         ctm.setLimit(limitTextField.getText());
@@ -682,6 +682,10 @@ public class CreateTable implements MouseListener, KeyListener {
         c.gridy = 0;
         eastPanel.add(addButton);
         return eastPanel;
+    }
+
+    private boolean isInvalidForeignKey() {
+        return constraintManager.contains("Foreign key") && ctm.getReferences() == null;
     }
 
     private JPanel southPanel;
@@ -858,7 +862,7 @@ public class CreateTable implements MouseListener, KeyListener {
 
     public boolean isColumnExist(String name) {
         for (CreateTableModel s : dataLine) {
-            if (s.getName().equalsIgnoreCase(name) && toModify == null) {
+            if (s.getName().equalsIgnoreCase(name) && columnToModify == null) {
                 return true;
             }
         }
