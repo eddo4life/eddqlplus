@@ -74,7 +74,6 @@ public class Home implements MouseListener, KeyListener, FocusListener {
         frame.setMinimumSize(new Dimension(gd.getDisplayMode().getWidth() / 2, gd.getDisplayMode().getHeight() / 2));
 
         passwordField.addKeyListener(this);
-        frame.addKeyListener(globalF4Exit());
 
         setupToolBar();
         Home.content.setLayout(new BorderLayout());
@@ -96,18 +95,6 @@ public class Home implements MouseListener, KeyListener, FocusListener {
         footer.setPreferredSize(new Dimension(10, 35));
         footer.add(copyright);
         return footer;
-    }
-
-    private KeyListener globalF4Exit() {
-        return new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (AWTKeyStroke.getAWTKeyStrokeForEvent(e).equals(
-                        AWTKeyStroke.getAWTKeyStroke(KeyEvent.VK_F4, InputEvent.ALT_DOWN_MASK))) {
-                    System.exit(0);
-                }
-            }
-        };
     }
 
     private void setupToolBar() {
