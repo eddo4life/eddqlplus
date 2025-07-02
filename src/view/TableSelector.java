@@ -31,14 +31,14 @@ public class TableSelector {
 
     public JPanel showTables() {
         try {
-            ArrayList<String> showtables;
+            ArrayList<String> tablesList;
             if (DBMS.dbms == 1) {
-                showtables = new MySQLDaoOperation().showTables();
+                tablesList = new MySQLDaoOperation().showTables();
             } else {
-                showtables = new OracleDaoOperation().showTables();
+                tablesList = new OracleDaoOperation().showTables();
             }
-            arr = showtables;
-            String title = createTitle(showtables);
+            arr = tablesList;
+            String title = createTitle(tablesList);
 
             pane = new JPanel();
             pane.setLayout(new GridBagLayout());
@@ -47,7 +47,7 @@ public class TableSelector {
             setupTableMouseListener();
 
             Home.frame.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            Object[][] tableData = createTableData(showtables.size());
+            Object[][] tableData = createTableData(tablesList.size());
             DefaultTableModel model = createTableModel(tableData);
             table.setModel(model);
             Home.frame.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -113,14 +113,14 @@ public class TableSelector {
         };
     }
 
-    private String createTitle(ArrayList<String> showtables) {
-        if (showtables.isEmpty()) {
+    private String createTitle(ArrayList<String> tablesList) {
+        if (tablesList.isEmpty()) {
             return "";
         }
         String dbName = new MySQLConnection().getDbName();
-        return showtables.size() == 1 ?
+        return tablesList.size() == 1 ?
                 "(1) table from " + dbName :
-                "(" + showtables.size() + ") tables from " + dbName;
+                "(" + tablesList.size() + ") tables from " + dbName;
     }
 
     static void tableSetup(String title, JPanel intern, JTable table, JPanel pane) {

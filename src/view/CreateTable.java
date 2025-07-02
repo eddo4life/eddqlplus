@@ -40,6 +40,8 @@ public class CreateTable implements MouseListener, KeyListener {
     private final ArrayList<String> dataTable = new ArrayList<>();
     private final ArrayList<String> constraintArrayList = new ArrayList<>();
     private final ArrayList<CreateTableModel> dataLine = new ArrayList<>();
+    private String[] tabs;
+
     private CreateTableModel ctm = new CreateTableModel();
 
     public CreateTable() {
@@ -90,30 +92,26 @@ public class CreateTable implements MouseListener, KeyListener {
      *
      */
 
-    public static ArrayList<String> arr = null;
-    String[] tabs;
-    JTable table;
-
     public void showTables() {
         try {
-            ArrayList<String> showtables;
+            ArrayList<String> tablesList;
             if (DBMS.dbms == 1) {
-                showtables = new MySQLDaoOperation().showTables();
+                tablesList = new MySQLDaoOperation().showTables();
             } else {
-                showtables = new OracleDaoOperation().showTables();
+                tablesList = new OracleDaoOperation().showTables();
             }
-            arr = showtables;
-            String title = "(" + showtables.size() + ") tables from " + new MySQLConnection().getDbName();
-            if (showtables.size() == 1) {
+
+            String title = "(" + tablesList.size() + ") tables from " + new MySQLConnection().getDbName();
+            if (tablesList.size() == 1) {
                 title = "(1) table from " + new MySQLConnection().getDbName();
             }
-            if (showtables.isEmpty()) {
+            if (tablesList.isEmpty()) {
                 title = "";
             }
             pane = new JPanel();
             pane.setLayout(new GridBagLayout());
 
-            table = new JTable();
+            JTable table = new JTable();
 
             table.setEnabled(false);
             table.addMouseListener(this);
@@ -121,7 +119,7 @@ public class CreateTable implements MouseListener, KeyListener {
             JPanel intern = new JPanel();
             intern.setLayout(new BorderLayout());
             Object[] header = {"#", "Names", "Columns count", "Rows count", "Date", "Time"};
-            int i = 0, j = showtables.size(), k = 1;
+            int i = 0, j = tablesList.size(), k = 1;
             tabs = new String[j];
             Home.frame.setCursor(new Cursor(Cursor.WAIT_CURSOR));
             Object[][] obj = new Object[j][6];
