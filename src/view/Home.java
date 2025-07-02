@@ -38,7 +38,6 @@ public class Home implements MouseListener, KeyListener, FocusListener {
     public static JTextField searchField = new JTextField(15);
 
     private JButton logout, refresh, restart, lockButton;
-    private JLabel searchLabel;
     private Component hoveredComponent;
 
     private final ConnectingToolsModel toolsModel = new ConnectingToolsModel();
@@ -151,7 +150,7 @@ public class Home implements MouseListener, KeyListener, FocusListener {
     private JPanel buildSearchBar() {
         searchField.setFocusable(false);
         searchField.setBorder(null);
-        searchLabel = new JLabel("Search", new IconFontGenerator(FontAwesome.SEARCH, 15, null).getIcon(), JLabel.LEFT);
+        JLabel searchLabel = new JLabel("Search", new IconFontGenerator(FontAwesome.SEARCH, 15, null).getIcon(), JLabel.LEFT);
         addMouseListenerOn(searchLabel);
 
         searchLabel.addMouseListener(new MouseAdapter() {
