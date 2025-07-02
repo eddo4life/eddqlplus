@@ -39,6 +39,8 @@ public class CreateTable implements MouseListener, KeyListener {
     private JTextField tableNameField, columnNameField;
     private final ArrayList<String> dataTable = new ArrayList<>();
     private final ConstraintManager constraintManager = new ConstraintManager();
+    private final String[] constraints = {"Not null", "Unique", "Primary key", "Foreign key", "Check", "Default"};
+    private final JComboBox<String> constraintPickerComboBox = new JComboBox<>(constraints);
 
     private final ArrayList<CreateTableModel> dataLine = new ArrayList<>();
     private String[] tabs;
@@ -573,8 +575,6 @@ public class CreateTable implements MouseListener, KeyListener {
         eastPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         eastPanel.add(okButton);
         eastPanel.add(exitButton);
-        String[] constraints = {"Not null", "Unique", "Primary key", "Foreign key", "Check", "Default"};
-        JComboBox<String> constraintPickerComboBox = new JComboBox<String>(constraints);
         constraintPickerComboBox.addActionListener((ActionEvent e) -> {
             String item = (String) constraintPickerComboBox.getSelectedItem();
             if (item != null) {
@@ -657,8 +657,7 @@ public class CreateTable implements MouseListener, KeyListener {
                     Home.content.remove(mainPanel);
                     showTables();
                     panelBuilder.setVisible(true);
-                    ctm = new CreateTableModel();
-                    constraintManager.clear();
+                    resetColumnInputFields();
                 } else {
                     new PopupMessages().message("two columns can not have same name!", new IconGenerator().exceptionIcon());
                 }
@@ -669,6 +668,24 @@ public class CreateTable implements MouseListener, KeyListener {
         eastPanel.add(addButton);
         return eastPanel;
     }
+
+    private void resetColumnInputFields() {
+        ctm = new CreateTableModel();
+
+        columnNameField.setText("");
+        columnNameField.setForeground(Color.BLACK);
+
+        limitTextField.setText("2");
+        limitTextField.setForeground(Color.BLACK);
+
+        comboBoxDataType.setSelectedIndex(0); // Reset to default (e.g., "int")
+        constraintPickerComboBox.setSelectedIndex(0); // Top level element
+        constraintManager.clear();
+        refreshRemoveConstraintComboBox();
+
+       addButton.setEnabled(false);
+    }
+
 
     private void refreshRemoveConstraintComboBox() {
         internAction = true;
