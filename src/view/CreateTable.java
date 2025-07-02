@@ -595,15 +595,7 @@ public class CreateTable implements MouseListener, KeyListener {
                     } else {
                         constArrayList(item);
                     }
-                    internAction = true;
-                    removeConstraintComboBox.removeAllItems();
-                    for (int i = 0; i < constraintManager.getArray()
-                            .length; i++) {
-                        internAction = true;
-                        removeConstraintComboBox.addItem(constraintManager.getArray()
-                                [i]);
-                    }
-                    internAction = false;
+                    refreshRemoveConstraintComboBox();
                 }
             }
         });
@@ -626,12 +618,7 @@ public class CreateTable implements MouseListener, KeyListener {
             if (!internAction) {
                 assert constraint != null;
                 constraintManager.removeConstraint(constraint);
-                removeConstraintComboBox.removeAllItems();
-                for (int i = 0; i < constraintManager.getArray()
-                        .length; i++) {
-                    removeConstraintComboBox.addItem(constraintManager.getArray()
-                            [i]);
-                }
+                refreshRemoveConstraintComboBox();
                 if (constraint.equals("Foreign key")) {
                     if (southPanel != null) {
                         p.remove(southPanel);
@@ -640,7 +627,6 @@ public class CreateTable implements MouseListener, KeyListener {
                     }
                 }
             }
-            internAction = false;
         });
         // rcPanel.add(rcBox);
         eastPanel.add(removeConstraintComboBox);
@@ -683,6 +669,16 @@ public class CreateTable implements MouseListener, KeyListener {
         eastPanel.add(addButton);
         return eastPanel;
     }
+
+    private void refreshRemoveConstraintComboBox() {
+        internAction = true;
+        removeConstraintComboBox.removeAllItems();
+        for (String c : constraintManager.getArray()) {
+            removeConstraintComboBox.addItem(c);
+        }
+        internAction = false;
+    }
+
 
     private boolean isInvalidForeignKey() {
         return constraintManager.contains("Foreign key") && ctm.getReferences() == null;
