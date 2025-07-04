@@ -46,11 +46,12 @@ public class CreateTable implements MouseListener, KeyListener {
 
     private CreateTableModel ctm = new CreateTableModel();
     private JPanel foreignKeySectionPanel;
-    private String tabSelect = "";
-    private boolean remove = false;
     private GridBagConstraints c2;
-    private JPanel foreignKeySetupPanel;
     private JComboBox<String> tablesComboBox;
+    private JPanel foreignKeyFieldPanel;
+    private JComboBox<String> columnsComboBox;
+    private boolean foreignKeyPanelActive = false;
+    private String selectedReferenceTable = "";
 
     public CreateTable() {
     }
@@ -709,43 +710,49 @@ public class CreateTable implements MouseListener, KeyListener {
     private JComboBox<String> columns;
 
     private void foreignAssociated() {
-        remove = false;
+        foreignKeyPanelActive = false;
         c2 = new GridBagConstraints();
         c2.insets = new Insets(5, 5, 5, 5);
-        foreignKeySectionPanel = new JPanel();
-        foreignKeySectionPanel.setLayout(new BorderLayout());
-        foreignKeySetupPanel = new JPanel();
-        foreignKeySetupPanel.setLayout(new FlowLayout());
+
+        foreignKeySectionPanel = new JPanel(new BorderLayout());
+        foreignKeyFieldPanel = new JPanel(new FlowLayout());
+
         tablesComboBox = new JComboBox<>(tabs);
         tablesComboBox.addActionListener((ActionEvent e) -> {
-            tabSelect = Objects.requireNonNull(tablesComboBox.getSelectedItem()).toString();
+            selectedReferenceTable = Objects.requireNonNull(tablesComboBox.getSelectedItem()).toString();
             try {
-                columns = new JComboBox<>(new MySQLDaoOperation().selectColumn(tabSelect));
-                ctm.setTabSelectForReference(tabSelect);
-                if (remove) {
-                    foreignKeySetupPanel.removeAll();
-                    foreignKeySetupPanel.revalidate();
-                    foreignKeySetupPanel.repaint();
+                columnsComboBox = new JComboBox<>(new MySQLDaoOperation().selectColumn(selectedReferenceTable));
+                ctm.setTabSelectForReference(selectedReferenceTable);
+
+                if (foreignKeyPanelActive) {
+                    foreignKeyFieldPanel.removeAll();
+                    foreignKeyFieldPanel.revalidate();
+                    foreignKeyFieldPanel.repaint();
                     addForeignKeySelectors();
                 }
-                foreignKeySetupPanel.add(new JLabel("Column Referenced"));
-                foreignKeySetupPanel.add(columns);
-                remove = true;
-                foreignKeySectionPanel.add(foreignKeySetupPanel, BorderLayout.EAST);
+
+                foreignKeyFieldPanel.add(new JLabel("Column Referenced"));
+                foreignKeyFieldPanel.add(columnsComboBox);
+                foreignKeyPanelActive = true;
+
+                foreignKeySectionPanel.add(foreignKeyFieldPanel, BorderLayout.EAST);
                 createTableEntryMainPanel.add(foreignKeySectionPanel, BorderLayout.SOUTH);
                 createTableEntryMainPanel.revalidate();
                 createTableEntryMainPanel.repaint();
                 Home.content.revalidate();
                 Home.content.repaint();
-                columns.addActionListener((ActionEvent e1) -> {
-                    ctm.setReferences(Objects.requireNonNull(columns.getSelectedItem()).toString());
+
+                columnsComboBox.addActionListener((ActionEvent e1) -> {
+                    ctm.setReferences(Objects.requireNonNull(columnsComboBox.getSelectedItem()).toString());
                 });
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
         });
+
         addForeignKeySelectors();
     }
+
 
     /*
      *
@@ -756,15 +763,17 @@ public class CreateTable implements MouseListener, KeyListener {
     private void addForeignKeySelectors() {
         c2.gridx = 0;
         c2.gridy = 0;
-        foreignKeySetupPanel.add(new JLabel("Table"));
+        foreignKeyFieldPanel.add(new JLabel("Table"));
         c2.gridx = 1;
         c2.gridy = 0;
-        foreignKeySetupPanel.add(tablesComboBox);
-        foreignKeySectionPanel.add(foreignKeySetupPanel, BorderLayout.EAST);
+        foreignKeyFieldPanel.add(tablesComboBox);
+        foreignKeySectionPanel.add(foreignKeyFieldPanel, BorderLayout.EAST);
+
         createTableEntryMainPanel.add(foreignKeySectionPanel, BorderLayout.SOUTH);
         Home.content.revalidate();
         Home.content.repaint();
     }
+
 
     /*
      *
