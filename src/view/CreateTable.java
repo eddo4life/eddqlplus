@@ -28,10 +28,9 @@ public class CreateTable implements MouseListener, KeyListener {
     public String database;
     private String name;
     private JComboBox<String> removeConstraintComboBox;
-    private JButton createButton, exitButton, addColumnButton;// ,searchNextButton;
+    private JButton createButton, exitButton, addColumnButton;
     private JPanel mainPanel;
     private JLabel tableName;
-    private JPanel panel;
     static JPanel pane;
     private String query = "";
     private JTextField limitTextField;
@@ -46,13 +45,12 @@ public class CreateTable implements MouseListener, KeyListener {
     private String[] tabs;
 
     private CreateTableModel ctm = new CreateTableModel();
-    private JPanel southPanel;
+    private JPanel foreignKeySectionPanel;
     private String tabSelect = "";
     private boolean remove = false;
     private GridBagConstraints c2;
-    private JLabel ref, colref;
-    private JPanel alternativePanel;
-    private JComboBox<String> tables;
+    private JPanel foreignKeySetupPanel;
+    private JComboBox<String> tablesComboBox;
 
     public CreateTable() {
     }
@@ -65,9 +63,6 @@ public class CreateTable implements MouseListener, KeyListener {
 
     public void initialize() {
         constraintManager.clear();
-
-        panel = new JPanel();
-        panel.setLayout(new FlowLayout());
 
         if (Home.content != null) {
             Home.content.removeAll();
@@ -270,14 +265,14 @@ public class CreateTable implements MouseListener, KeyListener {
                                     }
                                     if (createTableModel.getKey() != null) {
                                         if (createTableModel.getKey().equals("Foreign key")) {
-                                            tables.setSelectedItem(createTableModel.getTabSelectForReference());
+                                            tablesComboBox.setSelectedItem(createTableModel.getTabSelectForReference());
                                             columns.setSelectedItem(createTableModel.getReferences());
                                             foreignAssociated();
                                         }
                                     }
                                     if (createTableModel.getKey() == null || createTableModel.getKey().equals("Primary key")) {
-                                        if (southPanel != null) {
-                                            p.remove(southPanel);
+                                        if (foreignKeySectionPanel != null) {
+                                            createTableEntryMainPanel.remove(foreignKeySectionPanel);
                                             Home.content.revalidate();
                                             Home.content.repaint();
                                         }
@@ -476,10 +471,9 @@ public class CreateTable implements MouseListener, KeyListener {
      */
 
 
-    private JPanel p;
+    private JPanel createTableEntryMainPanel;
 
     private void create() {
-        Home.content.remove(panel);
         createButton = new JButton("Create");
         createButton.setEnabled(false);
         createButton.setPreferredSize(new Dimension(70, 30));
@@ -523,8 +517,8 @@ public class CreateTable implements MouseListener, KeyListener {
         exitButton.addActionListener((ActionEvent e) -> new TablesSections().options());
         exitButton.setForeground(Color.red);
 
-        p = new JPanel();
-        p.setLayout(new BorderLayout());
+        createTableEntryMainPanel = new JPanel();
+        createTableEntryMainPanel.setLayout(new BorderLayout());
 
         JPanel northPanel, westPanel;
         northPanel = new JPanel();
@@ -532,11 +526,10 @@ public class CreateTable implements MouseListener, KeyListener {
         westPanel = new JPanel();
         westPanel.setLayout(new FlowLayout());
 
-        p.add(northPanel, BorderLayout.NORTH);
-        p.add(east(), BorderLayout.CENTER);
-        new Resize(p, "tabData");
+        createTableEntryMainPanel.add(buildColumnDefinitionPanel(), BorderLayout.CENTER);
+        new Resize(createTableEntryMainPanel, "tabData");
 
-        Home.content.add(p, BorderLayout.NORTH);
+        Home.content.add(createTableEntryMainPanel, BorderLayout.NORTH);
 
         Home.content.revalidate();
         Home.content.repaint();
@@ -553,9 +546,9 @@ public class CreateTable implements MouseListener, KeyListener {
 
     private boolean internAction = false;
 
-    private JPanel east() {
+    private JPanel buildColumnDefinitionPanel() {
         GridBagConstraints c = new GridBagConstraints();
-        JPanel eastPanel = new JPanel();
+        JPanel panel = new JPanel();
         JLabel cname = new JLabel("Column name");
         columnNameField = new JTextField(10);
         columnNameField.addKeyListener(this);
@@ -578,9 +571,9 @@ public class CreateTable implements MouseListener, KeyListener {
                 }
             }
         });
-        eastPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        eastPanel.add(createButton);
-        eastPanel.add(exitButton);
+        panel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        panel.add(createButton);
+        panel.add(exitButton);
         constraintPickerComboBox.addActionListener((ActionEvent e) -> {
             String item = (String) constraintPickerComboBox.getSelectedItem();
             if (item != null) {
@@ -605,16 +598,16 @@ public class CreateTable implements MouseListener, KeyListener {
                 }
             }
         });
-        eastPanel.add(cname);
-        eastPanel.add(columnNameField);
-        eastPanel.add(dataTypeLabel);
-        eastPanel.add(comboBoxDataType);
-        eastPanel.add(limitLabel);
-        eastPanel.add(limitTextField);
-        eastPanel.add(addC);
-        eastPanel.add(constraintPickerComboBox);
+        panel.add(cname);
+        panel.add(columnNameField);
+        panel.add(dataTypeLabel);
+        panel.add(comboBoxDataType);
+        panel.add(limitLabel);
+        panel.add(limitTextField);
+        panel.add(addC);
+        panel.add(constraintPickerComboBox);
         JLabel remC = new JLabel("Remove constraints");
-        eastPanel.add(remC);
+        panel.add(remC);
         JPanel rcPanel = new JPanel();
         rcPanel.setLayout(new GridBagLayout());
         removeConstraintComboBox = new JComboBox<>(constraintManager.getArray()
@@ -626,8 +619,8 @@ public class CreateTable implements MouseListener, KeyListener {
                 constraintManager.removeConstraint(constraint);
                 refreshRemoveConstraintComboBox();
                 if (constraint.equals("Foreign key")) {
-                    if (southPanel != null) {
-                        p.remove(southPanel);
+                    if (foreignKeySectionPanel != null) {
+                        createTableEntryMainPanel.remove(foreignKeySectionPanel);
                         Home.content.revalidate();
                         Home.content.repaint();
                     }
@@ -635,7 +628,7 @@ public class CreateTable implements MouseListener, KeyListener {
             }
         });
         // rcPanel.add(rcBox);
-        eastPanel.add(removeConstraintComboBox);
+        panel.add(removeConstraintComboBox);
         addColumnButton = new JButton("Add column");
         addColumnButton.setEnabled(false);
         addColumnButton.addActionListener(e -> {
@@ -655,8 +648,8 @@ public class CreateTable implements MouseListener, KeyListener {
                         ctm.setLimit(null);
                     ctm.setConstraint(constraintAnalysis());
                     dataLine.add(ctm);
-                    if (southPanel != null) {
-                        p.remove(southPanel);
+                    if (foreignKeySectionPanel != null) {
+                        createTableEntryMainPanel.remove(foreignKeySectionPanel);
                         Home.content.revalidate();
                         Home.content.repaint();
                     }
@@ -671,8 +664,8 @@ public class CreateTable implements MouseListener, KeyListener {
         });
         c.gridx = 11;
         c.gridy = 0;
-        eastPanel.add(addColumnButton);
-        return eastPanel;
+        panel.add(addColumnButton);
+        return panel;
     }
 
     private void resetColumnInputFields() {
@@ -719,31 +712,29 @@ public class CreateTable implements MouseListener, KeyListener {
         remove = false;
         c2 = new GridBagConstraints();
         c2.insets = new Insets(5, 5, 5, 5);
-        ref = new JLabel("Table");
-        colref = new JLabel("Column Referenced");
-        southPanel = new JPanel();
-        southPanel.setLayout(new BorderLayout());
-        alternativePanel = new JPanel();
-        alternativePanel.setLayout(new FlowLayout());
-        tables = new JComboBox<>(tabs);
-        tables.addActionListener((ActionEvent e) -> {
-            tabSelect = Objects.requireNonNull(tables.getSelectedItem()).toString();
+        foreignKeySectionPanel = new JPanel();
+        foreignKeySectionPanel.setLayout(new BorderLayout());
+        foreignKeySetupPanel = new JPanel();
+        foreignKeySetupPanel.setLayout(new FlowLayout());
+        tablesComboBox = new JComboBox<>(tabs);
+        tablesComboBox.addActionListener((ActionEvent e) -> {
+            tabSelect = Objects.requireNonNull(tablesComboBox.getSelectedItem()).toString();
             try {
                 columns = new JComboBox<>(new MySQLDaoOperation().selectColumn(tabSelect));
                 ctm.setTabSelectForReference(tabSelect);
                 if (remove) {
-                    alternativePanel.removeAll();
-                    alternativePanel.revalidate();
-                    alternativePanel.repaint();
-                    tab();
+                    foreignKeySetupPanel.removeAll();
+                    foreignKeySetupPanel.revalidate();
+                    foreignKeySetupPanel.repaint();
+                    addForeignKeySelectors();
                 }
-                alternativePanel.add(colref);
-                alternativePanel.add(columns);
+                foreignKeySetupPanel.add(new JLabel("Column Referenced"));
+                foreignKeySetupPanel.add(columns);
                 remove = true;
-                southPanel.add(alternativePanel, BorderLayout.EAST);
-                p.add(southPanel, BorderLayout.SOUTH);
-                p.revalidate();
-                p.repaint();
+                foreignKeySectionPanel.add(foreignKeySetupPanel, BorderLayout.EAST);
+                createTableEntryMainPanel.add(foreignKeySectionPanel, BorderLayout.SOUTH);
+                createTableEntryMainPanel.revalidate();
+                createTableEntryMainPanel.repaint();
                 Home.content.revalidate();
                 Home.content.repaint();
                 columns.addActionListener((ActionEvent e1) -> {
@@ -753,7 +744,7 @@ public class CreateTable implements MouseListener, KeyListener {
                 e1.printStackTrace();
             }
         });
-        tab();
+        addForeignKeySelectors();
     }
 
     /*
@@ -762,15 +753,15 @@ public class CreateTable implements MouseListener, KeyListener {
      *
      */
 
-    private void tab() {
+    private void addForeignKeySelectors() {
         c2.gridx = 0;
         c2.gridy = 0;
-        alternativePanel.add(ref);
+        foreignKeySetupPanel.add(new JLabel("Table"));
         c2.gridx = 1;
         c2.gridy = 0;
-        alternativePanel.add(tables);
-        southPanel.add(alternativePanel, BorderLayout.EAST);
-        p.add(southPanel, BorderLayout.SOUTH);
+        foreignKeySetupPanel.add(tablesComboBox);
+        foreignKeySectionPanel.add(foreignKeySetupPanel, BorderLayout.EAST);
+        createTableEntryMainPanel.add(foreignKeySectionPanel, BorderLayout.SOUTH);
         Home.content.revalidate();
         Home.content.repaint();
     }
