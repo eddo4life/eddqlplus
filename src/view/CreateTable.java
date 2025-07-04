@@ -35,7 +35,6 @@ public class CreateTable implements MouseListener, KeyListener {
     static JPanel pane;
     private String query = "";
     private JTextField limitTextField;
-    private final ArrayList<String> listNames = new ArrayList<>();
     private JTextField tableNameField, columnNameField;
     private final ArrayList<String> dataTable = new ArrayList<>();
     private final ConstraintManager constraintManager = new ConstraintManager();
@@ -142,7 +141,6 @@ public class CreateTable implements MouseListener, KeyListener {
                 obj[i][3] = data.getRowCount();
                 obj[i][4] = data.getDate();
                 obj[i][5] = data.getTime();
-                listNames.add(data.getNames().toUpperCase());
                 i++;
                 k++;
             }
@@ -235,6 +233,7 @@ public class CreateTable implements MouseListener, KeyListener {
                             for (CreateTableModel cm : dataLine) {
                                 if (cm.getName().equals(id)) {
                                     dataLine.remove(cm);
+                                    disableButton();
                                     break;
                                 }
                             }
@@ -428,7 +427,7 @@ public class CreateTable implements MouseListener, KeyListener {
 
     public void disableButton() {
         if (createButton != null) {
-            createButton.setEnabled(false);
+            createButton.setEnabled(dataLine.size() > 0); //if there's at least one column we can't disable the create button
             addColumnButton.setEnabled(false);
         }
     }
@@ -441,10 +440,11 @@ public class CreateTable implements MouseListener, KeyListener {
 
     public void enableButton() {
         if (createButton != null) {
-            createButton.setEnabled(true);
+            createButton.setEnabled(dataLine.size() > 0); //create table button can be enabled if only one column is registered
             addColumnButton.setEnabled(true);
         }
     }
+
 
     /*
      *
@@ -478,7 +478,7 @@ public class CreateTable implements MouseListener, KeyListener {
 
     private JPanel p;
 
-    public void create() {
+    private void create() {
         Home.content.remove(panel);
         createButton = new JButton("Create");
         createButton.setEnabled(false);
@@ -551,9 +551,9 @@ public class CreateTable implements MouseListener, KeyListener {
     private JComboBox<String> comboBoxDataType;
     private JLabel limitLabel;
 
-    boolean internAction = false;
+    private boolean internAction = false;
 
-    public JPanel east() {
+    private JPanel east() {
         GridBagConstraints c = new GridBagConstraints();
         JPanel eastPanel = new JPanel();
         JLabel cname = new JLabel("Column name");
@@ -689,7 +689,7 @@ public class CreateTable implements MouseListener, KeyListener {
         constraintManager.clear();
         refreshRemoveConstraintComboBox();
 
-        addColumnButton.setEnabled(false);
+        disableButton();
     }
 
 
@@ -825,7 +825,7 @@ public class CreateTable implements MouseListener, KeyListener {
     }
 
 
-    public String queryBuilder(ArrayList<CreateTableModel> qb) {
+    private String queryBuilder(ArrayList<CreateTableModel> qb) {
         StringBuilder queryBuilder = new StringBuilder("CREATE TABLE " + getName() + " (");
         for (CreateTableModel data : qb) {
             queryBuilder.append(data.getName()).append(" ").append(data.getDatatype());
@@ -871,6 +871,7 @@ public class CreateTable implements MouseListener, KeyListener {
      *
      */
 
+    // TODO: Move this into a separate class, maybe the ConstraintManager one
     public boolean isColumnExist(String name) {
         for (CreateTableModel s : dataLine) {
             if (s.getName().equalsIgnoreCase(name) && columnToModify == null) {

@@ -21,20 +21,20 @@ public class InsertData extends AbstractTableModel {
     public Class<?>[] getClas() {
         try {
 
-            ArrayList<String> arr = null;
+            ArrayList<String> dataTypeList = null;
 
             if (DBMS.dbms == 1) {
-                arr = new MySQLDaoOperation().getDataType(Insertion.tabName);
+                dataTypeList = new MySQLDaoOperation().getDataType(Insertion.tabName);
             } else if (DBMS.dbms == 2) {
-                arr = new OracleDaoOperation().getDataType(Insertion.tabName);
+                dataTypeList = new OracleDaoOperation().getDataType(Insertion.tabName);
             }
 
 
-            assert arr != null;
-            Class<?>[] columnC = new Class[arr.size()];
+            assert dataTypeList != null;
+            Class<?>[] columnC = new Class[dataTypeList.size()];
             int i = 0;
-            for (String x : arr) {
-                switch (x.toLowerCase()) {
+            for (String dataType : dataTypeList) {
+                switch (dataType.toLowerCase()) {
 
                     case "number", "int", "integer", "unsigned smallint" -> columnC[i] = Integer.class;
                     case "decimal", "float", "double precision", "bigdatetime" -> columnC[i] = Double.class;
