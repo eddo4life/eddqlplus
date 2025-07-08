@@ -34,7 +34,6 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
     private final JTextField userField = new JTextField(20);
     private JPasswordField passwordField;
     private final JPanel mainPanel = new JPanel();
-    private final JPanel menuPanel = new JPanel();
     private JComboBox<String> host;
 
     // Models
@@ -126,11 +125,10 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
     }
 
     // Connection-related methods
-    public JPanel sqlConnector() {
+    private void sqlConnector() {
         setupMainPanelLayout();
         Home.content.add(mainPanel, BorderLayout.CENTER);
         revalidateContent();
-        return mainPanel;
     }
 
     private void setupMainPanelLayout() {
@@ -305,12 +303,12 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
         }
     }
 
+
     // Event Handlers
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource() == connectionLabel) {
-            Home.content.add(sqlConnector(), BorderLayout.CENTER);
-            revalidateContent();
+            sqlConnector();
         }
         // Other button handlers can be added here
     }
