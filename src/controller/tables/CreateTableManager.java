@@ -55,10 +55,7 @@ public class CreateTableManager extends AbstractTableModel {
         } else if (2 == columnIndex) {
             return row.getLimit();
         } else if (3 == columnIndex) {
-            if (row.getConstraint().toLowerCase().contains("null"))
-                return "No";
-            else
-                return "Yes";
+            return row.getConstraint().toLowerCase().contains("null") ? "No" : "Yes";
         } else if (4 == columnIndex) {
             return row.getConstraintAff();
         } else if (5 == columnIndex) {
