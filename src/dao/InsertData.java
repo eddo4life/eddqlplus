@@ -13,9 +13,8 @@ import java.util.ArrayList;
 
 public class InsertData extends AbstractTableModel {
 
-    String[] columnNames;
-    ArrayList<InsertList> list;
-    InsertList insertList = new InsertList();
+    private final String[] columnNames;
+    private final InsertList insertList = new InsertList();
     private Class<?>[] columnClass = getClas();
 
     public Class<?>[] getClas() {
@@ -66,7 +65,6 @@ public class InsertData extends AbstractTableModel {
 
     public InsertData(String[] columnNames, ArrayList<InsertList> list) {
         this.columnNames = columnNames;
-        this.list = list;
 
     }
 
