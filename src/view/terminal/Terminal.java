@@ -16,6 +16,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Terminal {
+    private final JPanel mainPanel = new JPanel(new BorderLayout());
+    private final JPanel messagePanel = new JPanel(null);
+    private final JPanel outputPanel = new JPanel(new BorderLayout());
+    private final JLabel exceptionLabel = new JLabel("");
 
     public Terminal(String query, boolean isShow, String feedback) {
 
@@ -29,12 +33,7 @@ public class Terminal {
         }
     }
 
-    JPanel mainPanel = new JPanel(new BorderLayout());
-    JPanel messagePanel = new JPanel(null);
-    JPanel outputPanel = new JPanel(new BorderLayout());
-    JLabel exceptionLabel = new JLabel("");
-
-    void setPanels() {
+    private void setPanels() {
         mainPanel.add(messagePanel, BorderLayout.NORTH);
         messagePanel.setPreferredSize(new Dimension(0, 30));
         mainPanel.add(outputPanel, BorderLayout.CENTER);
