@@ -20,6 +20,9 @@ public class Terminal {
     private final JPanel messagePanel = new JPanel(null);
     private final JPanel outputPanel = new JPanel(new BorderLayout());
     private final JLabel exceptionLabel = new JLabel("");
+    private final JPanel tablePanel = new JPanel(new BorderLayout());
+    private final JTable table = new JTable();
+    private final JTableHeader tableHeader = table.getTableHeader();
 
     public Terminal(String query, boolean isShow, String feedback) {
 
@@ -55,18 +58,13 @@ public class Terminal {
 
     }
 
-    void setSize(int y) {
+    private void setSize(int y) {
         EditorSection.terminPanel.removeAll();
         EditorSection.terminPanel.add(mainPanel, BorderLayout.SOUTH);
         EditorSection.terminPanel.revalidate();
         EditorSection.terminPanel.repaint();
         mainPanel.setPreferredSize(new Dimension(100, y));
     }
-
-    ArrayList<String> header;
-    JPanel tablePanel = new JPanel(new BorderLayout());
-    JTable table = new JTable();
-    JTableHeader hea = table.getTableHeader();
 
     @SuppressWarnings("unchecked")
     public void display(String query, boolean isShow) {
@@ -84,7 +82,7 @@ public class Terminal {
 
             // table.removeAll();
 
-            header = new ArrayList<>();
+            ArrayList<String> header = new ArrayList<>();
             header = (ArrayList<String>) selectTable.get(0);
             ArrayList<String> data = (ArrayList<String>) selectTable.get(1);
 
@@ -127,9 +125,9 @@ public class Terminal {
                 table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
             }
 
-            hea.setUI(new javax.swing.plaf.basic.BasicTableHeaderUI());
+            tableHeader.setUI(new javax.swing.plaf.basic.BasicTableHeaderUI());
 
-            hea.setFont(new Font("sanserif", Font.BOLD, 13));
+            tableHeader.setFont(new Font("sanserif", Font.BOLD, 13));
             if (!isShow)
                 JTableUtilities.setCellsAlignment(table, SwingConstants.CENTER, 0);
             else {
