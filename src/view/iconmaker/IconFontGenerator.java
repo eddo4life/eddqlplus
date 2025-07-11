@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class IconFontGenerator {
-    private Icon icon;
+    private final Icon icon;
 
     public Icon getIcon() {
         return icon;
