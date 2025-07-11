@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Custom {
-    JScrollPane scrollPane;
+    private final JScrollPane scrollPane;
 
     public JScrollPane getScrollPane() {
         return scrollPane;
