@@ -94,9 +94,8 @@ public class DatabaseExporterUI {
             JCheckBox checkBox = new JCheckBox(s);
             boxList.add(checkBox);
             constraints2.gridx = 0;
-            constraints2.gridy = y;
+            constraints2.gridy = y++;
             pane.add(checkBox, constraints2);
-            y++;
         }
         selectAll(true);
         JScrollPane sp = new JScrollPane(pane);
