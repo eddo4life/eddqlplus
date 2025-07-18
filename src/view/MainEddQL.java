@@ -14,7 +14,7 @@ public class MainEddQL {
     public static void main(String[] args) {
         new EddoLibrary();// toInstantiateTheLibraryObject
         if (!restart) {
-            if (!new MySQLConnection().getDbName().isEmpty()) {
+            if (!new MySQLConnection().getDbName().isBlank()) {
                 new LoadData(null);
                 restart = true;
             }
