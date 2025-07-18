@@ -8,11 +8,6 @@ import java.util.List;
 
 public class CreateTableManager extends AbstractTableModel {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
-
     private final List<CreateTableModel> tableDataList;
 
     private final String[] columnNames = new String[]{"Field", "Type ", "Limit", "Null", "Constraints", "Key",
