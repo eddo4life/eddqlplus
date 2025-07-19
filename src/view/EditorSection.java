@@ -467,13 +467,8 @@ public class EditorSection implements KeyListener {
         }
     }
 
-    public static int maxLength = 0;
-    public static int acs = -1;
-
     @Override
     public void keyReleased(KeyEvent e) {
-        maxLength = textArea.getText().length();
-
         DefaultCaret caret = (DefaultCaret) textArea.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         save = "";
