@@ -9,14 +9,14 @@ import view.tools.Tools;
 import javax.swing.*;
 
 public class MainEddQL {
-    public static boolean restart = false;
+    private static boolean restart = false;
 
     public static void main(String[] args) {
         new EddoLibrary();// toInstantiateTheLibraryObject
-        if (!restart) {
+        if (!MainEddQL.restart) {
             if (!new MySQLConnection().getDbName().isBlank()) {
                 new LoadData(null);
-                restart = true;
+                MainEddQL.restart = true;
             }
         }
 

@@ -76,5 +76,4 @@ public class EddoLibrary {
         return isValidSqlName(input, PROHIBITED_TABLE_NAMES);
     }
 
-
 }

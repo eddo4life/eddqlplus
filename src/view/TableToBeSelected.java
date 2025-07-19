@@ -17,7 +17,6 @@ import java.util.Objects;
 public class TableToBeSelected {
 
     public TableToBeSelected() {
-
     }
 
     public static String[] head;

@@ -3,7 +3,8 @@ package view;
 import model.CreateTableModel;
 import view.pupupsmessage.PopupMessages;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConstraintManager {
     private final List<String> constraints = new ArrayList<>();
@@ -63,7 +64,7 @@ public class ConstraintManager {
         constraints.clear();
     }
 
-    public boolean contains(String element){
+    public boolean contains(String element) {
         return constraints.contains(element);
     }
 

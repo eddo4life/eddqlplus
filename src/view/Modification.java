@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 public class Modification {
-    String tableName;
+    private String tableName;
 
     public Modification(String tableName) {
         this.tableName = tableName;

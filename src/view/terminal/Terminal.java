@@ -128,7 +128,7 @@ public class Terminal {
             tableHeader.setUI(new javax.swing.plaf.basic.BasicTableHeaderUI());
             tableHeader.setFont(new Font("sanserif", Font.BOLD, 13));
 
-            JTableUtilities.setCellsAlignment(table, isShow?SwingConstants.LEFT:SwingConstants.CENTER, 0);
+            JTableUtilities.setCellsAlignment(table, isShow ? SwingConstants.LEFT : SwingConstants.CENTER, 0);
 
             Custom tabCustom = new Custom(table, false, false, 30, null, null);
             if (!data.isEmpty()) {
