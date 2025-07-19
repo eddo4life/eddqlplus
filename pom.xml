@@ -18,11 +18,6 @@
     <dependencies>
         <!-- Layout and UI -->
         <dependency>
-            <groupId>com.miglayout</groupId>
-            <artifactId>miglayout-swing</artifactId>
-            <version>5.0</version>
-        </dependency>
-        <dependency>
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf</artifactId>
             <version>2.4</version>
@@ -31,14 +26,6 @@
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf-extras</artifactId>
             <version>2.4</version>
-        </dependency>
-
-        <!-- Animation -->
-        <!-- https://mvnrepository.com/artifact/net.java.timingframework/timingframework-swing -->
-        <dependency>
-            <groupId>net.java.timingframework</groupId>
-            <artifactId>timingframework-swing</artifactId>
-            <version>4.1.0</version>
         </dependency>
 
         <!-- Databases -->
@@ -74,40 +61,17 @@
             <version>16.19.7</version>
         </dependency>
 
-        <!-- SLF4J -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>2.0.6</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-nop</artifactId>
-            <version>2.0.6</version>
-        </dependency>
-
-
         <dependency>
             <groupId>com.github.jiconfont</groupId>
             <artifactId>jiconfont-font_awesome</artifactId>
             <version>4.7.0.1</version>
         </dependency>
 
-
         <dependency>
             <groupId>com.github.jiconfont</groupId>
             <artifactId>jiconfont-swing</artifactId>
             <version>1.0.1</version>
         </dependency>
-
-
-        <!-- https://mvnrepository.com/artifact/com.kenai.nbpwr/org-jdesktop-animation-timing -->
-        <dependency>
-            <groupId>com.kenai.nbpwr</groupId>
-            <artifactId>org-jdesktop-animation-timing</artifactId>
-            <version>1.0-201002281504</version>
-        </dependency>
-
 
     </dependencies>
 </project>
