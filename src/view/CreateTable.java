@@ -222,7 +222,7 @@ public class CreateTable implements MouseListener, KeyListener {
                         String id = String.valueOf(table.getValueAt(table.getSelectedRow(), 0));
                         String[] reps = {"Delete", "Update", "Cancel"};
 
-                        int rep = JOptionPane.showOptionDialog(null, "do you want to delete or update?",
+                        int rep = JOptionPane.showOptionDialog(null, "Do you want to delete or update?",
                                 "delete or update", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE,
                                 new IconGenerator().questionIcon(), reps, 0);
                         if (rep == 0) {
@@ -250,7 +250,7 @@ public class CreateTable implements MouseListener, KeyListener {
                             for (CreateTableModel createTableModel : dataLine) {
                                 if (createTableModel.getName().equals(id)) {
                                     boolean exist = false;
-                                    String[] constraints = {};
+                                    String[] constraints;
                                     if (createTableModel.getConstraintAff().contains("Not null")) {
                                         createTableModel.setConstraintAff(createTableModel.getConstraintAff().replace("Not null", ""));
                                         constraints = createTableModel.getConstraintAff().split(" ");
@@ -265,6 +265,7 @@ public class CreateTable implements MouseListener, KeyListener {
                                         constArrayList("Not null");
                                     }
                                     if (createTableModel.getKey() != null) {
+                                        System.out.println(createTableModel.getKey());
                                         if (createTableModel.getKey().equals("Foreign key")) {
                                             tablesComboBox.setSelectedItem(createTableModel.getTabSelectForReference());
                                             columns.setSelectedItem(createTableModel.getReferences());
