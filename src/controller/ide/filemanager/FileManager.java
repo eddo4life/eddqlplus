@@ -9,7 +9,7 @@ import java.io.*;
 
 public class FileManager {
 
-    RSyntaxTextArea editor_pane = EditorSection.textArea;
+    private final RSyntaxTextArea editor_pane = EditorSection.textArea;
 
     public FileManager() {
 
