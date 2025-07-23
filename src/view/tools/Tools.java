@@ -7,6 +7,7 @@ import eddql.launch.LoadData;
 import jiconfont.icons.font_awesome.FontAwesome;
 import model.ConnectingToolsModel;
 import view.Home;
+import view.ScreenSelector;
 import view.iconmaker.IconFontGenerator;
 import view.iconmaker.IconGenerator;
 import view.pupupsmessage.PopupMessages;
@@ -33,12 +34,16 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
     private final JTextField portField = new JTextField(20);
     private final JTextField userField = new JTextField(20);
     private JPasswordField passwordField;
-    private final JPanel mainPanel = new JPanel();
+
     private JComboBox<String> host;
 
     // Models
     public static ConnectingToolsModel connectionModel = new ConnectingToolsModel();
     public static JScrollPane tools_menu_panel;
+    private final CardLayout cardLayout = new CardLayout();
+    private final JPanel mainPanel = new JPanel(new BorderLayout());
+    private final JPanel contentPanel = new JPanel(cardLayout);
+
 
     public Tools() {
         initializeFields();
@@ -52,6 +57,14 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
         rulesLabel = createMenuButton("Rules");
         aboutLabel = createMenuButton("About us");
         editorLabel = createMenuButton("Editor");
+        setupPanels();
+    }
+
+    private void setupPanels() {
+        contentPanel.add(connectionPanel(), "connection");
+        contentPanel.add(displayPanel(), "display");
+
+        mainPanel.add(contentPanel, BorderLayout.CENTER);
     }
 
     private JButton createMenuButton(String text) {
@@ -62,23 +75,18 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
         return button;
     }
 
+    //The first called method
     public void showMenu() {
-        clearContentPanel();
         setupMenuLayout();
-        revalidateContent();
+        ScreenSelector.showContent(mainPanel);
     }
 
-    private void clearContentPanel() {
-        if (Home.content != null) {
-            Home.content.removeAll();
-        }
-    }
 
     private void setupMenuLayout() {
         JPanel menuPanel = new JPanel(new BorderLayout());
         menuPanel.setPreferredSize(MENU_PANEL_SIZE);
         menuPanel.add(createMenuScrollPane());
-        Home.content.add(menuPanel, BorderLayout.WEST);
+        mainPanel.add(menuPanel, BorderLayout.WEST);
     }
 
     private JScrollPane createMenuScrollPane() {
@@ -106,7 +114,7 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
         panel.add(rulesLabel, setConstraints(constraints, 0, yPos++));
         panel.add(aboutLabel, setConstraints(constraints, 0, yPos++));
         panel.add(editorLabel, setConstraints(constraints, 0, yPos++));
-        panel.add(createMenuButton("Exit"), setConstraints(constraints, 0, yPos++));
+        panel.add(createMenuButton("Exit"), setConstraints(constraints, 0, yPos));
     }
 
     private GridBagConstraints setConstraints(GridBagConstraints constraints, int x, int y) {
@@ -114,6 +122,12 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
         constraints.gridy = y;
         return constraints;
     }
+
+    private void refreshUI(Component comp) {
+        comp.revalidate();
+        comp.repaint();
+    }
+
 
     private JPanel createHeaderPanel() {
         JPanel headerPanel = new JPanel(new GridBagLayout());
@@ -124,22 +138,30 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
         return headerPanel;
     }
 
-    // Connection-related methods
-    private void sqlConnector() {
-        setupMainPanelLayout();
-        Home.content.add(mainPanel, BorderLayout.CENTER);
-        revalidateContent();
+    private JPanel connectionPanel() {
+        JPanel connectionPanel = new JPanel();
+        connectionPanel.setLayout(new BorderLayout());
+        connectionPanel.setPreferredSize(new Dimension(500, 300));
+        connectionPanel.add(new CustomScrollPane(createConnectionFormPanel()).getScrollPane(), BorderLayout.CENTER);
+        connectionPanel.add(createPanelWithSize(0, 100), BorderLayout.NORTH);
+        connectionPanel.add(createPanelWithSize(0, 100), BorderLayout.SOUTH);
+        return connectionPanel;
     }
 
-    private void setupMainPanelLayout() {
-        mainPanel.setLayout(new BorderLayout());
-        mainPanel.setPreferredSize(new Dimension(500, 300));
+    private JPanel displayPanel() {
+        JPanel displayPanel = new JPanel(new GridBagLayout());
+        displayPanel.add(new JLabel("Display"));
 
-        JPanel connectionPanel = createConnectionFormPanel();
-        mainPanel.add(new CustomScrollPane(connectionPanel).getScrollPane(), BorderLayout.CENTER);
-        mainPanel.add(createPanelWithSize(0, 100), BorderLayout.NORTH);
-        mainPanel.add(createPanelWithSize(0, 100), BorderLayout.SOUTH);
+        return displayPanel;
     }
+
+
+    private JPanel createPanelWithSize(int width, int height) {
+        JPanel panel = new JPanel();
+        panel.setPreferredSize(new Dimension(width, height));
+        return panel;
+    }
+
 
     private JPanel createConnectionFormPanel() {
         JPanel connectionPanel = new JPanel(new GridBagLayout());
@@ -241,12 +263,6 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
         field.setBorder(new BevelBorder(1, Color.darkGray, Color.darkGray));
     }
 
-    private JPanel createPanelWithSize(int width, int height) {
-        JPanel panel = new JPanel();
-        panel.setPreferredSize(new Dimension(width, height));
-        return panel;
-    }
-
     private void saveConnection() {
         String password = new String(passwordField.getPassword());
         ConnectingToolsModel model = new ConnectingToolsModel(
@@ -303,14 +319,21 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
         }
     }
 
+    private void switchScreen(String label) {
+        cardLayout.show(contentPanel, label);
+    }
+
 
     // Event Handlers
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource() == connectionLabel) {
-            sqlConnector();
+            switchScreen("connection");
+        } else if (e.getSource() == displayLabel) {
+            switchScreen("display");
         }
         // Other button handlers can be added here
+
     }
 
     @Override
@@ -340,12 +363,6 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
         } else if (source == passwordField) {
             saveConnection();
         }
-    }
-
-    // Utility methods
-    private void revalidateContent() {
-        Home.content.revalidate();
-        Home.content.repaint();
     }
 
     // Unused event handlers
