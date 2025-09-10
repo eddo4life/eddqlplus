@@ -82,11 +82,9 @@ public class Insertion {
             mainPanel.add(pane, BorderLayout.CENTER);
             Home.content.removeAll();
             Home.content.add(mainPanel, BorderLayout.CENTER);
-            if (insertPanel != null) {
-                insertPanel.removeAll();
-                insertPanel.revalidate();
-                insertPanel.repaint();
-            }
+            insertPanel.removeAll();
+            insertPanel.revalidate();
+            insertPanel.repaint();
             insert();
             Home.content.revalidate();
             Home.content.repaint();
@@ -105,7 +103,7 @@ public class Insertion {
         insertPanel.setLayout(new BorderLayout());
         String[] head = new String[header.size()];
         st = new ArrayList<>();
-        ArrayList<InsertList> list = new ArrayList<InsertList>();
+        ArrayList<InsertList> list = new ArrayList<>();
         InsertList insertList = new InsertList(st);
         list.add(insertList);
 

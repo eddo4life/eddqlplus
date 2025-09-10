@@ -143,8 +143,8 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
         connectionPanel.setLayout(new BorderLayout());
         connectionPanel.setPreferredSize(new Dimension(500, 300));
         connectionPanel.add(new CustomScrollPane(createConnectionFormPanel()).getScrollPane(), BorderLayout.CENTER);
-        connectionPanel.add(createPanelWithSize(0, 100), BorderLayout.NORTH);
-        connectionPanel.add(createPanelWithSize(0, 100), BorderLayout.SOUTH);
+        connectionPanel.add(createPanelWithSize(), BorderLayout.NORTH);
+        connectionPanel.add(createPanelWithSize(), BorderLayout.SOUTH);
         return connectionPanel;
     }
 
@@ -156,9 +156,9 @@ public class Tools implements FocusListener, MouseListener, KeyListener {
     }
 
 
-    private JPanel createPanelWithSize(int width, int height) {
+    private JPanel createPanelWithSize() {
         JPanel panel = new JPanel();
-        panel.setPreferredSize(new Dimension(width, height));
+        panel.setPreferredSize(new Dimension(0, 100));
         return panel;
     }
 
