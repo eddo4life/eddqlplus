@@ -16,8 +16,6 @@ public class FileEvent implements ActionListener, KeyListener {
     RSyntaxTextArea editor_pane = EditorSection.textArea;
 
     public FileEvent() {
-
-
     }
 
     @Override

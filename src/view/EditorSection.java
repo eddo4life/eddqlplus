@@ -17,8 +17,6 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class EditorSection implements KeyListener {
-    // JDesktopPane desktop;
-
     private final FontEditor editorPaneFontMemory = new FontEditor();
 
     private RTextScrollPane sp;
