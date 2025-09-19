@@ -164,12 +164,10 @@ public class MySQLDaoOperation {
         if (rs != null) {
             for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
                 header.add(rs.getMetaData().getColumnName(i));
-//				System.out.println("header.add(\"" + rs.getMetaData().getColumnName(i) + "\")");
             }
             while (rs.next()) {
                 for (String s : header) {
                     data.add(rs.getString(s));
-//					System.out.println("content.add(\"" + rs.getString(header.get(i)) + "\");");
                 }
             }
 

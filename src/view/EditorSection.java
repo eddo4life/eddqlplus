@@ -83,13 +83,8 @@ public class EditorSection implements KeyListener {
         textArea.setWrapStyleWord(true);
         textArea.setLineWrap(true);
         sp.addMouseListener(new MouseAdapter() {
-            @SuppressWarnings("deprecation")
             @Override
             public void mouseClicked(MouseEvent e) {
-                if ((e.getModifiers() & InputEvent.BUTTON3_MASK) != 0) {
-                    // new Popup().showPopupMenu(e.getPoint(), isClose,
-                    // sp.getTextArea().getSelectedText() != null);
-                }
             }
         });
 
