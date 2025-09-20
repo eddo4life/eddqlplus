@@ -10,13 +10,6 @@ import java.awt.event.*;
 import java.io.Serial;
 import java.util.Stack;
 
-/*
- * 
- * 
- * Font font = new Font("Consolas", Font.PLAIN, 12);
-textArea.setFont(font);
- */
-
 public class ConsoleApp extends JPanel implements ActionListener, DocumentListener, KeyListener {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -39,11 +32,6 @@ public class ConsoleApp extends JPanel implements ActionListener, DocumentListen
             }
         });
 
-        // outputArea.setBackground(new Color(25, 25, 105));
-        // outputArea.setForeground(new Color(245, 245, 245));
-        // optional
-        // outputArea.setWrapStyleWord(true);
-        // outputArea.setLineWrap(true);
         Font font = new Font("Monospaced", Font.PLAIN, 15);
         outputArea.setFont(font);
         outputArea.setEditable(false);

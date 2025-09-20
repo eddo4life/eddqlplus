@@ -7,7 +7,6 @@ public class ConnectingToolsModel implements Serializable {
     /**
      *
      */
-    private static final long serialVersionUID = 1L;
     private String dbName = "", port = "", password = "", portNme = "", host = "";
 
     public String getDbName() {

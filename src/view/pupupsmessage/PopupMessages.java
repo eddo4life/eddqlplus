@@ -32,8 +32,6 @@ public class PopupMessages extends JDialog {
         southPanel.setLayout(null);
         centerPanel = new JPanel();
         centerPanel.setLayout(new BorderLayout());
-        GridBagConstraints c = new GridBagConstraints();
-        c.insets = new Insets(5, 5, 5, 5);
         this.setLocationRelativeTo(null);
         this.setSize(new Dimension(350, 135));
         this.setIconImage(new ImageIcon("sql2.jpeg").getImage());
@@ -129,9 +127,7 @@ public class PopupMessages extends JDialog {
         }
 
         JButton ok = createButton("Ok");
-        ok.addActionListener((ActionEvent e) -> {
-            this.dispose();
-        });
+        ok.addActionListener((ActionEvent e) -> this.dispose());
         ok.setPreferredSize(new Dimension(80, 25));
         ok.setBounds((this.getWidth() / 2) - 55, 3, 80, 25);
         southPanel.setPreferredSize(new Dimension(10, 31));
