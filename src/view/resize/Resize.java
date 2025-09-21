@@ -49,8 +49,7 @@ public class Resize {
             component.setPreferredSize(new Dimension(0, y + (3 * 30)));
         } else if (x < 544) {
             component.setPreferredSize(new Dimension(0, y + (2 * 30)));
-        } else if (x < 943) {
-        } else if (x < 1039) {
+        }  else if (x < 1039) {
             component.setPreferredSize(new Dimension(0, y + (30)));
         } else {
             component.setPreferredSize(new Dimension(0, y));

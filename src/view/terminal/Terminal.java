@@ -82,7 +82,7 @@ public class Terminal {
 
             // table.removeAll();
 
-            ArrayList<String> header = new ArrayList<>();
+            ArrayList<String> header;
             header = (ArrayList<String>) selectTable.get(0);
             ArrayList<String> data = (ArrayList<String>) selectTable.get(1);
 
@@ -120,7 +120,7 @@ public class Terminal {
             };
             table.setEnabled(false);
             table.setModel(model);
-            table.setFont(new Font("Calibri", Font.CENTER_BASELINE, 15));
+            table.setFont(new Font("Calibri", Font.BOLD, 15));
             if (header.size() > 15) {
                 table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
             }
