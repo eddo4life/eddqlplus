@@ -136,7 +136,7 @@ class Popup extends JFrame implements ActionListener {
             }
             t.setForeground(EditorSection.editorPaneCurrentFgColor);
         } else if (e.getSource() == delete) {
-            // TODO: put it delete row and select the row current row to make the action
+            // TODO: put it delete row and select the current row to make the action
         } else if (e.getSource() == selectAll) {
             t.selectAll();
         } else if (e.getSource() == clear) {

@@ -50,9 +50,6 @@ public class DatabaseSection {
         ArrayList<String> dataBases = new MySQLDaoOperation().showDataBases();
 
         JTable table = new JTable();
-        // table.setEnabled(false);
-
-        // table.addMouseListener(this);
         JPanel intern = new JPanel();
         intern.setLayout(new BorderLayout());
         final Object[] header = {"Names", "oldest tab created", "at", "latest tab created", "at", "tables count"};
@@ -135,36 +132,26 @@ public class DatabaseSection {
                             String selectedValue = table.getValueAt(row, 0).toString();
                             JPopupMenu popup = new JPopupMenu();
                             JMenuItem deleteItem = new JMenuItem("Delete");
-                            deleteItem.addActionListener(new ActionListener() {
-                                public void actionPerformed(ActionEvent e) {
-                                    // Delete action
-                                    action("Delete", selectedValue);
-                                }
+                            deleteItem.addActionListener(e15 -> {
+                                // Delete action
+                                action("Delete", selectedValue);
                             });
                             JMenuItem connectItem = new JMenuItem("Connect");
-                            connectItem.addActionListener(new ActionListener() {
-                                public void actionPerformed(ActionEvent e) {
-                                    action("Connect", selectedValue);
-                                }
-                            });
+                            connectItem.addActionListener(e14 -> action("Connect", selectedValue));
 
                             JMenuItem createItem = new JMenuItem("↳ New");
-                            createItem.addActionListener(new ActionListener() {
-                                public void actionPerformed(ActionEvent e) {
-                                    // action("Create", selectedValue);
-                                    createDatabase();
-                                }
+                            createItem.addActionListener(e12 -> {
+                                // action("Create", selectedValue);
+                                createDatabase();
                             });
                             String dbConnected = new MySQLConnection().getDbName();
                             JMenuItem exportItem = new JMenuItem("Export");
-                            exportItem.addActionListener(new ActionListener() {
-                                public void actionPerformed(ActionEvent e) {
-                                    try {
-                                        new DatabaseExporterUI(dbConnected, new MySQLDaoOperation().showTables());
+                            exportItem.addActionListener(e13 -> {
+                                try {
+                                    new DatabaseExporterUI(dbConnected, new MySQLDaoOperation().showTables());
 
-                                    } catch (SQLException e1) {
-                                        e1.printStackTrace();
-                                    }
+                                } catch (SQLException e1) {
+                                    e1.printStackTrace();
                                 }
                             });
 
