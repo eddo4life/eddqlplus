@@ -16,6 +16,8 @@ import java.util.Objects;
 
 public class Modification {
     private String tableName;
+    private JPanel tablePanel = new JPanel();
+    private JPanel northPanel = new JPanel();
 
     public Modification(String tableName) {
         this.tableName = tableName;
@@ -34,9 +36,6 @@ public class Modification {
         revalidateHome();
         events();
     }
-
-    private JPanel tablePanel = new JPanel();
-    private JPanel northPanel = new JPanel();
 
     private void switchMenu(JPanel panel) {
         Home.content.remove(northPanel);
@@ -145,7 +144,7 @@ public class Modification {
         JLabel nameLabel = getLabel("Name");
         JTextField nameField = getTextField(15);
         String[] datatype = {"int(2)", "varchar(15)", "real", "blob", "decimal(2,2)", "date"};
-        JComboBox<String> comboBox = new JComboBox<String>(datatype);
+        JComboBox<String> comboBox = new JComboBox<>(datatype);
         comboBox.setSelectedIndex(1);
         // TODO: Optimizing later...(maybe)
         comboBox.addActionListener((e) -> {
@@ -184,7 +183,7 @@ public class Modification {
     private JPanel renameColumn() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JLabel renameLabel = getLabel("Rename");
-        JComboBox<String> comboBox = new JComboBox<String>(TableToBeSelected.head);
+        JComboBox<String> comboBox = new JComboBox<>(TableToBeSelected.head);
         JLabel label = getLabel("to");
         JTextField newNameField = getTextField(10);
         JButton renameButton = getButton("Rename");
@@ -218,7 +217,7 @@ public class Modification {
     private JPanel deleteColumn() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JLabel deleteLabel = getLabel("Delete column ");
-        JComboBox<String> comboBox = new JComboBox<String>(TableToBeSelected.head);
+        JComboBox<String> comboBox = new JComboBox<>(TableToBeSelected.head);
 
         comboBox.addActionListener((ActionEvent e) -> {
             String x = (String) comboBox.getSelectedItem();
@@ -247,7 +246,7 @@ public class Modification {
     private JPanel deleteRow() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JLabel deleteLabel = getLabel("Delete from " + tableName + " if only ");
-        JComboBox<String> comboBox = new JComboBox<String>(TableToBeSelected.head);
+        JComboBox<String> comboBox = new JComboBox<>(TableToBeSelected.head);
         comboBox.setSelectedIndex(0);
         JTextField field = getTextField(10);
         JButton valid_addButton = new JButton("valid&add");
@@ -316,14 +315,14 @@ public class Modification {
         JLabel label = getLabel("on");
         panel.add(label);
 
-        JComboBox<String> comboBox = new JComboBox<String>(TableToBeSelected.head);
+        JComboBox<String> comboBox = new JComboBox<>(TableToBeSelected.head);
         comboBox.setSelectedIndex(0);
         panel.add(comboBox);
         JCheckBox constBox = new JCheckBox("Constraint");
         panel.add(constBox);
         JLabel constLabel = getLabel("whenever");
         panel.add(constLabel);
-        JComboBox<String> comboBox2 = new JComboBox<String>(TableToBeSelected.head);
+        JComboBox<String> comboBox2 = new JComboBox<>(TableToBeSelected.head);
         comboBox2.setSelectedIndex(0);
         comboBox2.setEnabled(false);
         panel.add(comboBox2);
@@ -471,9 +470,7 @@ public class Modification {
         change_datatype_button.addActionListener((e) -> {
         });
 
-        exit_button.addActionListener((e) -> {
-            new TablesSections().options();
-        });
+        exit_button.addActionListener((e) -> new TablesSections().options());
 
     }
 
