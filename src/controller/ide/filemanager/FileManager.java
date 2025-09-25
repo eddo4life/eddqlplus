@@ -47,7 +47,7 @@ public class FileManager {
 
             try {
 
-                String currentLine = "";
+                String currentLine;
 
                 FileReader fr = new FileReader(fi);
 

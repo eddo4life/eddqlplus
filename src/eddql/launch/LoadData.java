@@ -30,7 +30,6 @@ public class LoadData {
         wait = false;
         try {
             UIManager.setLookAndFeel(new FlatDarkLaf());
-            // UIManager.setLookAndFeel( new FlatDarculaLaf() );
         } catch (Exception e) {
             e.printStackTrace();
         }
