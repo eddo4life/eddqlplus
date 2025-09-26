@@ -48,7 +48,7 @@ public class MySQLQueryFilter {
                     new MySQLDaoOperation().executeUpdate(query);
                     feedBack = getName(query).replaceAll(";", "") + " successfully deleted";
                 } else {
-                    Integer i = new MySQLDaoOperation().executeUpdate(query);
+                    int i = new MySQLDaoOperation().executeUpdate(query);
                     if (query.contains("use ")) {
                         String freshName = getName(query);
                         freshName = freshName.substring(0, freshName.length() - 1);
@@ -61,7 +61,7 @@ public class MySQLQueryFilter {
                 }
 
                 new Terminal("", false, feedBack);
-            } catch (SQLException e) {
+            } catch (SQLException ignored) {
 
             }
 
@@ -73,10 +73,10 @@ public class MySQLQueryFilter {
 
     public String getName(String query) {
         query = query.toLowerCase();
-        String arr[] = query.trim().split(" ");
-        for (int i = 0; i < arr.length; i++) {
-            if (!arr[i].equals("drop") && !arr[i].equals("database") && !arr[i].isBlank() && !arr[i].endsWith("use")) {
-                query = arr[i];
+        String[] arr = query.trim().split(" ");
+        for (String s : arr) {
+            if (!s.equals("drop") && !s.equals("database") && !s.isBlank() && !s.endsWith("use")) {
+                query = s;
             }
         }
         return query;
