@@ -19,7 +19,7 @@ public class MySQLQueryFilter {
     public void queryAnalysis(String query) {
 
         if (query.substring(0, 1).isBlank()) {
-            query = query.substring(1, query.length());
+            query = query.substring(1);
         }
 
         query = query.trim();
