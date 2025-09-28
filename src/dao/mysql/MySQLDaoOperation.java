@@ -526,9 +526,7 @@ public class MySQLDaoOperation {
         File file = new File(path + "/" + fileName);
         System.out.println(file.getAbsolutePath());
         if (!file.exists()) {
-
             file.createNewFile();
-
         }
 
         con = connection.getCon(toolsModel);
@@ -546,8 +544,6 @@ public class MySQLDaoOperation {
             String type = structureRs.getString("Type");
             create.append(field).append(" ").append(type).append(",\n");
             dataList.add(type);
-            // writer.write("ALTER TABLE " + table + " ADD COLUMN " + field + " " + type +
-            // ";\n");
         }
 
         if (c != 0)
@@ -575,7 +571,7 @@ public class MySQLDaoOperation {
                 }
             }
             values.deleteCharAt(values.length() - 1);
-            writer.write("INSERT INTO " + table + " VALUES (" + values.toString() + ");\n");
+            writer.write("INSERT INTO " + table + " VALUES (" + values + ");\n");
         }
         writer.close();
         MySQLConnection.closeCon(rs, pst, con);
