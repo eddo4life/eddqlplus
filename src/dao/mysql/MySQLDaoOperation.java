@@ -35,9 +35,7 @@ public class MySQLDaoOperation {
     public ArrayList<String> showDataBases() throws SQLException, NullPointerException {
         ArrayList<String> dataBases = new ArrayList<>();
         String query = " SHOW DATABASES ";
-        con = connection.getCon(toolsModel);
-        pst = con.prepareStatement(query);
-        rs = pst.executeQuery();
+        setUp(query);
         while (rs.next()) {
             dataBases.add(rs.getString(1));
         }
@@ -45,6 +43,13 @@ public class MySQLDaoOperation {
         MySQLConnection.closeCon(rs, pst, con);
         return dataBases;
 
+    }
+
+    //TODO: lead this refactoring process a cleaner way
+    private void setUp(String query) throws SQLException {
+        con = connection.getCon(toolsModel);
+        pst = con.prepareStatement(query);
+        rs = pst.executeQuery();
     }
 
     /*
