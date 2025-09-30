@@ -36,20 +36,19 @@ public class MySQLDaoOperation {
         ArrayList<String> dataBases = new ArrayList<>();
         String query = " SHOW DATABASES ";
         setUp(query);
+        rs = pst.executeQuery();
         while (rs.next()) {
             dataBases.add(rs.getString(1));
         }
 
         MySQLConnection.closeCon(rs, pst, con);
         return dataBases;
-
     }
 
     //TODO: lead this refactoring process a cleaner way
     private void setUp(String query) throws SQLException {
         con = connection.getCon(toolsModel);
         pst = con.prepareStatement(query);
-        rs = pst.executeQuery();
     }
 
     /*
@@ -58,8 +57,7 @@ public class MySQLDaoOperation {
 
     public int create(String name) throws SQLException {
         String query = " CREATE DATABASE " + name;
-        con = connection.getCon(toolsModel);
-        pst = con.prepareStatement(query);
+        setUp(query);
         int x = pst.executeUpdate();
         MySQLConnection.closeCon(rs, pst, con);
         return x;
@@ -71,8 +69,7 @@ public class MySQLDaoOperation {
 
     public void use(String name) throws SQLException {
         String query = " USE " + name;
-        con = connection.getCon(toolsModel);
-        pst = con.prepareStatement(query);
+        setUp(query);
         pst.executeUpdate();
         MySQLConnection.closeCon(rs, pst, con);
     }
@@ -83,8 +80,7 @@ public class MySQLDaoOperation {
 
     public int deleteDb(String name) throws SQLException {
         String query = " DROP DATABASE " + name;
-        con = connection.getCon(toolsModel);
-        pst = con.prepareStatement(query);
+        setUp(query);
         int x = pst.executeUpdate();
         MySQLConnection.closeCon(rs, pst, con);
         return x;
@@ -97,8 +93,7 @@ public class MySQLDaoOperation {
     public ArrayList<String> showTables() throws SQLException {
         ArrayList<String> dataBases = new ArrayList<>();
         String query = " SHOW TABLES ";
-        con = connection.getCon(toolsModel);
-        pst = con.prepareStatement(query);
+        setUp(query);
         rs = pst.executeQuery();
         while (rs.next()) {
             dataBases.add(rs.getString(1).toLowerCase());
@@ -146,8 +141,7 @@ public class MySQLDaoOperation {
      */
 
     public int createTable(String query) throws SQLException {
-        con = connection.getCon(toolsModel);
-        pst = con.prepareStatement(query);
+        setUp(query);
         int x = pst.executeUpdate();
 
         MySQLConnection.closeCon(rs, pst, con);
@@ -163,8 +157,7 @@ public class MySQLDaoOperation {
         ArrayList<String> header = new ArrayList<>();
         ArrayList<String> data = new ArrayList<>();
         String query = "SELECT * from " + name;
-        con = connection.getCon(toolsModel);
-        pst = con.prepareStatement(query);
+        setUp(query);
         rs = pst.executeQuery();
         if (rs != null) {
             for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
