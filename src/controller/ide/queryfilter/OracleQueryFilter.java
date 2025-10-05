@@ -52,7 +52,7 @@ public class OracleQueryFilter {
                     new MySQLDaoOperation().executeUpdate(query);
                     feedBack = getName(query).replaceAll(";", "") + " successfully deleted";
                 } else {
-                    Integer i = new MySQLDaoOperation().executeUpdate(query);
+                    int i = new MySQLDaoOperation().executeUpdate(query);
                     if (query.contains("use ")) {
                         String freshName = getName(query);
                         freshName = freshName.substring(0, freshName.length() - 1);
