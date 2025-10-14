@@ -31,7 +31,6 @@ public class OracleQueryFilter {
             new Terminal(query, query.contains("table_name"), "");
         } else if (query.toLowerCase().contains("use ") || query.contains("update") || query.contains("delete")
                 || query.contains("create") || query.contains("drop")) {
-
             try {
                 // components.add(ex);
                 String feedBack;

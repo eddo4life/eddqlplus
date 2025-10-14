@@ -14,8 +14,6 @@ public class MySQLQueryFilter {
         queryAnalysis(query);
     }
 
-    String feedBack;
-
     public void queryAnalysis(String query) {
 
         if (query.substring(0, 1).isBlank()) {
@@ -30,7 +28,7 @@ public class MySQLQueryFilter {
                 || query.contains("create") || query.contains("drop")) {
 
             try {
-                // components.add(ex);
+                String feedBack;
                 if (query.toLowerCase().trim().contains("drop database")) {
                     String name = getName(query);
                     if (new MySQLConnection().getDbName().equalsIgnoreCase(name.substring(0, name.length() - 1))) {
@@ -81,5 +79,4 @@ public class MySQLQueryFilter {
         }
         return query;
     }
-
 }
