@@ -58,13 +58,9 @@ public class LoadData {
         panel.setBounds(0, 0, 400, 200);
         bar.setBorder(null);
         bar.setBounds(0, -1, 400, 10);
-        //bar.setBackground(Color.black);
         southPanel.add(bar);
         bar.setValue(0);
         bar.setStringPainted(true);
-        //bar.setFont(new Font("mv Boli", 0, 10));
-        //bar.setForeground(Color.DARK_GRAY);
-        //loadingLabel.setForeground(Color.blue);
         loadingLabel.setFont(new Font(null, Font.PLAIN, 11));
 
         frame.add(panel);
