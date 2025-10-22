@@ -46,17 +46,13 @@ public class DatabaseExporterUI {
 
         ButtonGroup group = new ButtonGroup();
         group.add(allTableButton);
-        allTableButton.addActionListener(e -> {
-            selectAll(allTableButton.isSelected());
-        });
+        allTableButton.addActionListener(e -> selectAll(allTableButton.isSelected()));
         constraints.gridx = 0;
         constraints.gridy = 0;
         panel.add(allTableButton, constraints);
         JRadioButton selectTableButton = new JRadioButton("Select");
         group.add(selectTableButton);
-        selectTableButton.addActionListener(e -> {
-            selectAll(!selectTableButton.isSelected());
-        });
+        selectTableButton.addActionListener(e -> selectAll(!selectTableButton.isSelected()));
         constraints.gridx = 0;
         constraints.gridy = 1;
         panel.add(selectTableButton, constraints);
@@ -64,15 +60,11 @@ public class DatabaseExporterUI {
         constraints.gridy = 2;
         JRadioButton excelFileButton = new JRadioButton("Excel file");
         JRadioButton sqlFileButton = new JRadioButton("SQL file");
-        excelFileButton.addActionListener((e -> {
-            button.setEnabled(excelFileButton.isSelected() || sqlFileButton.isSelected());
-        }));
+        excelFileButton.addActionListener((e -> button.setEnabled(excelFileButton.isSelected() || sqlFileButton.isSelected())));
 
         panel.add(excelFileButton, constraints);
 
-        sqlFileButton.addActionListener((e -> {
-            button.setEnabled(excelFileButton.isSelected() || sqlFileButton.isSelected());
-        }));
+        sqlFileButton.addActionListener((e -> button.setEnabled(excelFileButton.isSelected() || sqlFileButton.isSelected())));
         constraints.gridx = 0;
         constraints.gridy = 3;
         panel.add(sqlFileButton, constraints);
@@ -110,33 +102,19 @@ public class DatabaseExporterUI {
             if (excelFileButton.isSelected() || sqlFileButton.isSelected()) {
                 if (excelFileButton.isSelected() && sqlFileButton.isSelected()) {
 
-                    Thread t = new Thread() {
-                        @Override
-                        public void run() {
-                            sqlExport();
-                            excelExport();
-
-                        }
-                    };
+                    Thread t = new Thread(() -> {
+                        sqlExport();
+                        excelExport();
+                    });
 
                     t.start();
                 } else if (sqlFileButton.isSelected()) {
 
-                    Thread t = new Thread() {
-                        @Override
-                        public void run() {
-                            sqlExport();
-                        }
-                    };
+                    Thread t = new Thread(this::sqlExport);
 
                     t.start();
                 } else {
-                    Thread t = new Thread() {
-                        @Override
-                        public void run() {
-                            excelExport();
-                        }
-                    };
+                    Thread t = new Thread(this::excelExport);
 
                     t.start();
                 }

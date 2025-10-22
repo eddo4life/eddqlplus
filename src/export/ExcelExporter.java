@@ -27,9 +27,7 @@ public class ExcelExporter {
         // cell by using the setCellValue() method
 
         for (int i = 1; i <= numColumns; i++) {
-            String columnLabel = metadata.getColumnLabel(i);
-
-            rowhead.createCell(i - 1).setCellValue(columnLabel);
+            rowhead.createCell(i - 1).setCellValue(metadata.getColumnLabel(i));
         }
 
         int rowNum = 1;
