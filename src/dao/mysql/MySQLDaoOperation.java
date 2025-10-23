@@ -324,7 +324,7 @@ public class MySQLDaoOperation {
      */
 
     public void addConstraint() {
-        // tough
+        //TODO: Implement later
 
     }
 
@@ -333,7 +333,7 @@ public class MySQLDaoOperation {
      */
 
     public void changeDataType() {
-
+        //TODO: Implement later
     }
 
     /*
