@@ -59,7 +59,7 @@ public class TableSelector {
             new Sort().tableSortFilter(table);
 
         } catch (SQLException e) {
-            handleDatabaseException(e);
+            handleDatabaseException();
         } catch (Exception e) {
             reloadTablesSection();
         }
@@ -139,7 +139,7 @@ public class TableSelector {
         pane.add(intern, BorderLayout.CENTER);
     }
 
-    private void handleDatabaseException(SQLException e) {
+    private void handleDatabaseException() {
         try {
             new DatabaseSection().dataBases();
         } catch (SQLException e1) {
