@@ -22,6 +22,8 @@ import java.util.List;
 
 public class DatabaseExporterUI {
 
+    private String path = "";
+
     public DatabaseExporterUI(String dbName, ArrayList<String> arrays) {
         boxList.clear();
         logArea.setText("");
@@ -264,7 +266,4 @@ public class DatabaseExporterUI {
         path = path.replace("\\", "/");
         return currentDir.toAbsolutePath().toString();
     }
-
-    String path = "";
-
 }
